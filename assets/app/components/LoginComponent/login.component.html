@@ -1,0 +1,39 @@
+<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>
+<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Montserrat:400,700'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<div class="jumbotron text-center vertical-center" style="height: 60%;
+  min-width: 50%;
+  max-width: 200px;
+  margin-left:25%;
+  margin-right:25%;
+  margin-bottom:2%;
+  display: flex;
+  align-items: center;
+  background-color: #ff0000;
+  border-radius: 25px;">
+
+
+    <div id="look">
+      <br>
+      
+      <div class="form">
+       <p> Log in to AKN English App</p>
+       <div class="profile"></div>
+       <div class="login-form">
+          <section id="content">
+             <form action="">
+              <input type="text" name="email" [(ngModel)]="email" placeholder="Email"  id="username"/>
+              <input type="{{inputType}}" name="password" [(ngModel)]="password" placeholder="Password" id="password" /><br>
+              <input type="checkbox" name="passwordCheckBox" (click)="hideShowPassword()" />
+              <label for="checkbox" *ngIf="passwordCheckbox">Hide password</label>
+              <label for="checkbox" *ngIf="!passwordCheckbox">Show password</label>
+               <button (click)="submit('teacher')">Login</button>
+             </form>
+           </section>
+        </div>
+      </div>
+    </div>
+
+</div>

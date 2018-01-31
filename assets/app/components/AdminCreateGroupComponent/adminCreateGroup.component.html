@@ -1,0 +1,39 @@
+
+  <navbar></navbar>
+<div style="height:50px">
+</div>
+<div class="container text-center">
+  <h1>
+    <b>Hello {{user}}!</b>
+  </h1>
+  <br>
+  <h3>
+    You can create new groups here:
+  </h3>
+  <br>
+    <hr>
+<table align="center">
+  <tr>
+    <td valign="top">
+      <form>
+        <div style="text-align:left">
+          <strong> Name </strong>
+        </div>
+      <div class="form-group">
+        <textarea rows="2" cols="30" class="form-control" name="name" [(ngModel)]="name" (keydown.enter)="create()" style="padding-top:0px">
+        </textarea>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success" (click)="create()">Create</button>
+      </div>
+    </form>
+    </td>
+  </tr>
+</table>
+
+<hr>
+    <div class="alert alert-success" *ngIf="created" style="margin-left:25%;margin-right:25%">Group created, you can now add students
+      <a (click)="goto()" style="cursor: pointer; margin-left:0px"><strong>here</strong></a></div>
+
+      <div class="alert alert-danger" *ngIf="error" style="margin-left:25%;margin-right:25%">Group must have a name</div>
+</div>

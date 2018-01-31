@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [ "es2015", "dom" ],
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "types": [ "node" ],
+  "typeRoots": [
+      "./node_modules/@types",
+      "./my_module/sails/sails.d.ts" ],
+  "exclude": [
+      ".tmp",
+      "node_modules",
+      "typings"
+  ]
+}

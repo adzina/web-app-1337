@@ -1,0 +1,160 @@
+
+body {
+background-color: #ccc;
+}
+.navbar{
+  background-color:  #ff0000;
+}
+
+
+div{
+  text-align: center;
+}
+div.login{
+  position: fixed;
+  top: 20%;
+  right: 45%;
+}
+div.welcome{
+	 height:40px;
+	 position: absolute;
+	 top:0;
+	 left:22%;
+	 font-weight: bold;
+	 font-size: 180%;
+}
+div.word_to_guess{
+	text-align: center;
+	font-size: 1000%;
+	font-weight: bold;
+	font-style: oblique;
+	border-style: solid;
+	border-width:thin;
+	border-color: #FFFFFF;
+
+}
+div.box {
+	margin:3% 1% 1% 0;
+	float:left;
+	clear:none;
+	width:100%;
+	height:50px;
+	border:none;
+}
+div.box1 {
+	margin:10% 1% 1% 0;
+	float:left;
+	clear:none;
+	width:100%;
+	height:50px;
+	border:none;
+}
+button{
+	height:100%;
+	background-color: lightyellow;
+  position: relative;
+}
+button.button_nav{
+	background-color: lightyellow;
+  position: absolute;
+  height:4%;
+  top: 0%;
+  right:0%;
+
+}
+.choose_mode{
+  float: right;
+  }
+.logout{
+  float: right;
+}
+input[type="submit"]{
+	width:100%;
+	height:100%;
+	background-color: lightyellow;
+}
+input[type="submit"].true{
+	width:100%;
+	height:100%;
+	background-color: lightgreen;
+}
+input[type="submit"].false{
+	width:100%;
+	height:100%;
+	background-color: tomato;
+}
+input[type="text"].true{
+  background-color: lightgreen;
+}
+input[type="text"].false{
+  background-color: tomato;
+}
+
+.grid2x2 {
+  justify-content: center;
+  min-height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.grid2x2 > div {
+  display: flex;
+  flex-basis: calc(50% - 40px);
+  justify-content: center;
+  flex-direction: column;
+}
+.grid2x2 > div > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.box { margin: 50px;
+ 			background-color: lightyellow;}
+
+.sidenav {
+          height: 100%; // 100% Full-height
+          width: 20%;
+          position: fixed; // Stay in place
+          z-index: 1; // Stay on top
+          top: 70;
+          left: 0;
+          background-color:black;
+          overflow-x: hidden; // Disable horizontal scroll
+          padding-top: 60px;
+      }
+.button_show{
+  margin-left: 0%;
+}
+.button_hide{
+  margin-left: 20%;
+}
+div.sidenav_true{
+          height: 100%;
+          width: 20%;
+          position: fixed;
+          z-index: 1;
+          top: 5;
+          left: 0;
+          background-color:black;
+          overflow-x: hidden;
+          padding-top: 60px;
+}
+.sidenav_false{
+          height: 100%;
+          width: 0%;
+          position: fixed;
+          z-index: 1;
+          top: 50;
+          left: 0;
+          background-color:black;
+          overflow-x: hidden;
+          padding-top: 60px;
+}
+.dash{
+  height: 100%;
+  width: 80%;
+  position: fixed;
+  top:10%;
+  left: 20%;
+}

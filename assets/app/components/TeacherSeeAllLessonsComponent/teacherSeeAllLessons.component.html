@@ -1,0 +1,10 @@
+<navbar></navbar>
+<div class="container">
+  <div style="margin-bottom:10%">
+  </div>
+        <h3><font color="white">Choose a lesson:</font></h3>
+        <div *ngFor=" let lesson of lessons; let i=index">
+
+      				<button style="margin-bottom:3px;min-width:30%"class="btn btn-info" (click)="choose(i)">{{lesson.subject}}</button><br>
+        </div>
+</div>
