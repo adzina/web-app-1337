@@ -62,7 +62,17 @@ module.exports.webpack={
 
   plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new CopyWebpackPlugin([
+     {
+       from: './assets/styles',
+       to: path.resolve(__dirname, '..', '.tmp', 'public', 'styles')
+     },
+     {
+       from: './assets/images',
+       to: path.resolve(__dirname, '..', '.tmp', 'public', 'images')
+     }
+])
     ],
 
 },
