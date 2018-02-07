@@ -8,6 +8,9 @@ import { HttpModule, Http, RequestOptions,ConnectionBackend } from '@angular/htt
 
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
+import { AuthGuard } from './common/auth.guard';
+import { RoleGuard } from './common/role.guard';
+
 import { AppRoutingModule } from './app.routing.module';
 import { LoginComponent } from "./components/LoginComponent/login.component";
 import { AdminRegisterComponent } from './components/AdminRegisterComponent/adminRegister.component';
@@ -54,7 +57,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
        deps: [ Http, RequestOptions ]
      },
       LoginService,
-      BackendService
+      BackendService,
+      AuthGuard,
+      RoleGuard
     ]
 
 })
