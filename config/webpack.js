@@ -3,6 +3,7 @@ var webpackMerge = require('webpack-merge');
 
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var commonConfig = require('./webpack/webpack.common.js');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
 
@@ -33,31 +34,38 @@ module.exports.webpack={
       ]
     },
      module: {
-    loaders: [
-      {
-        test: /\.ts$/,
-        loaders: [
-          'ts-loader' , 'angular2-template-loader'
-        ]
-      },
-      {
-        test: /\.html$/,
-        loaders:[ 'raw-loader']
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file-loader?name=assets/[name].[hash].[ext]'
-      },
-      {
-        test: /\.css$/,
-        loader: 'raw-loader'
-      },
-      {
-        test: /\.scss$/,
-        //loaders: ['style', 'css', 'sass']
-        loaders: ['raw', 'sass']
-            }
-    ]
+      loaders: [
+        {
+          test: /\.ts$/,
+          loaders: [
+            'ts-loader' , 'angular2-template-loader'
+          ]
+        },
+        {
+          test: /\.html$/,
+          loaders:[ 'raw-loader']
+        },
+        {
+          test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+          loader: 'file-loader?name=assets/[name].[ext]'
+        },
+        {
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract({ use: 'css-loader' })
+          //loader: 'raw-loader'
+        },
+        {
+          test: /\.scss$/,
+          //loaders: ['style', 'css', 'sass']
+          loaders: ['raw', 'sass']
+        },
+
+        {
+          test: /\.less$/,
+          loader: ExtractTextPlugin.extract({ use: 'css-loader!less-loader' })
+        }
+
+      ]
   },
 
   plugins: [

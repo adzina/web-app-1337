@@ -1,4 +1,4 @@
- import { Model } from 'Sails';
+import { Model } from 'Sails';
  import * as async from "async";
  declare var sails: any;
 module.exports = {
@@ -87,7 +87,6 @@ module.exports = {
 		                output.push(elem);}
 
 		            //inside the iterator function we call cb() once we are finished
-
                 cb();
 		          })
 		          .fail(function(error){

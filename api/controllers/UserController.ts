@@ -44,7 +44,6 @@ module.exports = {
 		});
 	},
 	login: function (req, res) {
-		console.log("In controller");
     /**
      * check if the username matches any email
      */
