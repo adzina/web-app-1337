@@ -36,13 +36,14 @@ getApiUrl(){
 
   return  this.http.get(url)
    .map((res:Response) => res.json())
-   .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+   .catch((error:any) => Observable.throw("Error getting teacher's lessons"));
 
   }
   getAllGroups():Observable<any>{
     var url=this.g_url+'group';
     return this.http.get(url).
-    map((res:Response) => res.json());
+    map((res:Response) => res.json())
+    .catch((error:any) => Observable.throw("Error getting all groups"));
   }
 
   getAllMyGroups(): Observable<Group[]>{
@@ -51,12 +52,14 @@ getApiUrl(){
     var body=JSON.stringify({userID: id});
     return this.http.post(url,body)
     .map((res:Response)=>res.json())
+    .catch((error:any) => Observable.throw("Error getting all user's groups"));
 
   }
   getAllUsers(): Observable<User[]>{
     var url=this.g_url+'user/getAll';
     return this.http.get(url)
     .map((res:Response)=>res.json())
+    .catch((error:any) => Observable.throw("Error getting all users"));
 
   }
   getActiveUsers(groupID: string): Observable<User[]>{
@@ -64,7 +67,8 @@ getApiUrl(){
 
     var body=JSON.stringify({groupID:groupID})
     return this.http.post(url,body)
-      .map((res:Response)=>res.json());
+      .map((res:Response)=>res.json())
+      .catch((error:any) => Observable.throw("Error getting active users"));
 
   }
 
@@ -73,7 +77,8 @@ getApiUrl(){
 
     var body=JSON.stringify({lessonID:lessonID})
     return this.http.post(url,body)
-      .map((res:Response)=>res.json());
+      .map((res:Response)=>res.json())
+      .catch((error:any) => Observable.throw("Error getting active groups"));
 
   }
 
@@ -83,7 +88,7 @@ getApiUrl(){
 
     return this.http.post(url,body)
     .map((res:Response) => res.json())
-    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+    .catch((error:any) => Observable.throw("Error getting words"));
 
 
   }
@@ -94,7 +99,7 @@ getApiUrl(){
 
           return this.http.post(url,body)
           .map((res:Response) => res.json())
-          .catch((error:any) => Observable.throw('Server error'));
+          .catch((error:any) => Observable.throw('Error adding users to group'));
   }
   addGroupToLesson(groupID: string, lessonID:string): Observable<any>{
       var url=this.g_url+'groupLesson/addGroupToLesson';
@@ -103,7 +108,7 @@ getApiUrl(){
 
           return this.http.post(url,body)
           .map(res => res.json())
-          .catch((error:any) => Observable.throw('Server error'));
+          .catch((error:any) => Observable.throw('Error adding group to lesson'));
   }
   removeUserFromGroup(userID: string, groupID: string): Observable<any>{
     var url=this.g_url+'groupuser/delete';
@@ -111,7 +116,7 @@ getApiUrl(){
 
     return this.http.post(url,body)
     .map(res => res.json())
-    .catch((error:any) => Observable.throw('Server error'));
+    .catch((error:any) => Observable.throw('Error removing user form group'));
   }
   removeWordFromLesson(lessonID:string,wordID:string):Observable<any>{
     var url=this.g_url+'lessonWord/delete';
@@ -119,7 +124,7 @@ getApiUrl(){
 
     return this.http.post(url,body)
     .map(res => res.json())
-    .catch((error:any) => Observable.throw('Server error'));
+    .catch((error:any) => Observable.throw('Error removing word from lesson'));
 
 
   }
@@ -129,7 +134,7 @@ getApiUrl(){
 
     return this.http.post(url,body)
     .map(res => res.json())
-    .catch((error:any) => Observable.throw('Server error'));
+    .catch((error:any) => Observable.throw('Error removing group from lesson'));
   }
   //zwraca wszystkie lekcje studenta
   getStudentsLessons(groupID:string):Observable<any>{
@@ -177,7 +182,7 @@ createLesson(login:string,subject:string,date:Date):Observable<any>{
   var url=this.g_url+"lesson";
   return this.http.post(url,body)
   .map(res => res.json())
-  .catch((error:any) => Observable.throw('Server error'));
+  .catch((error:any) => Observable.throw('Error creating lesson'));
 
 }
 addWord(polish:string,english:string,lessonID:string):Observable<any>{
