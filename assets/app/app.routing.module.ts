@@ -43,7 +43,7 @@ export const routes = [
       {
         path: 'see-all-lessons',
         component: TeacherSeeAllLessonsComponent,
-        //canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
       },
       /*
     {

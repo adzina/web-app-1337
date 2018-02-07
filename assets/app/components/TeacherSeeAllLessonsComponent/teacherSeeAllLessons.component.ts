@@ -19,6 +19,7 @@ export class TeacherSeeAllLessonsComponent {
               private router:Router) {
 
     this.lessons=[];
+    /*
     backendService.getTeachersLessons().
         subscribe(response=>{
 
@@ -31,6 +32,7 @@ export class TeacherSeeAllLessonsComponent {
               alert(error);
             }
           );
+          */
   }
 
   choose(nr:string) {

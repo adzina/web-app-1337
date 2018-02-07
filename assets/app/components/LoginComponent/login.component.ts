@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {Http} from '@angular/http';
+import {Headers,Http} from '@angular/http';
 import {LoginService} from '../../services/login.service';
 import {BackendService} from '../../services/backend.service';
 import * as bcrypt from "bcryptjs";
@@ -17,6 +17,7 @@ export class LoginComponent{
   password: string;
   wrong: boolean;
   url: string;
+  headers = new Headers({ 'Content-Type': 'application/json' });
   constructor(private _router:Router,
               private _loginService: LoginService,
               private http: Http,
@@ -41,8 +42,8 @@ export class LoginComponent{
               this._backendService.setApiUrl(x);
       }
       this.url=this._backendService.getApiUrl()+'user/login';
-
-      this.http.post(this.url, body)
+      this.headers.set('Access-Control-Allow-Origin' , '*');
+      this.http.post(this.url, body, { headers: this.headers })
         .map(res=>res.json())
         .subscribe(
           response => {
