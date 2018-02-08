@@ -3,8 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/LoginComponent/login.component';
 import { AdminRegisterComponent } from './components/AdminRegisterComponent/adminRegister.component';
 import { AdminCreateGroupComponent } from './components/AdminCreateGroupComponent/adminCreateGroup.component';
+import { AdminAddUsersComponent } from './components/AdminAddUsersComponent/adminAddUsers.component';
 import { TeacherSeeAllLessonsComponent } from './components/TeacherSeeAllLessonsComponent/teacherSeeAllLessons.component';
-
+import { TeacherAddStudentsComponent } from './components/TeacherAddStudentsComponent/teacherAddStudents.component';
+//import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonComponent/teacherCreateLesson.component';
+import { TeacherSeeProgressComponent } from './components/TeacherSeeProgressComponent/teacherSeeProgress.component';
+import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component'
+import { GoodbyeComponent } from './components/GoodbyeComponent/goodbye.component';
 import { AuthGuard } from './common/auth.guard';
 import { RoleGuard } from './common/role.guard';
 
@@ -17,10 +22,10 @@ export const routes = [
   {
     path: 'register',
     component: AdminRegisterComponent,
-  //  canActivate: [RoleGuard],
-    //data: {
-      //expectedRole: 'admin'
-    //}
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: 'admin'
+    }
   },
 
     {
@@ -31,7 +36,7 @@ export const routes = [
         expectedRole: 'admin'
       }
     },
-    /*
+
     {
         path: 'admin-add-users',
         component: AdminAddUsersComponent,
@@ -39,23 +44,23 @@ export const routes = [
         data: {
           expectedRole: 'admin'
         }
-      },*/
+      },
       {
         path: 'see-all-lessons',
         component: TeacherSeeAllLessonsComponent,
         canActivate: [AuthGuard]
       },
-      /*
+
     {
       path: 'teacher-words-panel',
       component: TeacherWordsPanelComponent,
       canActivate: [AuthGuard]
     },
-    {
-      path: 'teacher-create-lesson',
-      component: TeacherCreateLessonComponent,
-      canActivate: [AuthGuard]
-    },
+   // {
+     // path: 'teacher-create-lesson',
+    //  component: TeacherCreateLessonComponent,
+     // canActivate: [AuthGuard]
+    //},
     {
       path: 'teacher-see-progress',
       component: TeacherSeeProgressComponent,
@@ -67,18 +72,9 @@ export const routes = [
       canActivate: [AuthGuard]
     },
     {
-      path: 'dashboard',
-      component: DashboardComponent,
-      canActivate: [AuthGuard]
-    },
-    {  path: 'choose-mode',
-      component: ChooseModeComponent,
-      canActivate: [AuthGuard]
-    },
-    {
       path: 'goodbye',
       component: GoodbyeComponent
-    },*/
+    },
    { //Redirect urls not found at root
        path: '**',
        redirectTo: ''
