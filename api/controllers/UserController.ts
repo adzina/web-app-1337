@@ -70,7 +70,6 @@ module.exports = {
           expiresIn: '90m'
         });
 
-        console.log("Controller dziala");
         //return the token here
         res.json(200, { id_token: token, id: user.id, role: user.role, first_name: user.first_name });
       });

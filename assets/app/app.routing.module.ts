@@ -6,7 +6,7 @@ import { AdminCreateGroupComponent } from './components/AdminCreateGroupComponen
 import { AdminAddUsersComponent } from './components/AdminAddUsersComponent/adminAddUsers.component';
 import { TeacherSeeAllLessonsComponent } from './components/TeacherSeeAllLessonsComponent/teacherSeeAllLessons.component';
 import { TeacherAddStudentsComponent } from './components/TeacherAddStudentsComponent/teacherAddStudents.component';
-//import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonComponent/teacherCreateLesson.component';
+import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonComponent/teacherCreateLesson.component';
 import { TeacherSeeProgressComponent } from './components/TeacherSeeProgressComponent/teacherSeeProgress.component';
 import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component'
 import { GoodbyeComponent } from './components/GoodbyeComponent/goodbye.component';
@@ -56,11 +56,11 @@ export const routes = [
       component: TeacherWordsPanelComponent,
       canActivate: [AuthGuard]
     },
-   // {
-     // path: 'teacher-create-lesson',
-    //  component: TeacherCreateLessonComponent,
-     // canActivate: [AuthGuard]
-    //},
+    {
+      path: 'teacher-create-lesson',
+      component: TeacherCreateLessonComponent,
+      canActivate: [AuthGuard]
+    },
     {
       path: 'teacher-see-progress',
       component: TeacherSeeProgressComponent,

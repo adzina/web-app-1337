@@ -1,7 +1,6 @@
 var jwt = require("jsonwebtoken");
 
 module.exports = function (req, res, next) {
-  console.log("in policy");
   var bearerToken;
   var bearerHeader = req.headers["authorization"];
   if (typeof bearerHeader !== 'undefined') {
