@@ -16,19 +16,21 @@ export class AdminAddUsersComponent{
   receivedActiveUsers: user[];
   activeUsers: user[];
   inactiveUsers: user[];
+  backendError:string;
 
   constructor(private _loginService: LoginService,
               private _backendService: BackendService) {
                 this.receivedUsers=[];
                  this.activeUsers=[];
                  this.inactiveUsers=[];
+                 this.backendError=null;
 
                 this._backendService.getAllUsers().subscribe(response=>{
                   for (let index in response)
                   this.receivedUsers[index]=response[index];
       },
       error=>{
-          alert(error);
+          this.backendError=error._body;
         }
    );
   }
@@ -63,7 +65,7 @@ export class AdminAddUsersComponent{
         this.receivedActiveUsers=response;
         this.divideUsers();
         error=>{
-            alert(error);
+              this.backendError=error._body;
           };
       });
 

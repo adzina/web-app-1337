@@ -17,6 +17,7 @@ export class LoginComponent{
   password: string;
   wrong: boolean;
   url: string;
+  backendError:string;
   headers = new Headers({ 'Content-Type': 'application/json' });
   constructor(private _router:Router,
               private _loginService: LoginService,
@@ -25,6 +26,7 @@ export class LoginComponent{
     this.inputType = 'password';
     this.email="";
     this.password="";
+    this.backendError=null;
   }
 
   hideShowPassword(){
@@ -34,16 +36,13 @@ export class LoginComponent{
       this.inputType = 'password';
   };
   submit(type:string) {
+    this.backendError=null;
     var email=this.email;
     var pswd=this.password;
     let body = JSON.stringify({ email, pswd });
-    if(this.url){
-          var x='http://'+this.url+':1337/';
-              this._backendService.setApiUrl(x);
-      }
+
       this.url=this._backendService.getApiUrl()+'user/login';
-      this.headers.set('Access-Control-Allow-Origin' , '*');
-      this.http.post(this.url, body, { headers: this.headers })
+      this.http.post(this.url, body)
         .map(res=>res.json())
         .subscribe(
           response => {
@@ -57,50 +56,13 @@ export class LoginComponent{
               this._router.navigate(['./see-all-lessons']);
           },
           error => {
-            alert("login error:"+error);
             console.log(error);
+            this.backendError=error._body;
           }
         );
 
 
   }
-  /*
-submit(type:string){
-  var results: ItemsResponse;
-  var first_name: string;
-  var http_string="http://localhost:1337/users/"+this.email
-
-  this.http.get<ItemsResponse>(http_string).subscribe(
-    data => {
-      bcrypt.compare(this.password, data.password, function(err, res) {
-        if(res==true){
-          alert("haslo ok");
-          //====================================================================
-          this._loginService.setUserType(type);
-          this._loginService.setUserID(data.id);
-          this._loginService.setLoggedIn(true);
-          this._loginService.setUsername(data.first_name);
-          this._router.navigate(['./choose-mode']);
-          //=================================================================
-        }
-        else this.wrong=true;
-  });
-
-
-      },
-
-
-    (error)=>{
-      this.wrong=true;
-
-    });
-
-  };
-*/
-register(){
-  this._router.navigate(['./register']);
-}
-
 }
 interface ItemsResponse {
   email: string,

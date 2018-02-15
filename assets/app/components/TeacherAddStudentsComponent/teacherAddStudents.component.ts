@@ -15,17 +15,18 @@ export class TeacherAddStudentsComponent{
   receivedActiveGroups: Group[];
   activeGroups: Group[];
   inactiveGroups: Group[];
+  backendError: string;
   constructor(private _loginService: LoginService,
               private _backendService: BackendService) {
                 this.receivedGroups=[];
                  this.activeGroups=[];
                  this.inactiveGroups=[];
-
+                 this.backendError=null;
                 this._backendService.getAllMyGroups().subscribe(response=>{
                   this.receivedGroups=response;
       },
       error=>{
-          alert(error);
+          this.backendError=error._body;
         }
    );
   }
@@ -38,7 +39,7 @@ export class TeacherAddStudentsComponent{
         this.receivedActiveGroups=response;
         this.divideGroups();
         error=>{
-            alert(error);
+            this.backendError=error._body;
           };
       });
 

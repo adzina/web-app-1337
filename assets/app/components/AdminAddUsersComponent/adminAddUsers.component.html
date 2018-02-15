@@ -30,4 +30,7 @@
         </button></th>
       </tr>
     </table>
+    <div class="alert alert-danger" *ngIf="backendError!=null" style="margin-left:10%; margin-right:10%">
+   <strong>{{backendError}}</strong>
+    </div>
   </div>

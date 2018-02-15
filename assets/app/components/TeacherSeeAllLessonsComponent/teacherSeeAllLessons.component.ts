@@ -13,13 +13,15 @@ export class TeacherSeeAllLessonsComponent {
   show:boolean;
   lessons: Lesson[];
   className:string;
+  backendError:string;
   @Output() lessonChosen = new EventEmitter<Lesson>();
   constructor(private backendService:BackendService,
               private loginService:LoginService,
               private router:Router) {
 
     this.lessons=[];
-    /*
+    this.backendError=null;
+
     backendService.getTeachersLessons().
         subscribe(response=>{
 
@@ -29,10 +31,10 @@ export class TeacherSeeAllLessonsComponent {
 
           },
           error=>{
-              alert(error);
+              this.backendError=error._body;
             }
           );
-          */
+
   }
 
   choose(nr:string) {
