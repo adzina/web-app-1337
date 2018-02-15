@@ -44,7 +44,6 @@ module.exports = {
   * @param cb
   */
  beforeCreate: function (values, cb) {
-   console.log(values.password)
    // Hash password
    bcrypt.hash(values.password, 10, function (err, hash) {
      if (err) return cb(err);
