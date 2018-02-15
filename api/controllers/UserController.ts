@@ -102,7 +102,60 @@ module.exports = {
         return res.ok();
       });
   },
+  adminChangePassword: function(req,res){
+    let _email = req.param('email'),
+        _new_password = req.param('new_password');
 
+      sails.models.user.findOne({
+        email: _email
+      }).exec(function callback(err, user) {
+        if (err) return res.serverError(err);
+        if (!user) return res.serverError("Invalid email");
+
+        var data={first_name: user.first_name,
+                  last_name: user.last_name,
+                  password: _new_password,
+                  role: user.role};
+        sails.models.user.update({ email:user.email },data,function(err,updated){
+            if (err) return res.serverError(err);
+            return res.json(200);
+        })
+
+      });
+  },
+  changeMyPassword: function(req,res){
+    let _email = req.param('email'),
+        _old_password = req.param('old_password'),
+        _new_password = req.param('new_password');
+
+      sails.models.user.findOne({
+        email: _email
+      }).exec(function callback(err, user) {
+        if (err) return res.serverError(err);
+        if (!user) return res.serverError("Invalid email");
+
+
+        //check password
+        bcrypt.compare(_old_password, user.password, function(error, matched) {
+          if (error) return res.serverError(error);
+
+          if (!matched) return res.serverError("Invalid password");
+
+          else{
+
+            var data={first_name: user.first_name,
+                      last_name: user.last_name,
+                      email: user.email,
+                      role: user.role};
+            sails.models.user.update({ password: _new_password },data,function(err,updated){
+                if (err) return res.serverError(err);
+                return res.json(200);
+            })
+          }
+        });
+
+      });
+  }
 };
 
 interface user {

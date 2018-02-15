@@ -22,6 +22,7 @@ import { LoginComponent } from "./components/LoginComponent/login.component";
 import { AdminRegisterComponent } from './components/AdminRegisterComponent/adminRegister.component';
 import { AdminCreateGroupComponent } from './components/AdminCreateGroupComponent/adminCreateGroup.component';
 import { AdminAddUsersComponent } from './components/AdminAddUsersComponent/adminAddUsers.component';
+import { AdminModifyAccountsComponent } from './components/AdminModifyAccountsComponent/adminModifyAccounts.component';
 import { TeacherSeeAllLessonsComponent } from './components/TeacherSeeAllLessonsComponent/teacherSeeAllLessons.component';
 import { TeacherAddStudentsComponent } from './components/TeacherAddStudentsComponent/teacherAddStudents.component';
 import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonComponent/teacherCreateLesson.component';
@@ -55,6 +56,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       FooterComponent,
       AdminCreateGroupComponent,
       AdminAddUsersComponent,
+      AdminModifyAccountsComponent, 
       GoodbyeComponent,
       TeacherSeeAllLessonsComponent,
       TeacherCreateLessonComponent,

@@ -15,15 +15,18 @@
         <li *ngIf="isAdmin">
           <a class="tab" (click)="navigate(3)">    <b> Add users to groups</b>     </a>
         </li>
-        <li>
-          <a class="tab" (click)="navigate(4)">      <b> See all lessons</b>      </a>
+        <li *ngIf="isAdmin">
+          <a class="tab" (click)="navigate(4)">    <b> Modify accounts</b>     </a>
         </li>
         <li>
-          <a class="tab" (click)="navigate(5)">       <b>Create a lesson</b>      </a>
+          <a class="tab" (click)="navigate(5)">      <b> See all lessons</b>      </a>
+        </li>
+        <li>
+          <a class="tab" (click)="navigate(6)">       <b>Create a lesson</b>      </a>
         </li>
 
         <li>
-          <a class="tab" (click)="navigate(6)">     <b>Add words to lesson</b>     </a>
+          <a class="tab" (click)="navigate(7)">     <b>Add words to lesson</b>     </a>
         </li>
         <!--
         <li>

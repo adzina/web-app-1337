@@ -61,6 +61,8 @@ module.exports.policies = {
     //create: 'sessionAuth',
     getAll: 'sessionAuth',
     findByID: 'sessionAuth',
+    changeMyPassword: 'sessionAuth',
+    adminChangePassword: 'sessionAuth'
   },
   WordController: {
     add: 'sessionAuth',

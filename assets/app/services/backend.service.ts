@@ -191,5 +191,12 @@ addWord(polish:string,english:string,lessonID:string):Observable<any>{
   return this.http.post(url,body)
 
 }
+adminChangePassword(email:string,new_password:string):Observable<any>{
+  var url=this.g_url+'user/adminChangePassword';
+  var body=JSON.stringify({email:email,new_password:new_password});
+  return this.http.post(url,body);
+
+
+}
 
 }

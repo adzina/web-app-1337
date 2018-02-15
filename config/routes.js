@@ -74,6 +74,8 @@ module.exports.routes = {
      'GET /users/:email': 'UserController.findOne',
      'GET /user/findByID': 'UserController.findByID',
      'POST /user/getAll': 'UserController.getAll',
+     'POST /user/adminChangePassword': 'UserController.adminChangePassword',
+     'POST /user/changeMyPassword': 'UserController.changeMyPassword',
 
      'POST /lesson':'LessonController.create',
      'GET /lesson/:teacherID': 'LessonController.getTeacherID',
