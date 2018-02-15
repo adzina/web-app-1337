@@ -38,6 +38,6 @@ export class TeacherSeeAllLessonsComponent {
   choose(nr:string) {
     var lesson=this.lessons[nr];
     this.loginService.setChosenLesson(lesson);
-    this.router.navigate(['./teacher-words-panel']);
+    this.router.navigate(['./words-panel']);
   }
 }

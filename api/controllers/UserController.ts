@@ -124,12 +124,12 @@ module.exports = {
       });
   },
   changeMyPassword: function(req,res){
-    let _email = req.param('email'),
+    let _id = req.param('id'),
         _old_password = req.param('old_password'),
         _new_password = req.param('new_password');
 
       sails.models.user.findOne({
-        email: _email
+        id: _id
       }).exec(function callback(err, user) {
         if (err) return res.serverError(err);
         if (!user) return res.serverError("Invalid email");
@@ -146,10 +146,11 @@ module.exports = {
             var data={first_name: user.first_name,
                       last_name: user.last_name,
                       email: user.email,
+                      password: _new_password,
                       role: user.role};
-            sails.models.user.update({ password: _new_password },data,function(err,updated){
-                if (err) return res.serverError(err);
-                return res.json(200);
+            sails.models.user.update({ email:user.email },data,function(err,updated){
+                      if (err) return res.serverError(err);
+                      return res.json(200);
             })
           }
         });

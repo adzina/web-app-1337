@@ -27,7 +27,8 @@ import { TeacherSeeAllLessonsComponent } from './components/TeacherSeeAllLessons
 import { TeacherAddStudentsComponent } from './components/TeacherAddStudentsComponent/teacherAddStudents.component';
 import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonComponent/teacherCreateLesson.component';
 import { TeacherSeeProgressComponent } from './components/TeacherSeeProgressComponent/teacherSeeProgress.component';
-import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component'
+import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component';
+import { UpdateProfileComponent } from './components/UpdateProfileComponent/updateProfile.component';
 import { GoodbyeComponent } from './components/GoodbyeComponent/goodbye.component';
 
 import {NavbarComponent} from "./bars/NavbarComponent/navbar.component";
@@ -56,13 +57,14 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       FooterComponent,
       AdminCreateGroupComponent,
       AdminAddUsersComponent,
-      AdminModifyAccountsComponent, 
+      AdminModifyAccountsComponent,
       GoodbyeComponent,
       TeacherSeeAllLessonsComponent,
       TeacherCreateLessonComponent,
       TeacherWordsPanelComponent,
       TeacherSeeProgressComponent,
       TeacherAddStudentsComponent,
+      UpdateProfileComponent,
       AdminRegisterComponent,
 
     ],

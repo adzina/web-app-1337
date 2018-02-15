@@ -73,7 +73,7 @@ export class TeacherCreateLessonComponent {
   );
   }
   goto(){
-    this._router.navigate(['./teacher-words-panel']);
+    this._router.navigate(['./words-panel']);
 
   }
 

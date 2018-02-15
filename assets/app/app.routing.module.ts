@@ -9,7 +9,8 @@ import { TeacherSeeAllLessonsComponent } from './components/TeacherSeeAllLessons
 import { TeacherAddStudentsComponent } from './components/TeacherAddStudentsComponent/teacherAddStudents.component';
 import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonComponent/teacherCreateLesson.component';
 import { TeacherSeeProgressComponent } from './components/TeacherSeeProgressComponent/teacherSeeProgress.component';
-import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component'
+import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component';
+import { UpdateProfileComponent } from './components/UpdateProfileComponent/updateProfile.component';
 import { GoodbyeComponent } from './components/GoodbyeComponent/goodbye.component';
 import { AuthGuard } from './common/auth.guard';
 import { RoleGuard } from './common/role.guard';
@@ -21,7 +22,7 @@ export const routes = [
     component: LoginComponent
   },
   {
-    path: 'register',
+    path: 'admin-register',
     component: AdminRegisterComponent,
     canActivate: [RoleGuard],
     data: {
@@ -61,23 +62,28 @@ export const routes = [
       },
 
     {
-      path: 'teacher-words-panel',
+      path: 'words-panel',
       component: TeacherWordsPanelComponent,
       canActivate: [AuthGuard]
     },
     {
-      path: 'teacher-create-lesson',
+      path: 'create-lesson',
       component: TeacherCreateLessonComponent,
       canActivate: [AuthGuard]
     },
     {
-      path: 'teacher-see-progress',
+      path: 'see-progress',
       component: TeacherSeeProgressComponent,
       canActivate: [AuthGuard]
     },
     {
-      path: 'teacher-add-students',
+      path: 'add-students',
       component: TeacherAddStudentsComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'update-profile',
+      component: UpdateProfileComponent,
       canActivate: [AuthGuard]
     },
     {

@@ -195,8 +195,12 @@ adminChangePassword(email:string,new_password:string):Observable<any>{
   var url=this.g_url+'user/adminChangePassword';
   var body=JSON.stringify({email:email,new_password:new_password});
   return this.http.post(url,body);
-
-
+}
+updateMyProfile(old_password:string,new_password:string):Observable<any>{
+  var url=this.g_url+'user/changeMyPassword';
+  var id = this._loginService.getUserID();
+  var body=JSON.stringify({id:id,old_password:old_password,new_password:new_password});
+  return this.http.post(url,body);
 }
 
 }
