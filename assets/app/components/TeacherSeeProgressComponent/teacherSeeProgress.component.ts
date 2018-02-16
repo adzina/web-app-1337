@@ -24,6 +24,10 @@ export class TeacherSeeProgressComponent{
   }
   isStudent(user){
     for(let role of user.role){
+      if(role=="admin")
+        return false;
+    }
+    for(let role of user.role){
       if(role=="student")
         return true;
     }
@@ -41,15 +45,15 @@ export class TeacherSeeProgressComponent{
       }
     )
   }
-  s(i){
+  info(i){
     var allGuessed,allWords;
     let student=this.students[i];
     this._backendService.countAllGuessedWords(student.id).subscribe(
       data=>{
-        allGuessed=data.number;
+        allGuessed=data._body;
         this._backendService.countAllWords(student.id).subscribe(
           data=>{
-            allWords=data.number;
+            allWords=data._body;
             if(allWords==undefined)
                 allWords=0
             if(allGuessed==undefined)
