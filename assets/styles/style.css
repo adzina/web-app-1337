@@ -1,22 +1,22 @@
 html{
   position:fixed;
   width:100%;
-  height:100%;
+  height:60%;
 }
 body {
 background-color: #ccc;
 position:fixed;
 width:100%;
-height:100%;
+height:60%;
 }
 .navbar{
   background-color:  #ff0000;
 }
 
-
 div{
   text-align: center;
 }
+/*
 div.login{
   position: fixed;
   top: 20%;
@@ -119,45 +119,7 @@ input[type="text"].false{
 .box { margin: 50px;
  			background-color: lightyellow;}
 
-.sidenav {
-          height: 100%; // 100% Full-height
-          width: 20%;
-          position: fixed; // Stay in place
-          z-index: 1; // Stay on top
-          top: 70;
-          left: 0;
-          background-color:black;
-          overflow-x: hidden; // Disable horizontal scroll
-          padding-top: 60px;
-      }
-.button_show{
-  margin-left: 0%;
-}
-.button_hide{
-  margin-left: 20%;
-}
-div.sidenav_true{
-          height: 100%;
-          width: 20%;
-          position: fixed;
-          z-index: 1;
-          top: 5;
-          left: 0;
-          background-color:black;
-          overflow-x: hidden;
-          padding-top: 60px;
-}
-.sidenav_false{
-          height: 100%;
-          width: 0%;
-          position: fixed;
-          z-index: 1;
-          top: 50;
-          left: 0;
-          background-color:black;
-          overflow-x: hidden;
-          padding-top: 60px;
-}
+
 .dash{
   height: 100%;
   width: 80%;
@@ -165,3 +127,4 @@ div.sidenav_true{
   top:10%;
   left: 20%;
 }
+*/

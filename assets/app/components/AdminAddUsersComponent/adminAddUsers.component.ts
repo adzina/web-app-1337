@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Output,EventEmitter } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { BackendService } from '../../services/backend.service';
+import { CompleterService, CompleterData, CompleterItem } from 'ng2-completer';
 import { Router } from '@angular/router';
 import { SidePanelGroupsComponent } from '../../bars/SidePanelGroupsComponent/sidePanelGroups.component';
 import { Group } from '../../models/group';
@@ -10,29 +11,44 @@ import { Group } from '../../models/group';
   templateUrl: './adminAddUsers.component.html'
 })
 export class AdminAddUsersComponent{
-
+  dataService: CompleterData;
+  placeholder: Group;
   chosenGroup: Group;
   receivedUsers: user[];
   receivedActiveUsers: user[];
   activeUsers: user[];
   inactiveUsers: user[];
   backendError:string;
-
+  groups: Group[];
+  dropdownText:string;
   constructor(private _loginService: LoginService,
-              private _backendService: BackendService) {
+              private _backendService: BackendService,
+              private _completerService: CompleterService) {
                 this.receivedUsers=[];
                  this.activeUsers=[];
                  this.inactiveUsers=[];
                  this.backendError=null;
-
+                 this.placeholder=null;
+                 this.dropdownText="choose group";
                 this._backendService.getAllUsers().subscribe(response=>{
                   for (let index in response)
                   this.receivedUsers[index]=response[index];
-      },
-      error=>{
-          this.backendError=error._body;
-        }
-   );
+                  _backendService.getAllMyGroups().
+                    subscribe(response=>{
+                      this.groups=response;
+                       this.dataService=_completerService.local(this.groups,'name','name');
+                        }
+                      );
+                },
+                error=>{
+                    this.backendError=error._body;
+                  }
+                );
+  }
+  onItemSelect(selected:CompleterItem){
+    if(selected)
+    this.chosenGroup = selected.originalObject;
+    this.handleGroupChosen();
   }
   divideUsers(){
     let count_active=0;
@@ -55,14 +71,15 @@ export class AdminAddUsersComponent{
         }
     }
   }
-  handleGroupChosen(x:Group){
+  handleGroupChosen(){
 
     this.activeUsers=[];
     this.inactiveUsers=[];
-    this.chosenGroup=x;
-    this._backendService.getActiveUsers(x.id)
+    console.log(this.chosenGroup);
+    this._backendService.getActiveUsers(this.chosenGroup.id)
     .subscribe(response=>{
         this.receivedActiveUsers=response;
+        console.log(response);
         this.divideUsers();
         error=>{
               this.backendError=error._body;
@@ -77,7 +94,7 @@ export class AdminAddUsersComponent{
         {
           this.inactiveUsers=[];
           this.activeUsers=[];
-          this.handleGroupChosen(this.chosenGroup);
+          this.handleGroupChosen();
         });
     // this.activeUsers.splice(i,1);
     // this.inactiveUsers.push(user);
@@ -89,7 +106,7 @@ export class AdminAddUsersComponent{
         {
         this.inactiveUsers=[];
         this.activeUsers=[];
-        this.handleGroupChosen(this.chosenGroup);
+        this.handleGroupChosen();
 
         });
            /*
