@@ -4,10 +4,10 @@ import {LoginService} from '../services/login.service';
 import {Observable,Observer} from 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
-import {Lesson} from '../Models/lesson';
-import {Word} from '../Models/word';
-import {Group} from '../Models/group';
-import {User} from '../Models/user';
+import {Lesson} from '../models/lesson';
+import {Word} from '../models/word';
+import {Group} from '../models/group';
+import {User} from '../models/user';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
