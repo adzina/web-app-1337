@@ -1,5 +1,4 @@
  declare var sails: any;
- var LessonModel: Sails.Model = sails.models.lesson;
 
 module.exports = {
   create: function(req,res){

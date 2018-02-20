@@ -1,5 +1,4 @@
 declare var sails: any;
- var GroupModel = sails.models.group;
 
 module.exports = {
   create: function(req:any,res:any){
