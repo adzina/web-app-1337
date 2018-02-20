@@ -7,7 +7,7 @@ import { User } from '../../models/user';
 
 @Component({
   selector: 'teacherSeeProgress',
-  templateUrl: './TeacherSeeProgress.component.html'
+  templateUrl: './teacherSeeProgress.component.html'
 })
 export class TeacherSeeProgressComponent{
   groups: Group[];
