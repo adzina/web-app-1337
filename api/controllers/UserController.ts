@@ -1,12 +1,3 @@
-/**
- * UserController
- *
- * @description :: Server-side logic for managing Users
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
- */
-
-import { Model } from 'Sails';
-
 declare var sails: any;
 
 import * as jwt from "jsonwebtoken";

@@ -1,5 +1,4 @@
-import { Model } from 'Sails';
- import * as async from "async";
+import * as async from "async";
  declare var sails: any;
 module.exports = {
 		addGroupToLesson: function(req,res){

@@ -1,10 +1,3 @@
-/**
- * groupUserController
- *
- * @description :: Server-side logic for managing groupusers
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
- */
- import { Model } from 'Sails';
  import * as async from "async";
  declare var sails: any;
 

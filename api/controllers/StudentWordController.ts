@@ -1,5 +1,3 @@
-
-import { Model } from 'Sails';
 import * as async from "async";
 declare var sails: any;
 
