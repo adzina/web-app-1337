@@ -6,7 +6,10 @@ li a{
   font-size: 14px;
 }
 a{
-  cursor: pointer
+  cursor: pointer;
+}
+.navbar-inverse .navbar-nav>li>a{
+  color: white;
 }
 ul{
     display:table;
