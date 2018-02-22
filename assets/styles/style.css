@@ -1,18 +1,23 @@
 html{
-  position:fixed;
   width:100%;
-  height:60%;
+  height:100%;
+  overflow: auto;
+  display: inline-block;
 }
 body {
-background-color: #ccc;
-position:fixed;
-width:100%;
-height:60%;
+  background-color: #ccc;
+  width:100%;
+  height:100%;
+  display: inline-block;
 }
 .navbar{
   background-color:  #ff0000;
 }
-
+.footer{
+  width: 100%;
+  display: inline-block;
+  padding: 20px;
+}
 div{
   text-align: center;
 }
