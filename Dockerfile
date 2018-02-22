@@ -13,4 +13,4 @@ COPY . /app
 
 EXPOSE 1337
 
-CMD ["node", "app.js"]
+CMD ["node", "app.js","--prod"]
