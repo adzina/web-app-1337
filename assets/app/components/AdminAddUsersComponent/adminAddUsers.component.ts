@@ -33,7 +33,7 @@ export class AdminAddUsersComponent{
                 this._backendService.getAllUsers().subscribe(response=>{
                   for (let index in response)
                   this.receivedUsers[index]=response[index];
-                  _backendService.getAllMyGroups().
+                  _backendService.getAllGroups().
                     subscribe(response=>{
                       this.groups=response;
                        this.dataService=_completerService.local(this.groups,'name','name');
