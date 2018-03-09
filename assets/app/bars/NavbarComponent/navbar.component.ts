@@ -28,8 +28,6 @@ export class NavbarComponent{
       case(4): this._router.navigate(['./admin-modify-accounts']);break;
       case(5): this._router.navigate(['./see-all-lessons']);break;
       case(6): this._router.navigate(['./create-lesson']);break;
-      case(7): this._router.navigate(['./words-panel']);break;
-      case(-1): this._router.navigate(['./add-students']);break;
       case(8): this._router.navigate(['./see-progress']);break;
       case(9): this._router.navigate(['./update-profile']);break;
       case(10): this._router.navigate(['./goodbye']);break;
