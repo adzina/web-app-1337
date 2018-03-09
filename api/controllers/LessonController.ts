@@ -25,7 +25,6 @@ module.exports = {
     return sails.models.lesson.find({teacherID: id}).sort('date ASC')
             .exec(function (err, lessons){
                   if (err) { return res.serverError(err); }
-                  console.log(lessons);
                   res.json(200, lessons );
 			             });
   },

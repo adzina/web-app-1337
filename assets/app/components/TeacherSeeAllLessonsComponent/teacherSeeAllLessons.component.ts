@@ -26,7 +26,7 @@ export class TeacherSeeAllLessonsComponent {
         subscribe(response=>{
 
           for (let index in response)
-            {this.lessons[index]=response[index]}
+              this.lessons[index]=response[index];
           this.lessonChosen.emit(this.loginService.getChosenLesson());
 
           },
@@ -41,5 +41,8 @@ export class TeacherSeeAllLessonsComponent {
     var lesson=this.lessons[nr];
     this.loginService.setChosenLesson(lesson);
     this.router.navigate(['./words-panel']);
+  }
+  navigate(){
+    this.router.navigate(['./create-lesson']);
   }
 }
