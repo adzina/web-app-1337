@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/LoginComponent/login.component';
 import { AdminRegisterComponent } from './components/AdminRegisterComponent/adminRegister.component';
+import { AdminGroupComponent } from './components/AdminGroupComponent/adminGroupComponent.component';
 import { AdminCreateGroupComponent } from './components/AdminCreateGroupComponent/adminCreateGroup.component';
 import { AdminAddUsersComponent } from './components/AdminAddUsersComponent/adminAddUsers.component';
 import { AdminModifyAccountsComponent } from './components/AdminModifyAccountsComponent/adminModifyAccounts.component';
@@ -29,7 +30,14 @@ export const routes = [
       expectedRole: 'admin'
     }
   },
-
+  {
+    path: 'admin-group',
+    component: AdminGroupComponent,
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: 'admin'
+    }
+  },
     {
       path: 'admin-create-group',
       component: AdminCreateGroupComponent,

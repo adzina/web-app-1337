@@ -2,6 +2,7 @@
 import { Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Lesson} from '../models/lesson';
+import {Group} from '../models/group';
 @Injectable()
 
 export class LoginService{
@@ -11,6 +12,7 @@ export class LoginService{
   userID: string;
   role: string[];
   chosenLesson: Lesson;
+  chosenGroup: Group;
   constructor(private _router:Router){
   }
   getUserID(){
@@ -24,6 +26,12 @@ export class LoginService{
   }
   getMode(){
     return this.mode;
+  }
+  getChosenLesson(){
+    return this.chosenLesson;
+  }
+  getChosenGroup(){
+    return this.chosenGroup;
   }
   setUserID(id:string){
     this.userID=id;
@@ -45,8 +53,8 @@ export class LoginService{
   setChosenLesson(lesson:Lesson){
     this.chosenLesson=lesson;
   }
-  getChosenLesson(){
-    return this.chosenLesson;
+  setChosenGroup(group:Group){
+    this.chosenGroup=group
   }
   isAdmin(){
     for (var i=0;i<this.role.length;i++)

@@ -33,12 +33,13 @@ export class AdminAddUsersComponent{
                 this._backendService.getAllUsers().subscribe(response=>{
                   for (let index in response)
                   this.receivedUsers[index]=response[index];
-                  _backendService.getAllGroups().
+                  this.handleGroupChosen();
+                  /*_backendService.getAllGroups().
                     subscribe(response=>{
                       this.groups=response;
                        this.dataService=_completerService.local(this.groups,'name','name');
                         }
-                      );
+                      );*/
                 },
                 error=>{
                     this.backendError=error._body;
@@ -72,14 +73,12 @@ export class AdminAddUsersComponent{
     }
   }
   handleGroupChosen(){
-
+    this.chosenGroup = this._loginService.getChosenGroup();
     this.activeUsers=[];
     this.inactiveUsers=[];
-    console.log(this.chosenGroup);
     this._backendService.getActiveUsers(this.chosenGroup.id)
     .subscribe(response=>{
         this.receivedActiveUsers=response;
-        console.log(response);
         this.divideUsers();
         error=>{
               this.backendError=error._body;

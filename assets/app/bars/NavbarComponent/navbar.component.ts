@@ -22,9 +22,8 @@ export class NavbarComponent{
   navigate(nr: number){
     switch(nr){
       case(0): this._router.navigate(['./see-all-lessons']);break;
-      case(1): this._router.navigate(['./admin-create-group']);break;
+      case(1): this._router.navigate(['./admin-group']);break;
       case(2): this._router.navigate(['./admin-register']);break;
-      case(3): this._router.navigate(['./admin-add-users']);break;
       case(4): this._router.navigate(['./admin-modify-accounts']);break;
       case(5): this._router.navigate(['./see-all-lessons']);break;
       case(8): this._router.navigate(['./see-progress']);break;

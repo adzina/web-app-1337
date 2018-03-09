@@ -1,0 +1,18 @@
+<navbar></navbar>
+<div class="container">
+  <div style="margin-bottom:10%">
+  </div>
+  <p>Add new group:
+    <a (click)="navigate()">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+  </p>
+  <table class="table table-striped table-bordered table-hover table-condensed">
+    <tr *ngFor=" let group of groups; let i=index" [attr.data-index]="i">
+      <th class="text-center">{{group.name}}</th>
+      <th style = "cursor: pointer" (click)="addRemove(i)" class="text-center">Add/remove users</th>
+      <th style = "cursor: pointer" (click)="seeLessons(i)" class="text-center">See group's lessons</th>
+    </tr>
+  </table>
+
+</div>
