@@ -8,16 +8,23 @@ import { Group } from '../../models/group';
 
 @Component({
   selector: 'admin-add-users',
-  templateUrl: './adminAddUsers.component.html'
+  templateUrl: './adminAddUsers.component.html',
+  styleUrls: ['./adminAddUsers.component.scss']
 })
 export class AdminAddUsersComponent{
   dataService: CompleterData;
   placeholder: Group;
   chosenGroup: Group;
   receivedUsers: user[];
+  teachers: user[];
+  students: user[];
   receivedActiveUsers: user[];
-  activeUsers: user[];
+  activeUsers: user[]
   inactiveUsers: user[];
+  activeTeachers: user[];
+  inactiveTeachers: user[];
+  activeStudents: user[];
+  inactiveStudents: user[];
   backendError:string;
   groups: Group[];
   dropdownText:string;
@@ -25,11 +32,15 @@ export class AdminAddUsersComponent{
               private _backendService: BackendService,
               private _completerService: CompleterService) {
                 this.receivedUsers=[];
-                 this.activeUsers=[];
-                 this.inactiveUsers=[];
-                 this.backendError=null;
-                 this.placeholder=null;
-                 this.dropdownText="choose group";
+                this.activeUsers=[];
+                this.inactiveUsers=[];
+                this.activeStudents=[];
+                this.inactiveStudents=[];
+                this.activeTeachers=[];
+                this.inactiveTeachers=[];
+                this.backendError=null;
+                this.placeholder=null;
+                this.dropdownText="choose group";
                 this._backendService.getAllUsers().subscribe(response=>{
                   for (let index in response)
                   this.receivedUsers[index]=response[index];
@@ -71,11 +82,40 @@ export class AdminAddUsersComponent{
           count_inactive++;
         }
     }
+    this.divideUsersByRole();
+  }
+  divideUsersByRole(){
+    for (let active of this.activeUsers){
+      if(this.isStudent(active.role))
+        this.activeStudents.push(active)
+      else if(this.isTeacher(active.role))
+          this.activeTeachers.push(active)
+    }
+    for (let inactive of this.inactiveUsers){
+      if(this.isStudent(inactive.role))
+        this.inactiveStudents.push(inactive)
+      else if(this.isTeacher(inactive.role))
+          this.inactiveTeachers.push(inactive)
+    }
+  }
+  isStudent(role){
+    if(role[0]=="student")
+      return true
+    return false
+  }
+  isTeacher(role){
+    if(role[0]=='teacher')
+      return true
+    return false
   }
   handleGroupChosen(){
     this.chosenGroup = this._loginService.getChosenGroup();
-    this.activeUsers=[];
     this.inactiveUsers=[];
+    this.activeUsers=[];
+    this.activeTeachers=[];
+    this.inactiveTeachers=[];
+    this.activeStudents=[];
+    this.inactiveStudents=[];
     this._backendService.getActiveUsers(this.chosenGroup.id)
     .subscribe(response=>{
         this.receivedActiveUsers=response;
@@ -87,24 +127,45 @@ export class AdminAddUsersComponent{
 
   }
 
-  delete(i:number){
-    var user=this.activeUsers[i];
-        this._backendService.removeUserFromGroup(user.id,this.chosenGroup.id).subscribe(response=>
-        {
-          this.inactiveUsers=[];
-          this.activeUsers=[];
-          this.handleGroupChosen();
-        });
-    // this.activeUsers.splice(i,1);
-    // this.inactiveUsers.push(user);
+  deleteTeacher(i:number){
+    var user=this.activeTeachers[i];
+    this.delete(user);
   }
-  add(i:number){
-  var user=this.inactiveUsers[i];
+  deleteStudent(i:number){
+    var user=this.activeStudents[i];
+    this.delete(user);
+  }
+  delete(user){
+    this._backendService.removeUserFromGroup(user.id,this.chosenGroup.id).subscribe(response=>
+    {
+      this.inactiveUsers=[];
+      this.activeUsers=[];
+      this.activeTeachers=[];
+      this.inactiveTeachers=[];
+      this.activeStudents=[];
+      this.inactiveStudents=[];
+      this.handleGroupChosen();
+    });
+  }
+  addStudent(i:number){
+    var user=this.inactiveStudents[i];
+    this.add(user);
+
+  }
+  addTeacher(i:number){
+    var user=this.inactiveTeachers[i];
+    this.add(user);
+  }
+  add(user){
       this._backendService.addUserToGroup(user.id,this.chosenGroup.id)
       .subscribe(response=>
         {
-        this.inactiveUsers=[];
-        this.activeUsers=[];
+          this.inactiveUsers=[];
+          this.activeUsers=[];
+          this.activeTeachers=[];
+          this.inactiveTeachers=[];
+          this.activeStudents=[];
+          this.inactiveStudents=[];
         this.handleGroupChosen();
 
         });
