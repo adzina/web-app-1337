@@ -46,7 +46,7 @@ export class TeacherCreateLessonComponent {
                     );
   }
   create(){
-    if(this.subject!=null){
+    if(this.subject!=null  && this.group!=null){
       this.sendRequest();
     }
     else{
