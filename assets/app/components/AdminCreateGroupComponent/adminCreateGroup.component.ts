@@ -8,7 +8,8 @@ import { AuthHttp} from 'angular2-jwt';
 
 @Component({
   selector: 'admin-create-group',
-  templateUrl: './adminCreateGroup.component.html'
+  templateUrl: './adminCreateGroup.component.html',
+  styleUrls: ['./adminCreateGroup.component.scss']
 })
 export class AdminCreateGroupComponent{
   name: string;
@@ -43,6 +44,9 @@ export class AdminCreateGroupComponent{
   goto(){
     this._router.navigate(['./admin-add-users']);
 
+  }
+  goBack(){
+    this._router.navigate(['./admin-group']);
   }
 
 }
