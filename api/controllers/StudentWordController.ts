@@ -33,6 +33,8 @@ module.exports = {
           attempt=0;
           sails.models.studentword.create({ studentID: studentID, wordID: wordID, attempt: attempt, guessed: false })
           .exec(function(created){
+            sails.log.debug("StudentWord created");
+            sails.log.debug(created);
             return res.json(created);
           })
         }
@@ -41,6 +43,8 @@ module.exports = {
           attempt=0;
           sails.models.studentword.create({ studentID: studentID, wordID: wordID, attempt: attempt, guessed: true })
           .exec(function(created){
+            sails.log.debug("StudentWord created");
+            sails.log.debug(created);
             return res.json(created);
           })
         }
@@ -52,19 +56,28 @@ module.exports = {
     var studentID = req.param("studentID");
     return  sails.models.studentword.find({studentID: studentID,guessed:true})
       .exec(function(err,found){
-
+        if(err){
+          sails.log.debug("Error getting all guessed");
+          sails.log.error(err);
+        }
+        sails.log.debug("All guessed collected");
+        sails.log.debug(found);
         res.json(found);
       })
   },
   countAllGuessed:function(req,res){
     var studentID = req.param("studentID");
     return sails.models.studentword.count({studentID: studentID,guessed:true}).exec(function countCB(error, number) {
+      sails.log.debug("All guessed counted");
+      sails.log.debug(number);
       res.json(number)
     });
   },
   countAll:function(req,res){
     var studentID = req.param("studentID");
     return sails.models.studentword.count({studentID: studentID}).exec(function countCB(error, number) {
+      sails.log.debug("All words counted");
+      sails.log.debug(number);
       res.json(number)
     });
   }

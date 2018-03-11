@@ -9,8 +9,11 @@ module.exports = {
 
       })
       .exec(function (err:any, group:any){
-        if (err) { return res.serverError(err); }
-
+        if (err) {
+          sails.log.debug("Error creating group");
+          sails.log.error(err);
+          return res.serverError(err); }
+        sails.log.debug("Group created");
         return res.ok();
       });
   },
@@ -19,7 +22,12 @@ module.exports = {
     let _userID=req.param('userID');
     return sails.models.group.find()
             .exec(function (err:any, groups:any){
-                  if (err) { return res.serverError(err); }
+                  if (err) {
+                    sails.log.debug("Error getting groups");
+                    sails.log.error(err);
+                    return res.serverError(err); }
+                      sails.log.debug("Groups found");
+                      sails.log.debug(groups)
                       res.json(200,groups);
 			             });
   }

@@ -11,8 +11,13 @@ create: function(req,res){
       wordID: _wordID
 
     })
-    .exec(function (err, user){
-      if (err) { return res.serverError(err); }
+    .exec(function (err, lessonWord){
+      if (err) {
+        sails.log.debug("Error creating LessonWord");
+        sails.log.error(err);
+        return res.serverError(err); }
+      sails.log.debug("LessonWord created");
+      sails.log.debug(lessonWord);
       return res.ok();
     });
 },
@@ -33,7 +38,8 @@ getLessonsWords:function(req,res){
             cb();
           })
           .fail(function(error){
-            //you can pass an error...
+            sails.log.debug("Error in getLessonsWords");
+            sails.log.error(error);
             cb(error);
           })
       }, function(error){
@@ -50,7 +56,10 @@ getLessonsWords:function(req,res){
 getWordsID:function(_lessonID,callback){
   sails.models.lessonword.find({lessonID:_lessonID})
     .exec(function(err,words){
-      if(err) console.log(err);
+      if(err) {
+          sails.log.debug("Error getting word's id");
+          sails.log.error(err);
+      }
       var output:string[];
       output=[];
       for(var i=0;i<words.length;i++){
@@ -67,7 +76,12 @@ removeWordFromLesson:function(req,res){
     { wordID: _wordID,
       lessonID: _lessonID})
       .exec(function (err, deleted){
-        if (err) { return res.serverError(err); }
+        if (err) {
+          sails.log.debug("Error deleting word from lesson");
+          sails.log.error(err);
+          return res.serverError(err); }
+        sails.log.debug("Word removed from lesson");
+        sails.log.debug(deleted);
         return res.json(deleted);
       });
 }

@@ -18,6 +18,8 @@ module.exports = {
             role: users[i].role
           };
         }
+        sails.log.debug("All users found");
+        sails.log.debug(output);
         res.json(200, output);
       })
   },
@@ -26,9 +28,13 @@ module.exports = {
     sails.models.user.findOne({
       id: id
     }).exec(function callback(err, user) {
-      if (err) return res.serverError(err);
+      if (err) {
+        sails.log.debug("Error getting user by id");
+        sails.log.error(err);
+        return res.serverError(err);}
 
-
+      sails.log("User found by id");
+      sails.log(user);
       res.json(200, {
         id: user.id,
         first_name: user.first_name,
@@ -45,7 +51,9 @@ module.exports = {
     sails.models.user.findOne({
       email: req.body.email
     }).exec(function callback(err, user) {
-      if (err) return res.serverError(err);
+      if (err) {
+        sails.log(err);
+        return res.serverError(err);}
       if (!user) return res.serverError("User not found, please sign up.");
 
 
@@ -88,8 +96,12 @@ module.exports = {
       role: _role
     })
       .exec(function(err, user) {
-        if (err) { return res.serverError(err); }
-
+        if (err) {
+          sails.log("Erro creating user");
+          sails.log(err);
+          return res.serverError(err); }
+        sails.log.debug("User created");
+        sails.log.debug(user);
         return res.ok();
       });
   },
@@ -100,7 +112,10 @@ module.exports = {
       sails.models.user.findOne({
         email: _email
       }).exec(function callback(err, user) {
-        if (err) return res.serverError(err);
+        if (err) {
+          sails.log.debug("Error changing password");
+          sails.log.error(err);
+          return res.serverError(err);}
         if (!user) return res.serverError("Invalid email");
 
         var data={first_name: user.first_name,
@@ -108,7 +123,10 @@ module.exports = {
                   password: _new_password,
                   role: user.role};
         sails.models.user.update({ email:user.email },data,function(err,updated){
-            if (err) return res.serverError(err);
+            if (err) {
+              sails.log.debug("Error updating user");
+              sails.log.error(err);
+              return res.serverError(err);}
             return res.json(200);
         })
 
@@ -128,7 +146,10 @@ module.exports = {
 
         //check password
         bcrypt.compare(_old_password, user.password, function(error, matched) {
-          if (error) return res.serverError(error);
+          if (error) {
+            sails.log.debug("Error comparing passwords");
+            sails.log.error(error);
+            return res.serverError(error);}
 
           if (!matched) return res.serverError("Invalid password");
 
@@ -140,7 +161,10 @@ module.exports = {
                       password: _new_password,
                       role: user.role};
             sails.models.user.update({ email:user.email },data,function(err,updated){
-                      if (err) return res.serverError(err);
+                      if (err) {
+                        sails.log.debug("Error updating user");
+                        sails.log.error(err);
+                        return res.serverError(err);}
                       return res.json(200);
             })
           }

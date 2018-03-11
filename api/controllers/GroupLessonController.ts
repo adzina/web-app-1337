@@ -10,7 +10,11 @@ module.exports = {
 
 					})
 					.exec(function (error, pair){
-						if (error)  return res.negotiate(error);
+						if (error)  {
+              sails.log.debug("Error adding group to lesson");
+              sails.log.error(error);
+              return res.negotiate(error);}
+            sails.log.debug("GroupLesson created");
 						return res.json(pair);
 					});
 
@@ -24,7 +28,11 @@ module.exports = {
 
 					})
 					.exec(function (error, deleted){
-						if (error)  return res.negotiate(error);
+						if (error)  {
+              sails.log.debug("Error removing group from lesson");
+              sails.log.error(error);
+              return res.negotiate(error);}
+            sails.log.debug("Group removed from lesson");
 						return res.json(deleted);
 					});
 
@@ -45,12 +53,16 @@ module.exports = {
 		            cb();
 		          })
 		          .fail(function(error){
-		            //you can pass an error...
+		            sails.log.debug("Error in getLessonsGroups");
+                sails.log.error(error);
 		            cb(error);
 		          })
 		      }, function(error){
 		        //... and handle it in the final callback
-		        if(error) return res.negotiate(error);
+		        if(error) {
+              sails.log.debug("Error in getLessonsGroups");
+              sails.log.error(error);
+              return res.negotiate(error);}
 
 		        //here we can return our finished use
 		        return res.json(output);
@@ -62,7 +74,9 @@ module.exports = {
 		getGroupsID:function(_lessonID,callback){
 		  sails.models.grouplesson.find({lessonID:_lessonID})
 		    .exec(function(err,Groups){
-		      if(err) console.log(err);
+		      if(err) {
+            sails.log.debug("Error in getGroupsID");
+            sails.log.error(err);}
 		      var output:string[];
 		      output=[];
 		      for(var i=0;i<Groups.length;i++){
@@ -89,15 +103,14 @@ module.exports = {
                 cb();
 		          })
 		          .fail(function(error){
-		            //you can pass an error...
+		            sails.log.debug("Error in getGroupsLessons");
+                sails.log.error(error);
 		            cb(error);
 		          })
 		      }, function(error){
-		        //... and handle it in the final callback
 		        if(error) res.negotiate(error);
             else
-		        //here we can return our finished use
-		        return res.json(output);
+		          return res.json(output);
 		});
 		  })
 
@@ -106,7 +119,9 @@ module.exports = {
     getLessonsID:function(_groupID,callback){
 		  sails.models.grouplesson.find({groupID:_groupID})
 		    .exec(function(err,Lessons){
-		      if(err) console.log(err);
+		      if(err) {
+            sails.log.debug("Error in getLessonsID");
+            sails.log.error(err);}
 		      var output:string[];
 		      output=[];
 		      for(var i=0;i<Lessons.length;i++){

@@ -8,6 +8,8 @@ module.exports = {
 
           this.create(eng,pol, (wordID) => {
               this.addToLesson(lessonID,wordID,(wordLesson)=>{
+                sails.log.debug("Word added");
+                sails.log.error(wordLesson);
                 return res.json(200);
               })
           });
@@ -23,7 +25,9 @@ module.exports = {
                  english:eng,
                  polish:pol})
              .exec(function (err,word){
-               if(err){console.log(err);}
+               if(err){
+                sails.log.debug("Error creating word");
+                 sails.log.error(err);}
               return callback(word.id);
 
               })
@@ -38,7 +42,9 @@ module.exports = {
     sails.models.lessonword.create({
       lessonID:lessonID,
       wordID:wordID}).exec(function (err, wordLesson){
-          if(err){console.log(err);}
+          if(err){
+            sails.log.debug("Error in addToLesson");
+            sails.log.error(err);}
           return callback(wordLesson);
 			});
 

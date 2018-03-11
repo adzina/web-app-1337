@@ -12,7 +12,11 @@ module.exports = {
 
 				})
 				.exec(function (error, pair){
-					if (error)  return res.negotiate(error);
+					if (error)  {
+            sails.log.debug("Error adding user to group");
+            sails.log.error(error);
+            return res.negotiate(error);}
+          sails.log("User added to group");
 					return res.json(pair);
 				});
 
@@ -26,7 +30,10 @@ module.exports = {
 
 				})
 				.exec(function (error, deleted){
-					if (error)  return res.negotiate(error);
+					if (error)  {
+            sails.log.debug("Error removing user form group");
+            sails.log.error(error);
+            return res.negotiate(error);}
 					return res.json(deleted);
 				});
 
@@ -47,7 +54,8 @@ module.exports = {
 	            cb();
 	          })
 	          .fail(function(error){
-	            //you can pass an error...
+	            sails.log.debug("Error in getGroupsUsers");
+              sails.log.error(error);
 	            cb(error);
 	          })
 	      }, function(error){
@@ -65,7 +73,10 @@ module.exports = {
 
 	  sails.models.groupuser.find({groupID:_groupID})
 	    .exec(function(err,Users){
-	      if(err) console.log(err);
+	      if(err) {
+            sails.log.debug("Error getting users id");
+            sails.log.error(err);
+        }
 	      var output:string[];
 	      output=[];
 	      for(var i=0;i<Users.length;i++){
@@ -90,7 +101,8 @@ module.exports = {
 	            cb();
 	          })
 	          .fail(function(error){
-	            //you can pass an error...
+	            sails.log.debug("Error in getMyGroups");
+              sails.log.error(error);
 	            cb(error);
 	          })
 	      }, function(error){
@@ -106,7 +118,10 @@ module.exports = {
   getGroupsID:function(_userID,callback){
 	  sails.models.groupuser.find({userID:_userID})
 	    .exec(function(err,Groups){
-	      if(err) console.log(err);
+	      if(err) {
+            sails.log.debug("Error in getGroupsID");
+            sails.log.error(err);
+        }
 	      var output:string[];
 	      output=[];
 	      for(var i=0;i<Groups.length;i++){
