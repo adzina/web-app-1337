@@ -30,7 +30,8 @@ export class AdminAddUsersComponent{
   dropdownText:string;
   constructor(private _loginService: LoginService,
               private _backendService: BackendService,
-              private _completerService: CompleterService) {
+              private _completerService: CompleterService,
+              private _router: Router) {
                 this.receivedUsers=[];
                 this.activeUsers=[];
                 this.inactiveUsers=[];
@@ -172,6 +173,9 @@ export class AdminAddUsersComponent{
            /*
           this.inactiveUsers.splice(i,1);
           this.activeUsers.push(user);*/
+  }
+  goBack(){
+    this._router.navigate(['admin-groups']);
   }
 }
 interface user{

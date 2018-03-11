@@ -1,11 +1,14 @@
 
   <navbar></navbar>
     <div class="container">
+      <ol class="breadcrumb pull-left">
+        <li class="breadcrumb-item"><a (click)="goBack()">Groups</a></li>
+        <li class="breadcrumb-item active">Add users to {{chosenGroup.name}}</li>
+      </ol>
+    </div>
 
-      <div *ngIf="chosenGroup!=null">
-        <h4>Adding users to group: <b>{{chosenGroup.name}}</b></h4>
-      </div>
 
+      <div class="container">
       <div class="row">
           <div class="column">
             <table class="table table-striped table-bordered table-hover table-condensed">
