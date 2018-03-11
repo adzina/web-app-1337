@@ -1,6 +1,11 @@
 .navbar{
   margin-bottom: 0px;
 }
+
+.navbar-inner, .navbar {
+  border: 0px;
+  border-radius: 0px;
+}
 li a{
   color: white;
   font-size: 14px;
