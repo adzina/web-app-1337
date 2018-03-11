@@ -1,19 +1,12 @@
 <navbar></navbar>
 
-<style>
-.table td {
-   text-align: center;
-}
-</style>
 <div class="container">
-      <div style="margin-bottom:10%">
-      </div>
-      <div *ngIf="chosenLesson==null">
-        <h4>You haven't chosen any lesson. You can do it <a (click)="goto()" style="cursor: pointer"><strong>here</strong></a></h4>
-      </div>
-      <div *ngIf="chosenLesson!=null">
-        <h4>Currently modifying: <strong>{{subject}}</strong></h4>
-      </div>
+  <ol class="breadcrumb pull-left">
+    <li class="breadcrumb-item"><a (click)="goBack()">Lessons</a></li>
+    <li class="breadcrumb-item active">Add words to {{subject}}</li>
+  </ol>
+</div>
+<div class="container">
       <table *ngIf="chosenLesson!=null" class="table table-striped table-bordered table-hover table-condensed">
         <tr *ngFor=" let word of words; let i=index" [attr.data-index]="i">
           <th class="text-center">{{word.english}}</th>

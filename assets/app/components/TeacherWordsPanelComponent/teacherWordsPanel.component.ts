@@ -8,6 +8,7 @@ import {Lesson} from '../../models/lesson';
 @Component({
   selector: 'teacher-words-panel',
   templateUrl: 'teacherWordsPanel.component.html',
+  styleUrls: ['teacherWordsPanel.component.scss']
 })
 
 export class TeacherWordsPanelComponent {
@@ -72,8 +73,7 @@ export class TeacherWordsPanelComponent {
     this.lessonsFiltered.push({pol:this.polish,eng:this.english,lesson:this.chosenLesson,id:""});
 */
   }
-
-  goto(){
+  goBack(){
     this._router.navigate(['./see-all-lessons']);
   }
 }
