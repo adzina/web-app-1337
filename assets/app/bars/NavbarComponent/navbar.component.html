@@ -8,11 +8,11 @@
         </li>
 
         <li *ngIf="isAdmin">
-          <a class="tab" (click)="navigate(1)">       <b>Group</b>       </a>
+          <a class="tab" (click)="navigate(1)"> <span class="glyphicon glyphicon-globe"></span>     </a>
         </li>
 
         <li *ngIf="isAdmin">
-          <a class="tab" (click)="navigate(2)">       <b>Register new user</b>     </a>
+          <a class="tab" (click)="navigate(2)"><span class="glyphicon glyphicon-user"></span></a>
         </li>
 
         <li *ngIf="isAdmin">
@@ -20,19 +20,20 @@
         </li>
 
         <li>
-          <a class="tab" (click)="navigate(5)">      <b> Lesson</b>      </a>
+          <a class="tab" (click)="navigate(5)"><span class="glyphicon glyphicon-book"></span></a>
         </li>
 
         <li>
-          <a class="tab" (click)="navigate(8)">   <b>See students' progress</b>   </a>
+          <a class="tab" (click)="navigate(8)"><span class="glyphicon glyphicon-tasks"></span></a>
         </li>
 
         <li  style="float: right">
           <a class="tab" style="color:black" (click)="navigate(10)">   <b>Logout</b>   </a>
         </li>
-        
+
         <li style="float: right">
-          <a class="tab" (click)="navigate(9)">     <b>Update my profile</b>     </a>
+          <a class="tab" (click)="navigate(9)">
+            <span class="glyphicon glyphicon-cog"></span>     </a>
         </li>
 
       </ul>
