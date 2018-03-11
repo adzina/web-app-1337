@@ -16,3 +16,16 @@ display: block;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+a {
+  cursor: pointer;
+}
+li.breadcrumb-item.active{
+  color: white;
+}
+li.breadcrumb-item.active::before{
+  color: black;
+}
+ol {
+  background-color: #ccc;
+  color: white;
+}

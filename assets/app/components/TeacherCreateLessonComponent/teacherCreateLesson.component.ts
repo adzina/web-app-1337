@@ -71,6 +71,8 @@ export class TeacherCreateLessonComponent {
     }
   );
   }
-
+  goBack(){
+    this._router.navigate(['./see-all-lessons']);  
+  }
 
 }
