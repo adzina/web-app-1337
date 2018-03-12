@@ -15,6 +15,7 @@ module.exports = {
             id: users[i].id,
             first_name: users[i].first_name,
             last_name: users[i].last_name,
+            email: users[i].email,
             role: users[i].role
           };
         }
@@ -178,5 +179,6 @@ interface user {
   id: string,
   first_name: string,
   last_name: string,
+  email: string,
   role: string
 }

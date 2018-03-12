@@ -21,6 +21,7 @@ import { RoleGuard } from './common/role.guard';
 import { LoginComponent } from "./components/LoginComponent/login.component";
 import { AdminRegisterComponent } from './components/AdminRegisterComponent/adminRegister.component';
 import { AdminGroupComponent } from './components/AdminGroupComponent/adminGroupComponent.component';
+import { AdminUserComponent } from './components/AdminUserComponent/adminUser.component';
 import { AdminCreateGroupComponent } from './components/AdminCreateGroupComponent/adminCreateGroup.component';
 import { AdminAddUsersComponent } from './components/AdminAddUsersComponent/adminAddUsers.component';
 import { AdminModifyAccountsComponent } from './components/AdminModifyAccountsComponent/adminModifyAccounts.component';
@@ -57,6 +58,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       NavbarComponent,
       FooterComponent,
       AdminGroupComponent,
+      AdminUserComponent,
       AdminCreateGroupComponent,
       AdminAddUsersComponent,
       AdminModifyAccountsComponent,

@@ -4,6 +4,7 @@ import { AuthHttp} from 'angular2-jwt';
 import {HttpErrorResponse} from '@angular/common/http';
 import {LoginService} from '../../services/login.service';
 import {BackendService} from '../../services/backend.service';
+import {User} from '../../models/user';
 @Component({
   selector: 'admin-modify-accounts',
   templateUrl: './adminModifyAccounts.component.html'
@@ -15,16 +16,18 @@ export class AdminModifyAccountsComponent {
   registered: boolean;
   empty_field: boolean;
   backend_error: string;
+  user: User;
   constructor(private _router:Router,
      private _loginService:LoginService,
      private _backendService: BackendService,
      private http:AuthHttp) {
-    this.email = null;
     this.inputType = 'password';
     this.new_password=null;
     this.registered=null;
     this.empty_field = false;
     this.backend_error=null;
+    this.user = _loginService.getChosenUser();
+    this.email = this.user.email;
   }
 
     hideShowPassword(){

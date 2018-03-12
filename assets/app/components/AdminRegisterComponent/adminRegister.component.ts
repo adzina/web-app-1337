@@ -6,7 +6,8 @@ import {LoginService} from '../../services/login.service';
 import {BackendService} from '../../services/backend.service';
 @Component({
   selector: 'register',
-  templateUrl: './adminRegister.component.html'
+  templateUrl: './adminRegister.component.html',
+  styleUrls: ['./adminRegister.component.scss']
 })
 export class AdminRegisterComponent {
   inputType: string;
@@ -51,6 +52,9 @@ createUser(){
   else{
     this.registered=false;
   }
+}
+goBack(){
+  this._router.navigate(['admin-user']);
 }
 
 }

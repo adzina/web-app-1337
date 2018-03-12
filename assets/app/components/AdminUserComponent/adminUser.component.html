@@ -1,0 +1,29 @@
+<navbar></navbar>
+<div class="container">
+  <div style="margin-bottom:10%">
+  </div>
+  <p class="pull-left">
+    <a (click)="navigate()">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a> Add new user
+  </p>
+  <table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor=" let user of users; let i=index" [attr.data-index]="i">
+      <td class="text-center">{{user.first_name}}</td>
+      <td class="text-center">{{user.last_name}}</td>
+      <td class="text-center">{{user.role[0]}}</td>
+      <td style = "cursor: pointer" (click)="modify(i)" class="text-center">Change password</td>
+      <!--
+      <th style = "cursor: pointer" (click)="seeGroups(i)" class="text-center">See user's groups</th>
+      <th style = "cursor: pointer" (click)="seeLessons(i)" class="text-center">See user's lessons</th>
+    -->
+    </tr>
+  </table>
+
+</div>
