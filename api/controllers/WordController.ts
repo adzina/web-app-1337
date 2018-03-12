@@ -9,7 +9,7 @@ module.exports = {
           this.create(eng,pol, (wordID) => {
               this.addToLesson(lessonID,wordID,(wordLesson)=>{
                 sails.log.debug("Word added");
-                sails.log.error(wordLesson);
+                sails.log.debug(wordLesson);
                 return res.json(200);
               })
           });
