@@ -8,10 +8,15 @@
     </a> Add new group
   </p>
   <table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+      <th>Name</th>
+      <th>Action</th>
+      <th>Action</th>
+    </tr>
     <tr *ngFor=" let group of groups; let i=index" [attr.data-index]="i">
-      <th class="text-center">{{group.name}}</th>
-      <th style = "cursor: pointer" (click)="addRemove(i)" class="text-center">Add/remove users</th>
-      <th style = "cursor: pointer" (click)="seeLessons(i)" class="text-center">See group's lessons</th>
+      <td class="text-center">{{group.name}}</td>
+      <td style = "cursor: pointer" (click)="addRemove(i)" class="text-center">Add/remove users</td>
+      <td style = "cursor: pointer" (click)="seeLessons(i)" class="text-center">See group's lessons</td>
     </tr>
   </table>
 

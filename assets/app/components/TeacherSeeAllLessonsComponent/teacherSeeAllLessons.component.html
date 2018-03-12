@@ -8,11 +8,14 @@
     </a> Add new lesson
   </p>
   <table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+    </tr>
     <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
-      <th style = "cursor: pointer;"(click)="choose(i)" class="text-center">{{lesson.subject}}</th>
-      <th class="text-center">{{lesson.date}}</th>
-      <th class="text-center" style="width:10px">
-      </th>
+      <td style = "cursor: pointer;"(click)="choose(i)" class="text-center">{{lesson.subject}}</td>
+      <td class="text-center">{{lesson.date}}</td>
+      <td class="text-center" style="width:10px"></td>
     </tr>
   </table>
 
