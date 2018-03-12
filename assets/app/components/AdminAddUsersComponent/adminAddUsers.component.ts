@@ -5,6 +5,7 @@ import { CompleterService, CompleterData, CompleterItem } from 'ng2-completer';
 import { Router } from '@angular/router';
 import { SidePanelGroupsComponent } from '../../bars/SidePanelGroupsComponent/sidePanelGroups.component';
 import { Group } from '../../models/group';
+import { Lesson } from '../../models/lesson';
 
 @Component({
   selector: 'admin-add-users',
@@ -15,6 +16,7 @@ export class AdminAddUsersComponent{
   dataService: CompleterData;
   placeholder: Group;
   chosenGroup: Group;
+  lessons: Lesson[];
   receivedUsers: user[];
   teachers: user[];
   students: user[];
@@ -41,11 +43,20 @@ export class AdminAddUsersComponent{
                 this.inactiveTeachers=[];
                 this.backendError=null;
                 this.placeholder=null;
+                this.lessons=[];
                 this.dropdownText="choose group";
                 this._backendService.getAllUsers().subscribe(response=>{
                   for (let index in response)
-                  this.receivedUsers[index]=response[index];
-                  this.handleGroupChosen();
+                    this.receivedUsers[index]=response[index];
+                  this.chosenGroup = this._loginService.getChosenGroup();
+                  this._backendService.getGroupsLessons(this.chosenGroup.id)
+                  .map(res => res.json()).
+                    subscribe(resp=>{
+                      for (let index in resp)
+                        this.lessons[index]=resp[index]
+                      this.handleGroupChosen();
+                    })
+
                   /*_backendService.getAllGroups().
                     subscribe(response=>{
                       this.groups=response;
@@ -110,7 +121,6 @@ export class AdminAddUsersComponent{
     return false
   }
   handleGroupChosen(){
-    this.chosenGroup = this._loginService.getChosenGroup();
     this.inactiveUsers=[];
     this.activeUsers=[];
     this.activeTeachers=[];
@@ -175,7 +185,12 @@ export class AdminAddUsersComponent{
           this.activeUsers.push(user);*/
   }
   goBack(){
-    this._router.navigate(['./admin-groups']);
+    this._router.navigate(['./admin-group']);
+  }
+  goToLesson(i:number){
+    var lesson = this.lessons[i];
+    this._loginService.setChosenLesson(lesson);
+    this._router.navigate(["./words-panel"]);
   }
 }
 interface user{

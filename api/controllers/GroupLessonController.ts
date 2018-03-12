@@ -96,8 +96,8 @@ module.exports = {
 		          .then(function(lesson){
                 if(lesson){
                     var elem:lesson;
-		                elem={id:<string>lesson.id,subject: <string>lesson.subject, date: <Date>lesson.date, teacherID: <string>lesson.teacherID};
-		                output.push(elem);}
+                    elem=lesson
+                    output.push(elem);}
 
 		            //inside the iterator function we call cb() once we are finished
                 cb();
@@ -110,7 +110,8 @@ module.exports = {
 		      }, function(error){
 		        if(error) res.negotiate(error);
             else
-		          return res.json(output);
+              {sails.log.debug(output);
+		          return res.json(output);}
 		});
 		  })
 
