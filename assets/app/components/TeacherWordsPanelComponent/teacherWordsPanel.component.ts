@@ -51,9 +51,11 @@ export class TeacherWordsPanelComponent {
       this.prepare();
     })
   }
-  submit(){
+  submit(element){
+
     if (this.polish!="" || this.english!="") this.addWord();
     else alert("Provide both polish and english version of the word");
+    element.focus();
   }
   addWord() {
     this._backendService.addWord(this.polish,this.english,this.chosenLesson.id)

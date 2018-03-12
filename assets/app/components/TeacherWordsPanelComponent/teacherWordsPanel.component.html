@@ -25,8 +25,8 @@
 
   <div class="text-center" *ngIf="chosenLesson!=null">
 
-      <input type="text"  name="english" [(ngModel)]="english" placeholder="english">
-      <input type="text" name="polish" [(ngModel)]="polish" placeholder="polish"  (keyup.enter)="submit()"/>
+      <input #focusable type="text"  name="english" [(ngModel)]="english" placeholder="english">
+      <input type="text" name="polish" [(ngModel)]="polish" placeholder="polish"  (keyup.enter)="submit(focusable)"/>
       <button class={{buttonClass}} (click)="submit()">Submit</button>
 
   </div>
