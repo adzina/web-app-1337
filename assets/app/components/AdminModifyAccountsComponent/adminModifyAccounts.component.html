@@ -1,15 +1,13 @@
 <navbar></navbar>
 <div class="text-centered" style="margin-bottom:40px">
+  <ol class="breadcrumb pull-left">
+    <li class="breadcrumb-item"><a (click)="goBack()">Users</a></li>
+    <li class="breadcrumb-item active">Modify {{user.first_name}} {{user.last_name}}</li>
+  </ol>
+  <br><br>
   <h1><strong>Modify account</strong></h1>
 </div>
 <form style="margin-left:20%; margin-right:20%">
-  <!--<div class="form-group">
-    <label for="InputPassword0">Old password</label>
-    <input type="{{inputType0}}" class="form-control" id="InputPassword0" name="old_password" [(ngModel)]="old_password" placeholder="Enter old password">
-    <input type="checkbox" name="passwordCheckBox0" (click)="hideShowPassword0()" />
-    <label for="checkbox" *ngIf="passwordCheckbox0">Hide password</label>
-    <label for="checkbox" *ngIf="!passwordCheckbox0">Show password</label><hr>
-  </div>-->
   <div>
     <p align="left" id="InputEmail1" aria-describedby="emailHelp" name="email">User's email: <b>{{email}}</b></p>
   </div>

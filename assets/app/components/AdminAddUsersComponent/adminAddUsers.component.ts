@@ -175,7 +175,7 @@ export class AdminAddUsersComponent{
           this.activeUsers.push(user);*/
   }
   goBack(){
-    this._router.navigate(['admin-groups']);
+    this._router.navigate(['./admin-groups']);
   }
 }
 interface user{

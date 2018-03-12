@@ -7,7 +7,8 @@ import {BackendService} from '../../services/backend.service';
 import {User} from '../../models/user';
 @Component({
   selector: 'admin-modify-accounts',
-  templateUrl: './adminModifyAccounts.component.html'
+  templateUrl: './adminModifyAccounts.component.html',
+  styleUrls: ["./adminModifyAccounts.component.scss"]
 })
 export class AdminModifyAccountsComponent {
   email: string;
@@ -49,6 +50,9 @@ export class AdminModifyAccountsComponent {
         })
     }
 
+  }
+  goBack(){
+    this._router.navigate(['./admin-group']);
   }
 
 }
