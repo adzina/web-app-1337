@@ -11,11 +11,16 @@
     <tr>
       <th>Name</th>
       <th>Date</th>
+      <!--
+      <th>Group</th>
+      -->
     </tr>
     <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
       <td style = "cursor: pointer;"(click)="choose(i)" class="text-center">{{lesson.subject}}</td>
       <td class="text-center">{{lesson.date}}</td>
+      <!--
       <td class="text-center" style="width:10px"></td>
+    -->
     </tr>
   </table>
 
