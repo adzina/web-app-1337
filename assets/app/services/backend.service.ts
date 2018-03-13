@@ -19,7 +19,7 @@ import * as async from "async";
 export class BackendService{
 
   g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
-
+  //g_url = 'http://localhost:1337/';
 
 
   constructor(private http:AuthHttp,
@@ -139,7 +139,7 @@ getApiUrl(){
     .catch((error:any) => Observable.throw('Error removing group from lesson'));
   }
   //zwraca wszystkie lekcje studenta
-  getStudentsLessons(groupID:string):Observable<any>{
+  getGroupsLessons(groupID:string):Observable<any>{
 
     var url=this.g_url+'groupLesson/getGroupsLessons';
     var body=JSON.stringify({groupID:groupID})
@@ -149,7 +149,7 @@ getApiUrl(){
   }
   getStudentsWords(studentID:string,groupID:string):Observable<any>{
     var url=this.g_url+'lessonword/getLessonsWords';
-    return this.getStudentsLessons(groupID)
+    return this.getGroupsLessons(groupID)
     .flatMap((res:Response)=>res.json())
     .flatMap((lesson:Lesson)=>
       this.http.post(url, JSON.stringify({lessonID:lesson.id})),
