@@ -64,8 +64,24 @@ getApiUrl(){
     .catch((error:any) => Observable.throw("Error getting all users"));
 
   }
+  getAllUsersMergeName(): Observable<any[]>{
+    var url=this.g_url+'user/getAllMergeName';
+    return this.http.get(url)
+    .map((res:Response)=>res.json())
+    .catch((error:any) => Observable.throw("Error getting all users"));
+
+  }
   getActiveUsers(groupID: string): Observable<User[]>{
     var url=this.g_url+'groupuser/getGroupsUsers';
+
+    var body=JSON.stringify({groupID:groupID})
+    return this.http.post(url,body)
+      .map((res:Response)=>res.json())
+      .catch((error:any) => Observable.throw("Error getting active users"));
+
+  }
+  getActiveUsersMergeName(groupID: string): Observable<any[]>{
+    var url=this.g_url+'groupuser/getGroupsUsersMergeName';
 
     var body=JSON.stringify({groupID:groupID})
     return this.http.post(url,body)

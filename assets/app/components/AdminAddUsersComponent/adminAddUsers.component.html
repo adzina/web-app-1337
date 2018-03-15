@@ -1,79 +1,81 @@
 
   <navbar></navbar>
     <div class="container">
-      <ol class="breadcrumb pull-left">
-        <li class="breadcrumb-item"><a (click)="goBack()">Groups</a></li>
-        <li class="breadcrumb-item active">Add users to {{chosenGroup.name}}</li>
-      </ol>
-    </div>
+      <div class="row">
+        <ol class="breadcrumb pull-left">
+          <li class="breadcrumb-item"><a (click)="goBack()">Groups</a></li>
+          <li class="breadcrumb-item active">Add users to {{chosenGroup.name}}</li>
+        </ol>
+      </div>
 
-
-      <div class="container">
       <div class="row">
           <div class="column">
-            <table class="table table-striped table-bordered table-hover table-condensed" style="max-width:90%">
+            <h3>Teachers</h3>
+            <table class="table table-striped table-bordered table-hover table-condensed">
               <tr *ngFor=" let a_teacher of activeTeachers; let a=index" [attr.data-index]="i">
-                <th class="text-left col-md-11">{{a_teacher.role}} : {{a_teacher.first_name}}  {{a_teacher.last_name}}</th>
+                <th class="text-left col-md-11">{{a_teacher.role}} : {{a_teacher.name}}</th>
                 <th align="center" class="text-center col-md-1">
-                  <button type="button" class="close danger" aria-label="Close" (click)="deleteTeacher(a)" style="width:60px;margin:0 auto">
+                  <button type="button" class="close danger" aria-label="Close" (click)="deleteTeacher(a)">
                     <span class="glyphicon glyphicon-remove"></span>
                   </button>
                 </th>
               </tr>
             </table>
 
-            <table class="table table-striped table-bordered table-hover table-condensed" style="max-width:90%">
-              <tr *ngFor=" let i_teacher of inactiveTeachers; let b=index" [attr.data-index]="i">
-                <th class="text-left col-md-11">{{i_teacher.role}} : {{i_teacher.first_name}}  {{i_teacher.last_name}}</th>
-                <th align="center" class="text-center col-md-1">
-                  <button type="button" class="close danger" aria-label="Close" (click)="addTeacher(b)" style="width:60px;margin:0 auto">
-                  <span class="glyphicon glyphicon-ok"></span>
-                </button></th>
-              </tr>
-            </table>
+
           </div>
           <div class="column">
-            <table class="table table-striped table-bordered table-hover table-condensed" style="max-width:90%">
+            <h3>Students</h3>
+            <table class="table table-striped table-bordered table-hover table-condensed">
               <tr *ngFor=" let a_student of activeStudents; let i=index" [attr.data-index]="i">
-                <th class="text-left col-md-11">{{a_student.role}} : {{a_student.first_name}}  {{a_student.last_name}}</th>
+                <th class="text-left col-md-11">{{a_student.role}} : {{a_student.name}}</th>
                 <th align="center" class="text-center col-md-1">
-                  <button type="button" class="close danger" aria-label="Close" (click)="deleteStudent(i)" style="width:60px;margin:0 auto">
+                  <button type="button" class="close danger" aria-label="Close" (click)="deleteStudent(i)">
                     <span class="glyphicon glyphicon-remove"></span>
                   </button>
                 </th>
               </tr>
             </table>
-
-            <table class="table table-striped table-bordered table-hover table-condensed" style="max-width:90%">
-              <tr *ngFor=" let i_student of inactiveStudents; let j=index" [attr.data-index]="i">
-                <th class="text-left col-md-11">{{i_student.role}} : {{i_student.first_name}}  {{i_student.last_name}}</th>
-                <th align="center" class="text-center col-md-1">
-                  <button type="button" class="close danger" aria-label="Close" (click)="addStudent(j)" style="width:60px;margin:0 auto">
-                  <span class="glyphicon glyphicon-ok"></span>
-                </button></th>
-              </tr>
-            </table>
           </div>
       </div>
-
-      <div class="alert alert-danger" *ngIf="backendError!=null" style="margin-left:10%; margin-right:10%">
-     <strong>{{backendError}}</strong>
+      <div class="row">
+        <div class="column">
+          <div class="completer">
+            <label>Add teacher</label>
+            <ng2-completer [(ngModel)]="placeholderTeacher" name="placeholderTeacher" clearSelected="true" [placeholder]="dropdownTextTeacher" (selected)="onTeacherSelect($event)" [datasource]="dataServiceTeacher" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+          </div>
+        </div>
+        <div class="column">
+          <div class="completer">
+            <label>Add student</label>
+            <ng2-completer [(ngModel)]="placeholderStudent" name="placeholderStudent" clearSelected="true" [placeholder]="dropdownTextStudent" (selected)="onStudentSelect($event)" [datasource]="dataServiceStudent" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="alert alert-danger" *ngIf="backendError!=null">
+       <strong>{{backendError}}</strong>
+        </div>
       </div>
 
-      <table *ngIf="lessons!=null" class="table table-striped table-bordered table-hover table-condensed">
-        <tr>
-          <th>Lesson</th>
-          <th>Date</th>
-          <!--
-          <th>Group</th>
+      <div class="row">
+        <div class="full-column">
+        <table *ngIf="lessons!=null" class="table table-striped table-bordered table-hover table-condensed">
+          <tr>
+            <th>Lesson</th>
+            <th>Date</th>
+            <!--
+            <th>Group</th>
+            -->
+          </tr>
+          <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
+            <td  class="text-center" style = "cursor: pointer" (click)="goToLesson(i)">{{lesson.subject}}</td>
+            <td class="text-center">{{lesson.date}}</td>
+            <!--
+            <td class="text-center" style="width:10px"></td>
           -->
-        </tr>
-        <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
-          <td  class="text-center" style = "cursor: pointer" (click)="goToLesson(i)">{{lesson.subject}}</td>
-          <td class="text-center">{{lesson.date}}</td>
-          <!--
-          <td class="text-center" style="width:10px"></td>
-        -->
-        </tr>
-      </table>
+          </tr>
+        </table>
+        </div>
+      </div>
     </div>

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { SidePanelGroupsComponent } from '../../bars/SidePanelGroupsComponent/sidePanelGroups.component';
 import { Group } from '../../models/group';
 import { Lesson } from '../../models/lesson';
+import { User } from '../../models/user';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'admin-add-users',
@@ -13,8 +15,12 @@ import { Lesson } from '../../models/lesson';
   styleUrls: ['./adminAddUsers.component.scss']
 })
 export class AdminAddUsersComponent{
-  dataService: CompleterData;
-  placeholder: Group;
+  dataServiceTeacher: CompleterData;
+  dataServiceStudent: CompleterData;
+  teacherSubject=new Subject();
+  studentSubject=new Subject();
+  placeholderTeacher: user;
+  placeholderStudent: user;
   chosenGroup: Group;
   lessons: Lesson[];
   receivedUsers: user[];
@@ -29,11 +35,13 @@ export class AdminAddUsersComponent{
   inactiveStudents: user[];
   backendError:string;
   groups: Group[];
-  dropdownText:string;
+  dropdownTextTeacher="start typing...";
+  dropdownTextStudent="start typing...";
   constructor(private _loginService: LoginService,
               private _backendService: BackendService,
               private _completerService: CompleterService,
               private _router: Router) {
+                this.chosenGroup = this._loginService.getChosenGroup();
                 this.receivedUsers=[];
                 this.activeUsers=[];
                 this.inactiveUsers=[];
@@ -42,13 +50,15 @@ export class AdminAddUsersComponent{
                 this.activeTeachers=[];
                 this.inactiveTeachers=[];
                 this.backendError=null;
-                this.placeholder=null;
+                this.placeholderStudent=null;;
+                this.placeholderTeacher=null;
                 this.lessons=[];
-                this.dropdownText="choose group";
-                this._backendService.getAllUsers().subscribe(response=>{
+                this.dataServiceTeacher=this._completerService.local(this.teacherSubject,'name','name');
+                this.dataServiceStudent=this._completerService.local(this.studentSubject,'name','name');
+                this._backendService.getAllUsersMergeName().subscribe(response=>{
                   for (let index in response)
                     this.receivedUsers[index]=response[index];
-                  this.chosenGroup = this._loginService.getChosenGroup();
+
                   this._backendService.getGroupsLessons(this.chosenGroup.id)
                   .map(res => res.json()).
                     subscribe(resp=>{
@@ -57,22 +67,21 @@ export class AdminAddUsersComponent{
                       this.handleGroupChosen();
                     })
 
-                  /*_backendService.getAllGroups().
-                    subscribe(response=>{
-                      this.groups=response;
-                       this.dataService=_completerService.local(this.groups,'name','name');
-                        }
-                      );*/
+                  this.divideUsers();
+
                 },
                 error=>{
                     this.backendError=error._body;
                   }
                 );
   }
-  onItemSelect(selected:CompleterItem){
-    if(selected)
-    this.chosenGroup = selected.originalObject;
-    this.handleGroupChosen();
+  onTeacherSelect(selected:CompleterItem){
+    var chosenTeacher = selected.originalObject;
+    this.add(chosenTeacher);
+  }
+  onStudentSelect(selected:CompleterItem){
+    var chosenStudent = selected.originalObject;
+    this.add(chosenStudent);
   }
   divideUsers(){
     let count_active=0;
@@ -95,6 +104,10 @@ export class AdminAddUsersComponent{
         }
     }
     this.divideUsersByRole();
+
+    this.teacherSubject.next(this.inactiveTeachers);
+    this.studentSubject.next(this.inactiveStudents);
+
   }
   divideUsersByRole(){
     for (let active of this.activeUsers){
@@ -109,6 +122,8 @@ export class AdminAddUsersComponent{
       else if(this.isTeacher(inactive.role))
           this.inactiveTeachers.push(inactive)
     }
+
+
   }
   isStudent(role){
     if(role[0]=="student")
@@ -127,9 +142,10 @@ export class AdminAddUsersComponent{
     this.inactiveTeachers=[];
     this.activeStudents=[];
     this.inactiveStudents=[];
-    this._backendService.getActiveUsers(this.chosenGroup.id)
+    this._backendService.getActiveUsersMergeName(this.chosenGroup.id)
     .subscribe(response=>{
         this.receivedActiveUsers=response;
+
         this.divideUsers();
         error=>{
               this.backendError=error._body;
@@ -149,40 +165,17 @@ export class AdminAddUsersComponent{
   delete(user){
     this._backendService.removeUserFromGroup(user.id,this.chosenGroup.id).subscribe(response=>
     {
-      this.inactiveUsers=[];
-      this.activeUsers=[];
-      this.activeTeachers=[];
-      this.inactiveTeachers=[];
-      this.activeStudents=[];
-      this.inactiveStudents=[];
       this.handleGroupChosen();
     });
   }
-  addStudent(i:number){
-    var user=this.inactiveStudents[i];
-    this.add(user);
 
-  }
-  addTeacher(i:number){
-    var user=this.inactiveTeachers[i];
-    this.add(user);
-  }
   add(user){
       this._backendService.addUserToGroup(user.id,this.chosenGroup.id)
       .subscribe(response=>
         {
-          this.inactiveUsers=[];
-          this.activeUsers=[];
-          this.activeTeachers=[];
-          this.inactiveTeachers=[];
-          this.activeStudents=[];
-          this.inactiveStudents=[];
-        this.handleGroupChosen();
+          this.handleGroupChosen();
 
         });
-           /*
-          this.inactiveUsers.splice(i,1);
-          this.activeUsers.push(user);*/
   }
   goBack(){
     this._router.navigate(['./admin-group']);
@@ -195,7 +188,6 @@ export class AdminAddUsersComponent{
 }
 interface user{
   id: string,
-  first_name: string,
-  last_name: string,
+  name: string,
   role: string
 }

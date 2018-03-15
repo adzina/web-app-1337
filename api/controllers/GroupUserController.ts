@@ -38,6 +38,36 @@ module.exports = {
 				});
 
 	},
+  getGroupsUsersMergeName:function(req,res){
+    let _groupID=req.param('groupID');
+
+    this.getUsersID(_groupID,UsersID=>{
+        var output=[];
+        async.each(UsersID, function (userID, cb) {
+          sails.models.user.findOne({id: userID})
+            .then(function(user){
+              var elem={id:user.id, name: user.first_name+" "+user.last_name, role: user.role};
+              //elem={id:<string>user.id,first_name: <string>user.first_name, last_name: <string>user.last_name, role: <string>user.role};
+              output.push(elem);
+              //inside the iterator function we call cb() once we are finished
+              cb();
+            })
+            .fail(function(error){
+              sails.log.debug("Error in getGroupsUsers");
+              sails.log.error(error);
+              cb(error);
+            })
+        }, function(error){
+          //... and handle it in the final callback
+          if(error) return res.negotiate(error);
+
+          //here we can return our finished use
+          return res.json(output);
+  });
+    })
+
+
+  },
 	getGroupsUsers:function(req,res){
 	  let _groupID=req.param('groupID');
 

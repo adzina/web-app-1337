@@ -73,6 +73,7 @@ module.exports.routes = {
      'POST /user/login': 'UserController.login',
      'GET /users/:email': 'UserController.findOne',
      'GET /user/findByID': 'UserController.findByID',
+     'GET /user/getAllMergeName': 'UserController.getAllMergeName',
      'POST /user/getAll': 'UserController.getAll',
      'POST /user/adminChangePassword': 'UserController.adminChangePassword',
      'POST /user/changeMyPassword': 'UserController.changeMyPassword',
@@ -88,6 +89,7 @@ module.exports.routes = {
      'POST /lessonWord/delete': 'LessonWordController.removeWordFromLesson',
 
      'POST /groupuser/getGroupsUsers': 'GroupUserController.getGroupsUsers',
+     'POST /groupuser/getGroupsUsersMergeName': 'GroupUserController.getGroupsUsersMergeName',
      'POST /groupuser/addUserToGroup': 'GroupUserController.addUserToGroup',
      'POST /groupuser/delete': 'GroupUserController.removeUserFromGroup',
 

@@ -24,6 +24,24 @@ module.exports = {
         res.json(200, output);
       })
   },
+  getAllMergeName: function(req, res) {
+    sails.models.user.find()
+      .exec(function callback(err, users) {
+        var output;
+        output = [];
+        for (var i = 0; i < users.length; i++) {
+          output[i] = {
+            id: users[i].id,
+            name: users[i].first_name+" "+users[i].last_name,
+            email: users[i].email,
+            role: users[i].role
+          };
+        }
+        sails.log.debug("All users found, names merged");
+        sails.log.debug(output);
+        res.json(200, output);
+      })
+  },
   findByID: function(req, res) {
     var id = req.param('id');
     sails.models.user.findOne({

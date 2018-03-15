@@ -1,8 +1,24 @@
 .column {
     float: left;
     width: 50%;
+    padding: 0px;
 }
-
+.full-column{
+  width: 100%;
+  padding: 0px;
+}
+.completer{
+  float: left
+}
+div{
+  padding: 0px;
+}
+label{
+  float: left
+}
+.row{
+  margin-bottom: 3%;
+}
 /* Clear floats after the columns */
 .row:after {
     content: "";
