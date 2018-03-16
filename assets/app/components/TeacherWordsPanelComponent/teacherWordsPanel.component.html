@@ -5,8 +5,21 @@
     <li class="breadcrumb-item"><a (click)="goBack()">Lessons</a></li>
     <li class="breadcrumb-item active">Add words to {{subject}}</li>
   </ol>
-</div>
-<div class="container">
+  <div *ngIf="chosenLesson!=null" style="clear: left">
+    <table class="table table-condensed add-words">
+      <tr>
+        <th class="text-center">
+          <input #focusable type="text"  name="english" [(ngModel)]="english" placeholder="english">
+        </th>
+        <th class="text-center">
+          <input type="text" name="polish" [(ngModel)]="polish" placeholder="polish"  (keyup.enter)="submit(focusable)"/>
+        </th>
+        <th class="text-center" style="width:10px">
+          <button class={{buttonClass}} (click)="submit()">Submit</button>
+        </th>
+      </tr>
+    </table>
+  </div>
       <table *ngIf="chosenLesson!=null" class="table table-striped table-bordered table-hover table-condensed">
         <tr *ngFor=" let word of words; let i=index" [attr.data-index]="i">
           <th class="text-center">{{word.english}}</th>
@@ -18,16 +31,5 @@
           </th>
         </tr>
 
-
-
       </table>
-
-
-  <div class="text-center" *ngIf="chosenLesson!=null">
-
-      <input #focusable type="text"  name="english" [(ngModel)]="english" placeholder="english">
-      <input type="text" name="polish" [(ngModel)]="polish" placeholder="polish"  (keyup.enter)="submit(focusable)"/>
-      <button class={{buttonClass}} (click)="submit()">Submit</button>
-
-  </div>
-</div>
+    </div>
