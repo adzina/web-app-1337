@@ -34,7 +34,7 @@ export class TeacherCreateLessonComponent {
                 this.user=this._loginService.getUserName();
                 this.minDate=new Date();
                 this.date=new Date();
-                this.minDate.setDate(this.date.getDate()-1);
+                this.minDate.setDate(this.date.getDate()-8);
                 this.placeholder="click to see all groups"
                 //this.model = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
                 this.subject=null;
@@ -72,7 +72,7 @@ export class TeacherCreateLessonComponent {
   );
   }
   goBack(){
-    this._router.navigate(['./see-all-lessons']);  
+    this._router.navigate(['./see-all-lessons']);
   }
 
 }
