@@ -17,7 +17,7 @@ export class AdminGroupComponent{
   constructor(private _backendService: BackendService,
               private _loginService: LoginService,
               private _router:Router) {
-
+            this.groups = null;
             _backendService.getAllGroups().
               subscribe(response=>{
                 this.groups=response;
