@@ -34,10 +34,7 @@ export const routes = [
   {
     path: 'admin-group',
     component: AdminGroupComponent,
-    canActivate: [RoleGuard],
-    data: {
-      expectedRole: 'admin'
-    }
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin-user',
@@ -50,19 +47,14 @@ export const routes = [
     {
       path: 'admin-create-group',
       component: AdminCreateGroupComponent,
-      canActivate: [RoleGuard],
-      data: {
-        expectedRole: 'admin'
-      }
+      canActivate: [AuthGuard],
+
     },
 
     {
         path: 'admin-add-users',
         component: AdminAddUsersComponent,
-        canActivate: [RoleGuard],
-        data: {
-          expectedRole: 'admin'
-        }
+        canActivate: [AuthGuard]
       },
       {
           path: 'admin-modify-accounts',

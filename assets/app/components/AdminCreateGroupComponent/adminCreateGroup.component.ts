@@ -3,7 +3,7 @@ import { LoginService } from '../../services/login.service';
 import { BackendService } from '../../services/backend.service';
 import { Router } from '@angular/router';
 import { AuthHttp} from 'angular2-jwt';
-
+import {Group} from '../../models/group';
 
 
 @Component({
@@ -17,16 +17,17 @@ export class AdminCreateGroupComponent{
   error: boolean;
   backend_error:string;
   user: string;
+  groupCreated: Group;
   constructor(private _router:Router,
               private http:AuthHttp,
-              private _login:LoginService,
+              private loginService:LoginService,
               private backendService: BackendService){
     this.name=null;
-    this.user=this._login.getUserName();
+    this.user=this.loginService.getUserName();
   }
   create(){
     if(this.name!=null){
-      this.sendRequest();
+      this.sendRequest()
     }
     else{
       this.error=true;
@@ -34,14 +35,20 @@ export class AdminCreateGroupComponent{
   }
   sendRequest(){
     this.backendService.createGroup(this.name).subscribe(data => {
-      this.name=null;
-      this.error=false;
-      this.created=true;
+      this.backendService.addUserToGroup(this.loginService.getUserID(),data.id)
+      .subscribe(res =>{
+        this.name=null;
+        this.error=false;
+        this.created=true;
+        this.groupCreated = data;
+
+      })
     }
   );
 
   }
   goto(){
+    this.loginService.setChosenGroup(this.groupCreated);
     this._router.navigate(['./admin-add-users']);
 
   }

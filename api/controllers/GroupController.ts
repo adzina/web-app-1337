@@ -3,7 +3,7 @@ declare var sails: any;
 module.exports = {
   create: function(req:any,res:any){
       let _name=req.param('name');
-
+      let _teacher=req.param('teacher');
       return sails.models.group.create({
         name:_name
 
@@ -14,7 +14,8 @@ module.exports = {
           sails.log.error(err);
           return res.serverError(err); }
         sails.log.debug("Group created");
-        return res.ok();
+        return res.json(200,group);
+
       });
   },
 
