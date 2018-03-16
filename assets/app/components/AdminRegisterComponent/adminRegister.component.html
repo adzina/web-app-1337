@@ -32,14 +32,11 @@
 
 </form>
 <div class="container text-center">
-      <button class="btn btn-success" (click)="submit('student')">Register a new student</button>
-      <button class="btn btn-success" (click)="submit('teacher')">Register a new teacher</button>
+      <button class="btn btn-success" (click)="submit('student')">Register new student</button>
+      <button class="btn btn-success" (click)="submit('teacher')">Register new teacher</button>
     <hr>
-    <div class="alert alert-success" *ngIf="registered" style="margin-left:10%; margin-right:10%">
-   <strong>Account created!</strong> Student can <a href="#" class="alert-link">log in now</a>.
-    </div>
     <div class="alert alert-danger" *ngIf="registered==false" style="margin-left:10%; margin-right:10%">
-   <strong>Fill in all the fields!</strong>
+   <strong>Fill in all fields!</strong>
     </div>
     <div class="alert alert-danger" *ngIf="backend_error!=null" style="margin-left:10%; margin-right:10%">
    <strong>{{backend_error}}</strong>
