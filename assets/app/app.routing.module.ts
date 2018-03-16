@@ -86,7 +86,10 @@ export const routes = [
     {
       path: 'create-lesson',
       component: TeacherCreateLessonComponent,
-      canActivate: [AuthGuard]
+      canActivate: [RoleGuard],
+        data: {
+          expectedRole: 'teacher'
+        }
     },
     {
       path: 'see-progress',
