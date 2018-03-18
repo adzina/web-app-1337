@@ -1,8 +1,8 @@
 <navbar></navbar>
-<div class="text-centered" style="margin-bottom:40px">
+<div class="text-centered header">
   <h1><strong>Modify account</strong></h1>
 </div>
-<form style="margin-left:20%; margin-right:20%">
+<form>
   <div class="form-group">
     <label for="InputPassword0">Old password</label>
     <input type="{{inputType0}}" class="form-control" id="InputPassword0" name="old_password" [(ngModel)]="old_password" placeholder="Enter old password">
@@ -23,13 +23,13 @@
 <div class="container text-center">
       <button class="btn btn-success" (click)="submit()">Change password</button>
     <hr>
-    <div class="alert alert-success" *ngIf="registered" style="margin-left:10%; margin-right:10%">
+    <div class="alert alert-success" *ngIf="registered" >
    <strong>Password changed</strong>.
     </div>
-    <div class="alert alert-danger" *ngIf="empty_field" style="margin-left:10%; margin-right:10%">
+    <div class="alert alert-danger" *ngIf="empty_field" >
    <strong>Fill in all the fields!</strong>
     </div>
-    <div class="alert alert-danger" *ngIf="backend_error!=null" style="margin-left:10%; margin-right:10%">
+    <div class="alert alert-danger" *ngIf="backend_error!=null">
    <strong>{{backend_error}}</strong>
     </div>
 </div>

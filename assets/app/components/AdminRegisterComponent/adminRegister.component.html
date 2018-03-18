@@ -1,5 +1,5 @@
 <navbar></navbar>
-<div class="text-centered" style="margin-bottom:40px">
+<div class="text-centered" >
   <ol class="breadcrumb pull-left">
     <li class="breadcrumb-item"><a (click)="goBack()">Users</a></li>
     <li class="breadcrumb-item active">Add user</li>
@@ -7,7 +7,7 @@
   <br><br>
   <h1><strong>Register</strong></h1>
 </div>
-<form style="margin-left:20%; margin-right:20%">
+<form>
   <div class="form-group">
     <label for="InputFirstName">First Name</label>
     <input required type="text" class="form-control" id="InputFirstName" name="first_name" [(ngModel)]="first_name" placeholder="Enter first name">
@@ -35,10 +35,10 @@
       <button class="btn btn-success" (click)="submit('student')">Register new student</button>
       <button class="btn btn-success" (click)="submit('teacher')">Register new teacher</button>
     <hr>
-    <div class="alert alert-danger" *ngIf="registered==false" style="margin-left:10%; margin-right:10%">
+    <div class="alert alert-danger" *ngIf="registered==false">
    <strong>Fill in all fields!</strong>
     </div>
-    <div class="alert alert-danger" *ngIf="backend_error!=null" style="margin-left:10%; margin-right:10%">
+    <div class="alert alert-danger" *ngIf="backend_error!=null">
    <strong>{{backend_error}}</strong>
     </div>
 </div>

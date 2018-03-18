@@ -1,7 +1,5 @@
 <navbar></navbar>
 <div class="container">
-  <div style="margin-bottom:10%">
-  </div>
   <p class="pull-left">
     <a (click)="navigate()">
       <span class="glyphicon glyphicon-plus"></span>
@@ -17,7 +15,7 @@
       -->
     </tr>
     <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
-      <td style = "cursor: pointer;"(click)="choose(i)" class="text-center">{{lesson.subject}}</td>
+      <td class="link" (click)="choose(i)" class="text-center">{{lesson.subject}}</td>
       <td class="text-center">{{lesson.date}}</td>
       <!--
       <td class="text-center" style="width:10px"></td>

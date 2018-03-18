@@ -1,5 +1,6 @@
 a {
   cursor: pointer;
+  margin-left:0px;
 }
 li.breadcrumb-item.active{
   color: white;
@@ -10,4 +11,11 @@ li.breadcrumb-item.active::before{
 ol {
   background-color: #ccc;
   color: white;
+}
+.header{
+  text-align:left
+}
+.alert{
+   margin-left:25%;
+   margin-right:25%
 }

@@ -6,7 +6,8 @@ import { Group } from '../../models/group';
 
 @Component({
   selector: 'admin-group',
-  templateUrl: './adminGroupComponent.component.html'
+  templateUrl: './adminGroupComponent.component.html',
+  styleUrls: ['./adminGroupComponent.component.scss']
 })
 
 export class AdminGroupComponent{

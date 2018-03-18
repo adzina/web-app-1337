@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'goodbye',
   templateUrl: 'goodbye.component.html',
+  styleUrls: ['goodbye.component.scss']
 })
 
 export class GoodbyeComponent{

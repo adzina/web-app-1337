@@ -1,4 +1,17 @@
-/* Form */
+
+.jumbotron{
+  position : absolute;
+  max-height: 95%;
+  min-width: 50%;
+  max-width: 200px;
+  margin-left:25%;
+  margin-right:25%;
+  margin-top:1%;
+  display: flex;
+  align-items: center;
+  background-color: #ff0000;
+  border-radius: 25px;
+}
 .form {
   position:relative;
   z-index: 1;

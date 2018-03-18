@@ -6,7 +6,8 @@ import { Group } from '../../models/group';
 import { Lesson } from '../../models/lesson'
 @Component({
   selector: 'teacher-add-students',
-  templateUrl: './teacherAddStudents.component.html'
+  templateUrl: './teacherAddStudents.component.html',
+  styleUrls: ["./teacherAddStudents.component.scss"]
 })
 export class TeacherAddStudentsComponent{
 

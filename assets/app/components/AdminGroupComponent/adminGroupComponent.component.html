@@ -1,7 +1,5 @@
 <navbar></navbar>
 <div class="container">
-  <div style="margin-bottom:10%">
-  </div>
   <p class="pull-left">
     <a (click)="navigate()">
       <span class="glyphicon glyphicon-plus"></span>
@@ -12,8 +10,8 @@
       <tr>
         <th>Name</th>
       </tr>
-      <tr *ngFor=" let group of groups; let i=index" [attr.data-index]="i" style="max-width=50%">
-        <td class="text-center" style = "cursor: pointer" (click)="addRemove(i)">{{group.name}}</td>
+      <tr *ngFor=" let group of groups; let i=index" [attr.data-index]="i" >
+        <td class="text-center link" (click)="addRemove(i)">{{group.name}}</td>
         </tr>
     </table>
   </div>

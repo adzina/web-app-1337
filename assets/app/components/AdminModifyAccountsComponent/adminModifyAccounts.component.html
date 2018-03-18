@@ -7,7 +7,7 @@
   <br><br>
   <h1><strong>Modify account</strong></h1>
 </div>
-<form style="margin-left:20%; margin-right:20%">
+<form>
   <div>
     <p align="left" id="InputEmail1" aria-describedby="emailHelp" name="email">User's email: <b>{{email}}</b></p>
   </div>
@@ -24,13 +24,13 @@
 <div class="container text-center">
       <button class="btn btn-success" (click)="submit()">Change password</button>
     <hr>
-    <div class="alert alert-success" *ngIf="registered" style="margin-left:10%; margin-right:10%">
+    <div class="alert alert-success" *ngIf="registered">
    <strong>Password changed</strong>.
     </div>
-    <div class="alert alert-danger" *ngIf="empty_field" style="margin-left:10%; margin-right:10%">
+    <div class="alert alert-danger" *ngIf="empty_field">
    <strong>Fill in all the fields!</strong>
     </div>
-    <div class="alert alert-danger" *ngIf="backend_error!=null" style="margin-left:10%; margin-right:10%">
+    <div class="alert alert-danger" *ngIf="backend_error!=null">
    <strong>{{backend_error}}</strong>
     </div>
 </div>

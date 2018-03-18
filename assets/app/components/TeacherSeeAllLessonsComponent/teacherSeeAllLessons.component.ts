@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'see-all-lessons',
-  templateUrl: 'teacherSeeAllLessons.component.html',
+  templateUrl: './teacherSeeAllLessons.component.html',
+  styleUrls: ['./teacherSeeAllLessons.component.scss']
 })
 
 export class TeacherSeeAllLessonsComponent {

@@ -6,7 +6,8 @@ import {LoginService} from '../../services/login.service';
 import {BackendService} from '../../services/backend.service';
 @Component({
   selector: 'update-profile',
-  templateUrl: './updateProfile.component.html'
+  templateUrl: './updateProfile.component.html',
+  styleUrls: ["./updateProfile.component.scss"]
 })
 export class UpdateProfileComponent {
   inputType0: string;

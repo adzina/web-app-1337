@@ -70,7 +70,7 @@
             -->
           </tr>
           <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
-            <td  class="text-center" style = "cursor: pointer" (click)="goToLesson(i)">{{lesson.subject}}</td>
+            <td  class="text-center" class = "link" (click)="goToLesson(i)">{{lesson.subject}}</td>
             <td class="text-center">{{lesson.date}}</td>
             <!--
             <td class="text-center" style="width:10px"></td>

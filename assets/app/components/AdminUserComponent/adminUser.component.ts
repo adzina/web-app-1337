@@ -6,7 +6,8 @@ import { User } from '../../models/user';
 
 @Component({
   selector: 'admin-user',
-  templateUrl: './adminUser.component.html'
+  templateUrl: './adminUser.component.html',
+  styleUrls: ["./adminUser.component.scss"]
 })
 
 export class AdminUserComponent{
