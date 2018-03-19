@@ -115,18 +115,17 @@ getApiUrl(){
       var url=this.g_url+'groupuser/addUserToGroup';
       var body=JSON.stringify({groupID:groupID,userID:userID});
 
-          return this.http.post(url,body)
-          .map((res:Response) => res.json())
-          .catch((error:any) => Observable.throw('Error adding users to group'));
+      return this.http.post(url,body)
+      .map((res:Response) => res.json())
+      .catch((error:any) => Observable.throw('Error adding users to group'));
   }
   addGroupToLesson(groupID: string, lessonID:string): Observable<any>{
       var url=this.g_url+'groupLesson/addGroupToLesson';
-      console.log("adding lesson to group "+groupID);
       var body=JSON.stringify({lessonID:lessonID,groupID:groupID});
 
-          return this.http.post(url,body)
-          .map(res => res.json())
-          .catch((error:any) => Observable.throw('Error adding group to lesson'));
+      return this.http.post(url,body)
+      .map(res => res.json())
+      .catch((error:any) => Observable.throw('Error adding group to lesson'));
   }
   removeUserFromGroup(userID: string, groupID: string): Observable<any>{
     var url=this.g_url+'groupuser/delete';
@@ -171,24 +170,30 @@ getApiUrl(){
       this.http.post(url, JSON.stringify({lessonID:lesson.id})),
       (lesson:Lesson,resp:Response)=>resp.json()
       )
+  }
 
+
+  createGroup(name:string):Observable<any>{
+    var body={name:name};
+    var url=this.g_url+"group";
+    return this.http.post(url,body)
+    .map(res => res.json())
+    .catch((error:any) => Observable.throw('Error creating lesson'));
 
   }
   countAllWords(studentID:string):Observable<any>{
     var url=this.g_url+"studentword/countAll";
     return this.http.post(url,JSON.stringify({studentID:studentID}))
+    .map(res => res.json())
+    .catch((error:any) => Observable.throw('Error creating lesson'));
   }
   countAllGuessedWords(studentID:string):Observable<any>{
     var url=this.g_url+"studentword/countAllGuessed";
     return this.http.post(url,JSON.stringify({studentID:studentID}))
+    .map(res => res.json())
+    .catch((error:any) => Observable.throw('Error creating lesson'));
   }
 
-createGroup(name:string):Observable<any>{
-  var body={name:name};
-  var url=this.g_url+"group";
-  return this.http.post(url,body)
-
-}
 createUser(first_name:string,last_name:string,email:string,password:string,role:string):Observable<any>{
   var body={first_name: first_name,last_name: last_name, email: email, password: password,role: [role]};
   var url=this.g_url+"user";
