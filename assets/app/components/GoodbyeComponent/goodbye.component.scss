@@ -15,11 +15,16 @@ button{
   background:#4d79ff;
 }
 img{
-  margin-top:-40px;
+  margin-top:-20px;
 }
 .container{
   background-color: #ccc;
-  width:400px;
-  height:200px;
+  width:70%;
+  height:40%;
   border-radius: 10px;
+}
+@media only screen and (min-width:770px){
+  .jumbotron{
+    margin-top:1%;
+  }
 }

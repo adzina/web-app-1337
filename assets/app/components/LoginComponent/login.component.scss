@@ -1,16 +1,19 @@
 
 .jumbotron{
-  position : absolute;
-  max-height: 95%;
   min-width: 50%;
   max-width: 200px;
   margin-left:25%;
   margin-right:25%;
   margin-top:1%;
-  display: flex;
-  align-items: center;
   background-color: #ff0000;
   border-radius: 25px;
+}
+.vertical-center {
+  min-height: 80%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 80vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
 }
 .form {
   position:relative;
@@ -102,4 +105,20 @@ border-radius: 50%;
   margin-left: 20%;
   align-items: center;
 
+}
+@media only screen and(max-width: 1023px){
+      div.profile{
+        display: none;
+      }
+      span{
+        display: none;
+      }
+      #content form input[type="text"],
+      #content form input[type="password"]{
+        background: none;
+        padding: 15px 10px 15px 10px;
+      }
+      .jumbotron{
+        margin-top: 10%;
+      }
 }
