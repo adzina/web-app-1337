@@ -71,7 +71,7 @@
             -->
           </tr>
           <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
-            <td  class="text-center" class = "link" (click)="goToLesson(i)">{{lesson.subject}}</td>
+            <td  class="text-center">{{lesson.subject}}</td>
             <td class="text-center">{{lesson.hour}} </td>
             <td class="text-center">
               {{lesson.date.getDay()}}.{{lesson.date.getMonth()}}.{{lesson.date.getFullYear()}} </td>

@@ -172,11 +172,11 @@ export class AdminAddUsersComponent{
   goBack(){
     this._router.navigate(['./admin-group']);
   }
-  goToLesson(i:number){
-    var lesson = this.lessons[i];
-    this._loginService.setChosenLesson(lesson);
-    this._router.navigate(["./words-panel"]);
-  }
+  // goToLesson(i:number){
+  //   var lesson = this.lessons[i];
+  //   this._loginService.setChosenLesson(lesson);
+  //   this._router.navigate(["./words-panel"]);
+  // }
 
 
 }

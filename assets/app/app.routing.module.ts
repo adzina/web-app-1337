@@ -34,7 +34,10 @@ export const routes = [
   {
     path: 'admin-group',
     component: AdminGroupComponent,
-    canActivate: [AuthGuard]
+    canActivate: [RoleGuard],
+    data: {
+      expectedRole: 'admin'
+    }
   },
   {
     path: 'admin-user',
@@ -47,14 +50,20 @@ export const routes = [
     {
       path: 'admin-create-group',
       component: AdminCreateGroupComponent,
-      canActivate: [AuthGuard],
+      canActivate: [RoleGuard],
+      data: {
+        expectedRole: 'admin'
+      }
 
     },
 
     {
         path: 'admin-add-users',
         component: AdminAddUsersComponent,
-        canActivate: [AuthGuard]
+        canActivate: [RoleGuard],
+        data: {
+          expectedRole: 'admin'
+        }
       },
       {
           path: 'admin-modify-accounts',
@@ -67,13 +76,19 @@ export const routes = [
       {
         path: 'see-all-lessons',
         component: TeacherSeeAllLessonsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [RoleGuard],
+        data:{
+          expectedRole: 'teacher'
+        }
       },
 
     {
       path: 'words-panel',
       component: TeacherWordsPanelComponent,
-      canActivate: [AuthGuard]
+      canActivate: [RoleGuard],
+      data:{
+        expectedRole: 'teacher'
+      }
     },
     {
       path: 'create-lesson',
@@ -86,12 +101,18 @@ export const routes = [
     {
       path: 'see-progress',
       component: TeacherSeeProgressComponent,
-      canActivate: [AuthGuard]
+      canActivate: [RoleGuard],
+      data: {
+        expectedRole: 'teacher'
+      }
     },
     {
       path: 'add-students',
       component: TeacherAddStudentsComponent,
-      canActivate: [AuthGuard]
+      canActivate: [RoleGuard],
+      data:{
+        expectedRole: 'teacher'
+      }
     },
     {
       path: 'update-profile',

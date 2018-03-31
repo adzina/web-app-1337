@@ -19,7 +19,7 @@
           <a class="tab" (click)="navigate(5)"><span class="glyphicon glyphicon-book"></span></a>
         </li>
 
-        <li>
+        <li *ngIf="!isAdmin">
           <a class="tab" (click)="navigate(8)"><span class="glyphicon glyphicon-tasks"></span></a>
         </li>
 
