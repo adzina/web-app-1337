@@ -1,20 +1,19 @@
 <navbar></navbar>
 <div class="container">
-  <ol class="breadcrumb pull-left">
-    <li class="breadcrumb-item"><a (click)="goBack()">Lessons</a></li>
-    <li class="breadcrumb-item active">Lessons for group {{chosenGroup}}</li>
-  </ol>
+  <p class="pull-left">
+    <a (click)="navigate()">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a> Add new lesson
+  </p>
   <div *ngIf="lessons[0]!=null">
   <table class="table table-striped table-bordered table-hover table-condensed">
     <tr>
       <th>Name</th>
       <th>Date</th>
-      <th>Group</th>
     </tr>
     <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
-      <td (click)="chooseLesson(i)" class="text-center link">{{lesson.subject}}</td>
+      <td (click)="choose(i)" class="text-center link">{{lesson.subject}}</td>
       <td class="text-center">{{lesson.date.getDay()}}.{{lesson.date.getMonth()}}.{{lesson.date.getFullYear()}}</td>
-      <td (click)="chooseGroup(i)" class="text-center link" style="width:10px">{{lesson.groupID}}</td>
     </tr>
   </table>
 </div>

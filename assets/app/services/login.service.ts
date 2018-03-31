@@ -13,7 +13,7 @@ export class LoginService{
   userID: string;
   role: string[];
   chosenLesson: Lesson;
-  chosenGroup: Group;
+  chosenGroupID: string;
   chosenUser: User;
   constructor(private _router:Router){
   }
@@ -33,7 +33,7 @@ export class LoginService{
     return this.chosenLesson;
   }
   getChosenGroup(){
-    return this.chosenGroup;
+    return this.chosenGroupID;
   }
   getChosenUser(){
     return this.chosenUser;
@@ -58,8 +58,8 @@ export class LoginService{
   setChosenLesson(lesson:Lesson){
     this.chosenLesson=lesson;
   }
-  setChosenGroup(group:Group){
-    this.chosenGroup=group
+  setChosenGroup(group:string){
+    this.chosenGroupID=group
   }
   setChosenUser(user:User){
     this.chosenUser=user;

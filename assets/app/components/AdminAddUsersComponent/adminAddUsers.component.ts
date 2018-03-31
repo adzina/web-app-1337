@@ -21,7 +21,7 @@ export class AdminAddUsersComponent{
   studentSubject=new Subject();
   placeholderTeacher: user = null;
   placeholderStudent: user = null;
-  chosenGroup: Group;
+  chosenGroup: string;
   lessons: Lesson[] = [];
   receivedUsers: user[] = [];
   teachers: user[] = [];
@@ -48,7 +48,7 @@ export class AdminAddUsersComponent{
                   for (let index in response)
                     this.receivedUsers[index]=response[index];
 
-                  this._backendService.getGroupsLessons(this.chosenGroup.id)
+                  this._backendService.getGroupsLessons(this.chosenGroup)
                   .map(res => res.json()).
                     subscribe(resp=>{
                       for (let index in resp){
@@ -134,7 +134,7 @@ export class AdminAddUsersComponent{
     this.inactiveTeachers=[];
     this.activeStudents=[];
     this.inactiveStudents=[];
-    this._backendService.getActiveUsersMergeName(this.chosenGroup.id)
+    this._backendService.getActiveUsersMergeName(this.chosenGroup)
     .subscribe(response=>{
         this.receivedActiveUsers=response;
 
@@ -155,14 +155,14 @@ export class AdminAddUsersComponent{
     this.delete(user);
   }
   delete(user){
-    this._backendService.removeUserFromGroup(user.id,this.chosenGroup.id).subscribe(response=>
+    this._backendService.removeUserFromGroup(user.id,this.chosenGroup).subscribe(response=>
     {
       this.handleGroupChosen();
     });
   }
 
   add(user){
-      this._backendService.addUserToGroup(user.id,this.chosenGroup.id)
+      this._backendService.addUserToGroup(user.id,this.chosenGroup)
       .subscribe(response=>
         {
           this.handleGroupChosen();

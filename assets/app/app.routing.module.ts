@@ -9,6 +9,7 @@ import { AdminAddUsersComponent } from './components/AdminAddUsersComponent/admi
 import { AdminModifyAccountsComponent } from './components/AdminModifyAccountsComponent/adminModifyAccounts.component';
 import { TeacherSeeAllLessonsComponent } from './components/TeacherSeeAllLessonsComponent/teacherSeeAllLessons.component';
 import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonComponent/teacherCreateLesson.component';
+import { TeacherSeeGroupsLessonsComponent } from './components/TeacherSeeGroupsLessonsComponent/teacherSeeGroupsLessons.component';
 import { TeacherSeeProgressComponent } from './components/TeacherSeeProgressComponent/teacherSeeProgress.component';
 import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component';
 import { UpdateProfileComponent } from './components/UpdateProfileComponent/updateProfile.component';
@@ -96,6 +97,14 @@ export const routes = [
         data: {
           expectedRole: 'teacher'
         }
+    },
+    {
+      path: 'see-groups-lessons',
+      component: TeacherSeeGroupsLessonsComponent,
+      canActivate: [RoleGuard],
+      data:{
+        expectedRole: 'teacher'
+      }
     },
     {
       path: 'see-progress',
