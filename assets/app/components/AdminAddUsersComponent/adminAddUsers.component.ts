@@ -19,21 +19,21 @@ export class AdminAddUsersComponent{
   dataServiceStudent: CompleterData;
   teacherSubject=new Subject();
   studentSubject=new Subject();
-  placeholderTeacher: user;
-  placeholderStudent: user;
+  placeholderTeacher: user = null;
+  placeholderStudent: user = null;
   chosenGroup: Group;
-  lessons: Lesson[];
-  receivedUsers: user[];
-  teachers: user[];
-  students: user[];
-  receivedActiveUsers: user[];
-  activeUsers: user[]
-  inactiveUsers: user[];
-  activeTeachers: user[];
-  inactiveTeachers: user[];
-  activeStudents: user[];
-  inactiveStudents: user[];
-  backendError:string;
+  lessons: Lesson[] = [];
+  receivedUsers: user[] = [];
+  teachers: user[] = [];
+  students: user[] = [];
+  receivedActiveUsers: user[] = [];
+  activeUsers: user[] = [];
+  inactiveUsers: user[] = [];
+  activeTeachers: user[] = [];
+  inactiveTeachers: user[]=[];
+  activeStudents: user[] =[]
+  inactiveStudents: user[] = [];
+  backendError:string =null;
   groups: Group[];
   dropdownTextTeacher="start typing...";
   dropdownTextStudent="start typing...";
@@ -42,17 +42,7 @@ export class AdminAddUsersComponent{
               private _completerService: CompleterService,
               private _router: Router) {
                 this.chosenGroup = this._loginService.getChosenGroup();
-                this.receivedUsers=[];
-                this.activeUsers=[];
-                this.inactiveUsers=[];
-                this.activeStudents=[];
-                this.inactiveStudents=[];
-                this.activeTeachers=[];
-                this.inactiveTeachers=[];
-                this.backendError=null;
-                this.placeholderStudent=null;;
-                this.placeholderTeacher=null;
-                this.lessons=[];
+
                 this.dataServiceTeacher=this._completerService.local(this.teacherSubject,'name','name');
                 this.dataServiceStudent=this._completerService.local(this.studentSubject,'name','name');
                 this._backendService.getAllUsersMergeName().subscribe(response=>{
@@ -87,6 +77,7 @@ export class AdminAddUsersComponent{
     let count_active=0;
     let count_inactive=0;
     let flag=false;
+    
     for (var i=0; i<this.receivedUsers.length;i++){
       for (var j=0;j< this.receivedActiveUsers.length;j++)
         {
