@@ -3,12 +3,14 @@
 module.exports = {
   create: function(req,res){
 			let _teacherID=req.param('teacherID'),
+          _groupID = req.param('groupID'),
 					_subject=req.param('subject'),
 					_date=req.param('date'),
           _hour=req.param('hour');
 
 			return sails.models.lesson.create({
 				teacherID: _teacherID,
+        groupID: _groupID,
 				subject: _subject,
 				date:_date,
         hour: _hour
@@ -24,19 +26,20 @@ module.exports = {
 			});
 	},
 
-  getTeacherID: function(req,res){
+  getTeachersLessons: function(req,res){
     var id=req.param('teacherID');
-
+    var lessons=[]
     return sails.models.lesson.find({teacherID: id}).sort('date ASC')
-            .exec(function (err, lessons){
+            .exec(function (err, _lessons){
                   if (err) {
                     sails.log.debug("Error getting teacher's lessons");
                     sails.log.error(err);
                     return res.serverError(err); }
                   sails.log.debug("Teacher's lessons collected");
-                  sails.log.debug(lessons);
-                  res.json(200, lessons );
-			             });
+                  sails.log.debug(_lessons);
+                  res.json(200, _lessons);
+			             })
+
   },
 
   getLessonID: function(req,res) {

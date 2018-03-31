@@ -119,14 +119,7 @@ getApiUrl(){
       .map((res:Response) => res.json())
       .catch((error:any) => Observable.throw('Error adding users to group'));
   }
-  addGroupToLesson(groupID: string, lessonID:string): Observable<any>{
-      var url=this.g_url+'groupLesson/addGroupToLesson';
-      var body=JSON.stringify({lessonID:lessonID,groupID:groupID});
 
-      return this.http.post(url,body)
-      .map(res => res.json())
-      .catch((error:any) => Observable.throw('Error adding group to lesson'));
-  }
   removeUserFromGroup(userID: string, groupID: string): Observable<any>{
     var url=this.g_url+'groupuser/delete';
     var body=JSON.stringify({groupID:groupID,userID:userID});
@@ -145,14 +138,7 @@ getApiUrl(){
 
 
   }
-  removeGroupFromLesson(groupID: string, lessonID: string): Observable<any>{
-    var url=this.g_url+'grouplesson/delete';
-    var body=JSON.stringify({lessonID:lessonID,groupID:groupID});
 
-    return this.http.post(url,body)
-    .map(res => res.json())
-    .catch((error:any) => Observable.throw('Error removing group from lesson'));
-  }
   //zwraca wszystkie lekcje studenta
   getGroupsLessons(groupID:string):Observable<any>{
 
@@ -200,8 +186,8 @@ createUser(first_name:string,last_name:string,email:string,password:string,role:
   return this.http.post(url,body)
 
 }
-createLesson(login:string,subject:string,date:Date,hour:string):Observable<any>{
-  var body={teacherID:login,subject:subject, date:date.toISOString(), hour:hour};
+createLesson(login:string,groupID: string,subject:string,date:Date,hour:string):Observable<any>{
+  var body={teacherID:login,groupID:groupID,subject:subject, date:date.toISOString(), hour:hour};
   var url=this.g_url+"lesson";
   return this.http.post(url,body)
   .map(res => res.json())

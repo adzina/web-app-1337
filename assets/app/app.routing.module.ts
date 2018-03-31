@@ -8,7 +8,6 @@ import { AdminCreateGroupComponent } from './components/AdminCreateGroupComponen
 import { AdminAddUsersComponent } from './components/AdminAddUsersComponent/adminAddUsers.component';
 import { AdminModifyAccountsComponent } from './components/AdminModifyAccountsComponent/adminModifyAccounts.component';
 import { TeacherSeeAllLessonsComponent } from './components/TeacherSeeAllLessonsComponent/teacherSeeAllLessons.component';
-import { TeacherAddStudentsComponent } from './components/TeacherAddStudentsComponent/teacherAddStudents.component';
 import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonComponent/teacherCreateLesson.component';
 import { TeacherSeeProgressComponent } from './components/TeacherSeeProgressComponent/teacherSeeProgress.component';
 import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component';
@@ -103,14 +102,6 @@ export const routes = [
       component: TeacherSeeProgressComponent,
       canActivate: [RoleGuard],
       data: {
-        expectedRole: 'teacher'
-      }
-    },
-    {
-      path: 'add-students',
-      component: TeacherAddStudentsComponent,
-      canActivate: [RoleGuard],
-      data:{
         expectedRole: 'teacher'
       }
     },

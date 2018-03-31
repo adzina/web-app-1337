@@ -11,6 +11,7 @@ module.exports = {
       teacherID: {type:'string', required: true},
       date: {type: 'date', required: true},
       subject: {type: 'string', required: true, unique:true},
-      hour: {type: 'string', required: true}
+      hour: {type: 'string', required: true},
+      groupID: {type:'string', required: true}
   }
 };

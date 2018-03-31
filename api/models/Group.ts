@@ -8,6 +8,10 @@
 module.exports = {
   tableName: "group",
   attributes: {
-    name: {type:'string', required: true}
+    name: {type:'string', required: true},
+    lessons:{
+      collection: 'lesson',
+      via: 'groupID'
+    }
   }
 };

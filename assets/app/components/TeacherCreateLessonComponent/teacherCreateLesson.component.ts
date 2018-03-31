@@ -63,20 +63,20 @@ export class TeacherCreateLessonComponent {
   }
   sendRequest(){
     let hour=this.hour_start+":"+this.min_start+" - "+this.hour_end+":"+this.min_end;
-    this._backendService.createLesson(this._loginService.getUserID(),this.subject,this.date,hour).subscribe(data => {
+    let groupID;
+    for(var i=0;i<this.groups.length;i++){
+      if(this.group==this.groups[i].name)
+        {
+          groupID = this.groups[i].id
+        }
+    }
+    this._backendService.createLesson(this._loginService.getUserID(),groupID,this.subject,this.date,hour).subscribe(data => {
+        this._loginService.setChosenLesson(data);
+        this.subject=null;
+          this.error=false;
+          this.created=true;
+          this._router.navigate(['./words-panel']);
 
-      for(var i=0;i<this.groups.length;i++){
-        if(this.group==this.groups[i].name)
-          {
-            this._backendService.addGroupToLesson(this.groups[i].id,data.id).subscribe(result=>{
-              this._loginService.setChosenLesson(data);
-              this.subject=null;
-              this.error=false;
-              this.created=true;
-              this._router.navigate(['./words-panel']);
-            })
-          }
-      }
     }
   );
   }
