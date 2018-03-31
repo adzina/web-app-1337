@@ -26,8 +26,10 @@ export class TeacherSeeAllLessonsComponent {
     backendService.getTeachersLessons().
         subscribe(response=>{
 
-          for (let index in response)
+          for (let index in response){
               this.lessons[index]=response[index];
+              this.lessons[index].date = new Date(response[index].date);
+          }
           this.lessonChosen.emit(this.loginService.getChosenLesson());
 
           },
