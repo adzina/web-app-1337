@@ -4,12 +4,14 @@ module.exports = {
   create: function(req,res){
 			let _teacherID=req.param('teacherID'),
 					_subject=req.param('subject'),
-					_date=req.param('date');
+					_date=req.param('date'),
+          _hour=req.param('hour');
 
 			return sails.models.lesson.create({
 				teacherID: _teacherID,
 				subject: _subject,
 				date:_date,
+        hour: _hour
 
 			})
     	.exec(function (err, lesson){

@@ -16,28 +16,36 @@ const now = new Date();
 export class TeacherCreateLessonComponent {
   groups: Group[];
   dataService: CompleterData;
-  subject: string;
+  dataServiceHour: CompleterData;
+  dataServiceMin: CompleterData;
+  subject=null;
   created: boolean;
   error: boolean;
-  date: Date;
-  minDate: Date;
+  date=new Date();
+  minDate=new Date();
   backend_error:string;
-  placeholder: string;
+  placeholder="click to see all groups";
+  placeholder_hour="choose hours";
+  placeholder_min="choose minutes";
+
+  hour_start:string;
+  hour_end:string;
+  min_start:string;
+  min_end:string;
   group: string;
-  user:string;
+  user=this._loginService.getUserName();
   constructor(private _router:Router,
               private http:AuthHttp,
               private _loginService:LoginService,
               private _backendService: BackendService,
               private completerService: CompleterService){
-
-                this.user=this._loginService.getUserName();
-                this.minDate=new Date();
-                this.date=new Date();
+                let hours = this.generateHours()[0];
+                let mins = this.generateHours()[1]
+                this.dataServiceHour=completerService.local(hours,'value','value');
+                this.dataServiceMin = completerService.local(mins, "value","value");
                 this.minDate.setDate(this.date.getDate()-8);
-                this.placeholder="click to see all groups"
                 //this.model = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
-                this.subject=null;
+
                 _backendService.getAllMyGroups().
                   subscribe(response=>{
                     this.groups=response;
@@ -54,7 +62,8 @@ export class TeacherCreateLessonComponent {
     }
   }
   sendRequest(){
-    this._backendService.createLesson(this._loginService.getUserID(),this.subject,this.date).subscribe(data => {
+    let hour=this.hour_start+":"+this.min_start+" - "+this.hour_end+":"+this.min_end;
+    this._backendService.createLesson(this._loginService.getUserID(),this.subject,this.date,hour).subscribe(data => {
 
       for(var i=0;i<this.groups.length;i++){
         if(this.group==this.groups[i].name)
@@ -71,8 +80,31 @@ export class TeacherCreateLessonComponent {
     }
   );
   }
+  generateHours(){
+    let hours = []
+    let mins = []
+    for(let i=0;i<24;i++)
+      hours.push({value:i.toString()})
+    for(let i=0;i<60;i+=5){
+      if(i.toString().length<2)
+          mins.push({value:"0"+i.toString()})
+      else{
+          mins.push({value:i.toString()})
+      }
+    }
+    return [hours,mins]
+  }
   goBack(){
     this._router.navigate(['./see-all-lessons']);
+  }
+  toggleCalendar(){
+    document.getElementById("calendar").classList.toggle("visible");
+    if(document.getElementById("calendarHeader").innerHTML=="Show calendar"){
+        document.getElementById("calendarHeader").innerHTML="Hide calendar"
+    }
+    else{
+      document.getElementById("calendarHeader").innerHTML="Show calendar"
+    }
   }
 
 }

@@ -6,5 +6,6 @@ export class Lesson {
 		public id: string,
 		public subject:string,
 		public teacherID: string,
+		public hour: string,
 		public updatedAt: Date){}
 }

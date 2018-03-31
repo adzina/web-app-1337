@@ -121,7 +121,7 @@ module.exports = {
 	},
   getMyGroups: function(req,res){
   	 let _userID=req.param('userID');
-
+     console.log(_userID);
     this.getGroupsID(_userID,GroupsID=>{
 	      var output:group[];
 	      output=[];

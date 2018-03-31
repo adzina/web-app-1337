@@ -1,6 +1,6 @@
 /deep/ .completer-input  {
-display: block;
-    width: 100%;
+display: inline;
+    width: 70px;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
@@ -16,6 +16,17 @@ display: block;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+
+:host /deep/ .completer-holder{
+  max-width: 50px;
+   display: inline-block;
+ }
+/deep/ .completer-input.group-completer{
+     width:200px;
+  }
+  div{
+    text-align: left;
+  }
 a {
   cursor: pointer;
 }
@@ -30,5 +41,15 @@ ol {
   color: white;
 }
 .to-left{
-  text-align:left
+  text-align:left;
+  min-width: 300px;
+}
+datepicker {
+  display:none;
+}
+datepicker.visible{
+  display:block;
+}
+#calendarHeader{
+  cursor: pointer;
 }

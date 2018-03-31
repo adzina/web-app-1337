@@ -200,8 +200,8 @@ createUser(first_name:string,last_name:string,email:string,password:string,role:
   return this.http.post(url,body)
 
 }
-createLesson(login:string,subject:string,date:Date):Observable<any>{
-  var body={teacherID:login,subject:subject, date:date.toISOString()};
+createLesson(login:string,subject:string,date:Date,hour:string):Observable<any>{
+  var body={teacherID:login,subject:subject, date:date.toISOString(), hour:hour};
   var url=this.g_url+"lesson";
   return this.http.post(url,body)
   .map(res => res.json())

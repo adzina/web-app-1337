@@ -19,14 +19,25 @@
     <td>
       <form>
         <div class="form-group to-left">
-          <strong> Date</strong><br>
+          <strong id="calendarHeader" (click)="toggleCalendar()">Show calendar</strong><br>
 
           <datepicker
+                        id="calendar"
                         name="date"
                         [(ngModel)]="date"
                          [showWeeks]="true"
                          [minDate]="minDate"
           ></datepicker>
+          <strong>Start</strong><br>
+          <div>
+            <ng2-completer  [(ngModel)]="hour_start" name="hour_start" [placeholder]="placeholder_hour" [datasource]="dataServiceHour" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+            <ng2-completer  [(ngModel)]="min_start" name="min_start" [placeholder]="placeholder_min" [datasource]="dataServiceMin"  [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+          </div><br>
+          <strong>End</strong><br>
+          <div>
+            <ng2-completer [(ngModel)]="hour_end" name="hour_end" [placeholder]="placeholder_hour" [datasource]="dataServiceHour" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+            <ng2-completer [(ngModel)]="min_end" name="min_end" [placeholder]="placeholder_min" [datasource]="dataServiceMin"  [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+          </div>
         </div>
       </form>
     </td>
@@ -44,7 +55,7 @@
         <strong> Group</strong>
         </div>
         <div class="form-group">
-                <ng2-completer [(ngModel)]="group" name="group" [placeholder]="placeholder" [datasource]="dataService" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+                <ng2-completer class="group-completer" [(ngModel)]="group" name="group" [placeholder]="placeholder" [datasource]="dataService" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
 
         </div>
       <div class="form-group">
