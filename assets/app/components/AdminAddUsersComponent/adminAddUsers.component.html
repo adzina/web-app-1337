@@ -64,6 +64,7 @@
         <table class="table table-striped table-bordered table-hover table-condensed">
           <tr>
             <th>Lesson</th>
+            <th>Hour</th>
             <th>Date</th>
             <!--
             <th>Group</th>
@@ -71,7 +72,9 @@
           </tr>
           <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
             <td  class="text-center" class = "link" (click)="goToLesson(i)">{{lesson.subject}}</td>
-            <td class="text-center">{{lesson.date}}</td>
+            <!-- <td class="text-center">{{lesson.hour}} </td> -->
+            <td class="text-center">
+              {{lesson.date.getDay()}}.{{lesson.date.getMonth()}}.{{lesson.date.getFullYear()}} </td>
             <!--
             <td class="text-center" style="width:10px"></td>
           -->

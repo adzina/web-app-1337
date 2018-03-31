@@ -42,7 +42,6 @@ export class AdminAddUsersComponent{
               private _completerService: CompleterService,
               private _router: Router) {
                 this.chosenGroup = this._loginService.getChosenGroup();
-
                 this.dataServiceTeacher=this._completerService.local(this.teacherSubject,'name','name');
                 this.dataServiceStudent=this._completerService.local(this.studentSubject,'name','name');
                 this._backendService.getAllUsersMergeName().subscribe(response=>{
@@ -52,8 +51,10 @@ export class AdminAddUsersComponent{
                   this._backendService.getGroupsLessons(this.chosenGroup.id)
                   .map(res => res.json()).
                     subscribe(resp=>{
-                      for (let index in resp)
-                        this.lessons[index]=resp[index]
+                      for (let index in resp){
+                          this.lessons[index]=resp[index];
+                          this.lessons[index].date=new Date(resp[index].date);
+                      }
                       this.handleGroupChosen();
                     })
 
@@ -77,7 +78,7 @@ export class AdminAddUsersComponent{
     let count_active=0;
     let count_inactive=0;
     let flag=false;
-    
+
     for (var i=0; i<this.receivedUsers.length;i++){
       for (var j=0;j< this.receivedActiveUsers.length;j++)
         {
@@ -176,6 +177,8 @@ export class AdminAddUsersComponent{
     this._loginService.setChosenLesson(lesson);
     this._router.navigate(["./words-panel"]);
   }
+
+
 }
 interface user{
   id: string,
