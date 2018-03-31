@@ -21,7 +21,7 @@ module.exports.bootstrap = function (done) {
      "last_name": "admin",
      "password":"admin",
       "email": "admin@akn.com",
-       "role": ["admin" , "teacher" ,"student"]}).exec(function (err){
+       "role": ["admin"]}).exec(function (err){
       if (err) { return done(err); }
 
       return done();
