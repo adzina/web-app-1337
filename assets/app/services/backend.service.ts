@@ -145,6 +145,8 @@ getApiUrl(){
     var url=this.g_url+'groupLesson/getGroupsLessons';
     var body=JSON.stringify({groupID:groupID})
     return this.http.post(url,body)
+    .map(res => res.json())
+    .catch((error:any) => Observable.throw('Error getting lessons'));
 
 
   }
