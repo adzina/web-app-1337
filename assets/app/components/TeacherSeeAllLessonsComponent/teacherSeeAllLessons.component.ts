@@ -15,6 +15,7 @@ export class TeacherSeeAllLessonsComponent {
   lessons: Lesson[];
   className:string;
   backendError:string;
+  maxLessonsPerPage = 20;
   @Output() lessonChosen = new EventEmitter<Lesson>();
   constructor(private backendService:BackendService,
               private loginService:LoginService,
@@ -26,10 +27,15 @@ export class TeacherSeeAllLessonsComponent {
     backendService.getTeachersLessons().
         subscribe(response=>{
 
-          for (let index in response){
-              this.lessons[index]=response[index];
-              this.lessons[index].date = new Date(response[index].date);
-          }
+
+            let i=0;
+            while(i<this.maxLessonsPerPage && i<response.length){
+              this.lessons[i]=response[i];
+              this.lessons[i].date = new Date(response[i].date);
+              i++;
+            }
+
+
           this.lessonChosen.emit(this.loginService.getChosenLesson());
 
           },
