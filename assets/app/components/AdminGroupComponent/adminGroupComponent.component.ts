@@ -30,8 +30,9 @@ export class AdminGroupComponent{
     }
     addRemove(nr:string) {
       var group=this.groups[nr];
+      console.log(group)
       this._loginService.setChosenGroup(group);
       this._router.navigate(['./admin-add-users']);
     }
-  
+
     }
