@@ -16,11 +16,10 @@ const now = new Date();
 export class TeacherCreateLessonComponent {
   groups: Group[];
   dataService: CompleterData;
-  dataServiceHour: CompleterData;
-  dataServiceMin: CompleterData;
   subject=null;
   created: boolean;
   error: boolean;
+  hourError: boolean;
   date=new Date();
   minDate=new Date();
   backend_error:string;
@@ -70,8 +69,12 @@ export class TeacherCreateLessonComponent {
     else{
       this.error=true;
     }
+    if(this.hour_end<this.hour_start || (this.hour_end==this.hour_start && this.min_end<this.min_start)){
+      this.hourError=true;
+    }
   }
   sendRequest(){
+    this.date.setDate(this.date.getDate() + 1);
     let hour=this.hour_start.toString()+":"+this.min_start.toString()+" - "+this.hour_end.toString()+":"+this.min_end.toString();
     let groupID;
     for(var i=0;i<this.groups.length;i++){
@@ -84,6 +87,7 @@ export class TeacherCreateLessonComponent {
         this._loginService.setChosenLesson(data);
         this.subject=null;
           this.error=false;
+          this.hourError=false;
           this.created=true;
           this._router.navigate(['./words-panel']);
 
