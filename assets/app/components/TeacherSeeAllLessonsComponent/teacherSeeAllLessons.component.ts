@@ -52,7 +52,7 @@ export class TeacherSeeAllLessonsComponent {
     this.router.navigate(['./words-panel']);
   }
   chooseGroup(nr:string){
-    var groupID=this.lessons[nr].groupID.id;
+    var groupID=this.lessons[nr].groupID;
     this.loginService.setChosenGroup(groupID);
     this.router.navigate(['./see-groups-lessons']);
   }

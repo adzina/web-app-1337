@@ -2,6 +2,7 @@ import { Component,Output,EventEmitter } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { LoginService } from '../../services/login.service';
 import {Lesson} from '../../models/lesson';
+import { Group } from '../../models/group';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +16,7 @@ export class TeacherSeeGroupsLessonsComponent {
   lessons: Lesson[];
   className:string;
   backendError:string;
-  group:string;
+  group:Group;
 
   @Output() lessonChosen = new EventEmitter<Lesson>();
   constructor(private backendService:BackendService,
@@ -25,7 +26,7 @@ export class TeacherSeeGroupsLessonsComponent {
     this.lessons=[];
     this.backendError=null;
 
-    backendService.getGroupsLessons(this.group).
+    backendService.getGroupsLessons(this.group.id).
         subscribe(response=>{
           console.log(this.group)
           console.log(response)

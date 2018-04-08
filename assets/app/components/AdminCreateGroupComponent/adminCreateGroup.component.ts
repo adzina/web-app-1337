@@ -48,7 +48,7 @@ export class AdminCreateGroupComponent{
 
   }
   goto(){
-    this.loginService.setChosenGroup(this.groupCreated.id);
+    this.loginService.setChosenGroup(this.groupCreated);
     this._router.navigate(['./admin-add-users']);
 
   }

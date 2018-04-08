@@ -41,7 +41,7 @@ export class AdminAddUsersComponent{
               private _backendService: BackendService,
               private _completerService: CompleterService,
               private _router: Router) {
-                this.chosenGroup = this._loginService.getChosenGroup();
+                this.chosenGroup = this._loginService.getChosenGroup().id;
                 this.dataServiceTeacher=this._completerService.local(this.teacherSubject,'name','name');
                 this.dataServiceStudent=this._completerService.local(this.studentSubject,'name','name');
                 this._backendService.getAllUsersMergeName().subscribe(response=>{

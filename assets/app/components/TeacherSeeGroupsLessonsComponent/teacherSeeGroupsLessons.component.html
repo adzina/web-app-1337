@@ -3,7 +3,7 @@
     <div class="row">
       <ol class="breadcrumb pull-left">
         <li class="breadcrumb-item"><a (click)="goBack()">Lessons</a></li>
-        <li class="breadcrumb-item active">All lessons of {{chosenGroup}}</li>
+        <li class="breadcrumb-item active">All lessons of {{group.name}}</li>
       </ol>
     </div>
   <div *ngIf="lessons[0]!=null">
