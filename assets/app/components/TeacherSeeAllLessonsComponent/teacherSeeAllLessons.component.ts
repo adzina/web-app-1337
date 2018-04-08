@@ -31,8 +31,7 @@ export class TeacherSeeAllLessonsComponent {
             let i=0;
             while(i<this.maxLessonsPerPage && i<response.length){
               this.lessons[i]=response[i];
-              this.lessons[i].date = new Date(response[i].date);
-              console.log(response[i].date)
+              this.lessons[i].date=new Date(response[i].date)
               i++;
             }
 
