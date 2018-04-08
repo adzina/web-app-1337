@@ -12,6 +12,7 @@ import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonCo
 import { TeacherSeeGroupsLessonsComponent } from './components/TeacherSeeGroupsLessonsComponent/teacherSeeGroupsLessons.component';
 import { TeacherSeeProgressComponent } from './components/TeacherSeeProgressComponent/teacherSeeProgress.component';
 import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component';
+import { TeacherGroupComponent } from './components/TeacherGroupComponent/teacherGroup.component';
 import { UpdateProfileComponent } from './components/UpdateProfileComponent/updateProfile.component';
 import { GoodbyeComponent } from './components/GoodbyeComponent/goodbye.component';
 import { AuthGuard } from './common/auth.guard';
@@ -71,6 +72,14 @@ export const routes = [
           canActivate: [RoleGuard],
           data: {
             expectedRole: 'admin'
+          }
+        },
+      {
+          path: 'see-groups',
+          component: TeacherGroupComponent,
+          canActivate: [RoleGuard],
+          data:{
+            expectedRole: 'teacher'
           }
         },
       {

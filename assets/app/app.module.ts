@@ -29,6 +29,7 @@ import { TeacherSeeAllLessonsComponent } from './components/TeacherSeeAllLessons
 import { TeacherSeeGroupsLessonsComponent } from './components/TeacherSeeGroupsLessonsComponent/teacherSeeGroupsLessons.component';
 import { TeacherCreateLessonComponent } from './components/TeacherCreateLessonComponent/teacherCreateLesson.component';
 import { TeacherSeeProgressComponent } from './components/TeacherSeeProgressComponent/teacherSeeProgress.component';
+import { TeacherGroupComponent } from './components/TeacherGroupComponent/teacherGroup.component';
 import { TeacherWordsPanelComponent } from './components/TeacherWordsPanelComponent/teacherWordsPanel.component';
 import { UpdateProfileComponent } from './components/UpdateProfileComponent/updateProfile.component';
 import { GoodbyeComponent } from './components/GoodbyeComponent/goodbye.component';
@@ -66,6 +67,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       TeacherSeeAllLessonsComponent,
       TeacherSeeGroupsLessonsComponent,
       TeacherCreateLessonComponent,
+      TeacherGroupComponent,
       TeacherWordsPanelComponent,
       TeacherSeeProgressComponent,
       UpdateProfileComponent,

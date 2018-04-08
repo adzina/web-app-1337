@@ -15,7 +15,7 @@
     <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
       <td (click)="chooseLesson(i)" class="text-center link">{{lesson.subject}}</td>
       <td class="text-center">{{lesson.date.getDay()}}.{{lesson.date.getMonth()}}.{{lesson.date.getFullYear()}}</td>
-      <td (click)="chooseGroup(i)" class="text-center link" style="width:10px">{{lesson.groupID.name}}</td>
+      <td (click)="chooseGroup(i)" class="text-center link">{{lesson.groupID.name}}</td>
     </tr>
   </table>
 </div>

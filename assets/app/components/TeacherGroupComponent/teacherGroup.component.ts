@@ -5,12 +5,12 @@ import { Router } from '@angular/router';
 import { Group } from '../../models/group';
 
 @Component({
-  selector: 'admin-group',
-  templateUrl: './adminGroupComponent.component.html',
-  styleUrls: ['./adminGroupComponent.component.scss']
+  selector: 'teacher-group',
+  templateUrl: './teacherGroup.component.html',
+  styleUrls: ['./teacherGroup.component.scss']
 })
 
-export class AdminGroupComponent{
+export class TeacherGroupComponent{
   placeholder: Group;
   chosenGroup: Group;
   groups: Group[];
@@ -19,19 +19,16 @@ export class AdminGroupComponent{
               private _loginService: LoginService,
               private _router:Router) {
             this.groups = null;
-            _backendService.getAllGroups().
+            _backendService.getAllMyGroups().
               subscribe(response=>{
                 this.groups=response;
                   }
                 );
       }
-    navigate(){
-      this._router.navigate(["./admin-create-group"]);
-    }
-    addRemove(nr:string) {
+    select(nr:string) {
       var group=this.groups[nr];
       this._loginService.setChosenGroup(group);
-      this._router.navigate(['./admin-add-users']);
+      this._router.navigate(['./see-groups-lessons']);
     }
-  
+
     }
