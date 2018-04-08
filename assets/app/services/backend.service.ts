@@ -18,8 +18,8 @@ import * as async from "async";
 
 export class BackendService{
 
-  g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
-  //g_url = 'http://localhost:1337/';
+  //g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
+  g_url = 'http://localhost:1337/';
 
 
   constructor(private http:AuthHttp,
@@ -142,7 +142,7 @@ getApiUrl(){
   //zwraca wszystkie lekcje studenta
   getGroupsLessons(groupID:string):Observable<any>{
 
-    var url=this.g_url+'groupLesson/getGroupsLessons';
+    var url=this.g_url+'group/getGroupsLessons';
     var body=JSON.stringify({groupID:groupID})
     return this.http.post(url,body)
     .map(res => res.json())

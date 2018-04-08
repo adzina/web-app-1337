@@ -25,11 +25,10 @@ module.exports = {
         return res.json(lesson);
 			});
 	},
-
   getTeachersLessons: function(req,res){
     var id=req.param('teacherID');
     var lessons=[]
-    return sails.models.lesson.find({teacherID: id}).sort('date ASC')
+    return sails.models.lesson.find({teacherID: id}).populate('groupID').sort('date ASC')
             .exec(function (err, _lessons){
                   if (err) {
                     sails.log.debug("Error getting teacher's lessons");
@@ -38,7 +37,7 @@ module.exports = {
                   sails.log.debug("Teacher's lessons collected");
                   sails.log.debug(_lessons);
                   res.json(200, _lessons);
-			             })
+                })
 
   },
 

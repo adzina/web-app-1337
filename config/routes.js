@@ -92,14 +92,15 @@ module.exports.routes = {
      'POST /groupuser/getGroupsUsersMergeName': 'GroupUserController.getGroupsUsersMergeName',
      'POST /groupuser/addUserToGroup': 'GroupUserController.addUserToGroup',
      'POST /groupuser/delete': 'GroupUserController.removeUserFromGroup',
+     'POST /groupUser/getAll': 'GroupUserController.getMyGroups',
 
      'POST /groupLesson/getLessonsGroups': 'GroupLessonController.getLessonsGroups',
-     'POST /groupLesson/getGroupsLessons': 'GroupLessonController.getGroupsLessons',
      'POST /groupLesson/addGroupToLesson': 'GroupLessonController.addGroupToLesson',
      'POST /groupLesson/delete': 'GroupLessonController.removeGroupFromLesson',
 
      'GET /allGroups': 'GroupController.getGroups',
-     'POST /groupUser/getAll': 'GroupUserController.getMyGroups',
+     'POST /group/getGroupsLessons': 'GroupController.getGroupsLessons',
+
 
      'POST /studentword/addOrUpdateStudentWord': 'StudentWordController.addOrUpdateStudentWord',
      'POST /studentword/getAllGuessed': 'StudentWordController.getAllGuessed',
