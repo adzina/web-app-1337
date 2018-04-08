@@ -28,8 +28,6 @@ export class TeacherSeeGroupsLessonsComponent {
 
     backendService.getGroupsLessons(this.group.id).
         subscribe(response=>{
-          console.log(this.group)
-          console.log(response)
           for (let index in response){
               this.lessons[index]=response[index];
               this.lessons[index].date = new Date(response[index].date);
