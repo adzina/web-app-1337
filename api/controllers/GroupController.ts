@@ -34,8 +34,6 @@ module.exports = {
   },
   getGroupsLessons: function(req:any,res:any){
     let _groupID=req.param('groupID');
-    console.log("yas")
-    console.log(_groupID)
     return sails.models.group.findOne({id:_groupID}).populate("lessons")
             .exec(function (err:any, group:any){
                   if (err) {
@@ -43,7 +41,6 @@ module.exports = {
                     sails.log.error(err);
                     return res.serverError(err); }
                   sails.log.debug("Lessons found");
-                  sails.log.debug(group)
                   sails.log.debug(group.lessons)
                   res.json(200,group.lessons);
                    });
