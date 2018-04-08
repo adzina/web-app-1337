@@ -52,7 +52,7 @@ export class TeacherSeeProgressComponent{
                  if(record.all!=0)
                       this.progress.push(record.guessed/record.all)
                   else
-                      this.progress.push(0) 
+                      this.progress.push(0)
                }
              }
              )
@@ -62,24 +62,6 @@ export class TeacherSeeProgressComponent{
       }
     )
   }
-  info(i){
-    var allGuessed,allWords;
-    let student=this.students[i];
-    this._backendService.countAllGuessedWords(student.id).subscribe(
-      data=>{
-        allGuessed=data._body;
-        this._backendService.countAllWords(student.id).subscribe(
-          data=>{
-            allWords=data._body;
-            if(allWords==undefined)
-                allWords=0
-            if(allGuessed==undefined)
-                allGuessed=0
-            alert("Words already learnt: "+allGuessed+"\nWords opened: "+allWords);
-          }
-        )
-      }
-    );
-  }
+
 
 }

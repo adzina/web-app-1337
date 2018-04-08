@@ -8,16 +8,7 @@ input{
 a {
   cursor: pointer;
 }
-li.breadcrumb-item.active{
-  color: white;
-}
-li.breadcrumb-item.active::before{
-  color: black;
-}
-ol {
-  background-color: #ccc;
-  color: white;
-}
+
 ol:after{
   content: "";
   display: table;
