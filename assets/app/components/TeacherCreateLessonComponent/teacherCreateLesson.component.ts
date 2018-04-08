@@ -25,26 +25,25 @@ export class TeacherCreateLessonComponent {
   minDate=new Date();
   backend_error:string;
   placeholder="click to see all groups";
-  placeholder_hour="choose hours";
-  placeholder_min="choose minutes";
 
-  hour_start:string;
-  hour_end:string;
-  min_start:string;
-  min_end:string;
+  hour_start:number;
+  hour_end:number;
+  min_start:number;
+  min_end:number;
   group: string;
+
+  hours: number[];
+  mins:number[];
   user=this._loginService.getUserName();
   constructor(private _router:Router,
               private http:AuthHttp,
               private _loginService:LoginService,
               private _backendService: BackendService,
               private completerService: CompleterService){
-                let hours = this.generateHours()[0];
-                let mins = this.generateHours()[1]
-                this.dataServiceHour=completerService.local(hours,'value','value');
-                this.dataServiceMin = completerService.local(mins, "value","value");
+                this.hours = this.generateHours()[0];
+                this.mins = this.generateHours()[1];
+
                 this.minDate.setDate(this.date.getDate()-8);
-                //this.model = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
 
                 _backendService.getAllMyGroups().
                   subscribe(response=>{
@@ -52,6 +51,17 @@ export class TeacherCreateLessonComponent {
                      this.dataService=completerService.local(this.groups,'name','name');
                       }
                     );
+  }
+  setEndHour(){
+    if(this.hour_start<23)
+      this.hour_end=this.hour_start+1;
+    else
+      this.hour_end=this.hour_start;
+
+  }
+  setEndMin(){
+
+    this.min_end=this.min_start;
   }
   create(){
     if(this.subject!=null  && this.group!=null){
@@ -62,7 +72,7 @@ export class TeacherCreateLessonComponent {
     }
   }
   sendRequest(){
-    let hour=this.hour_start+":"+this.min_start+" - "+this.hour_end+":"+this.min_end;
+    let hour=this.hour_start.toString()+":"+this.min_start.toString()+" - "+this.hour_end.toString()+":"+this.min_end.toString();
     let groupID;
     for(var i=0;i<this.groups.length;i++){
       if(this.group==this.groups[i].name)
@@ -81,16 +91,14 @@ export class TeacherCreateLessonComponent {
   );
   }
   generateHours(){
-    let hours = []
-    let mins = []
+    let hours:number[]
+    let mins:number[]
+    hours=[]
+    mins=[]
     for(let i=0;i<24;i++)
-      hours.push({value:i.toString()})
+      hours.push(i)
     for(let i=0;i<60;i+=5){
-      if(i.toString().length<2)
-          mins.push({value:"0"+i.toString()})
-      else{
-          mins.push({value:i.toString()})
-      }
+          mins.push(i)
     }
     return [hours,mins]
   }
@@ -106,5 +114,6 @@ export class TeacherCreateLessonComponent {
       document.getElementById("calendarHeader").innerHTML="Show calendar"
     }
   }
+
 
 }

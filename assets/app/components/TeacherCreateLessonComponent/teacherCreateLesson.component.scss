@@ -1,6 +1,6 @@
 /deep/ .completer-input  {
 display: inline;
-    width: 70px;
+    width: 100%;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
@@ -16,17 +16,11 @@ display: inline;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+select.form-control{
+  display:inline;
+  width:90px;
+}
 
-:host /deep/ .completer-holder{
-  max-width: 50px;
-   display: inline-block;
- }
-/deep/ .completer-input.group-completer{
-     width:200px;
-  }
-  div{
-    text-align: left;
-  }
 a {
   cursor: pointer;
 }
@@ -52,4 +46,8 @@ datepicker.visible{
 }
 #calendarHeader{
   cursor: pointer;
+  text-decoration: underline;
 }
+.form-row{
+    text-align: left;
+  }

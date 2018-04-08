@@ -28,39 +28,49 @@
                          [showWeeks]="true"
                          [minDate]="minDate"
           ></datepicker>
-          <strong>Start</strong><br>
-          <div>
-            <ng2-completer  [(ngModel)]="hour_start" name="hour_start" [placeholder]="placeholder_hour" [datasource]="dataServiceHour" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
-            <ng2-completer  [(ngModel)]="min_start" name="min_start" [placeholder]="placeholder_min" [datasource]="dataServiceMin"  [minSearchLength]="0" [openOnClick]=true></ng2-completer>
-          </div><br>
-          <strong>End</strong><br>
-          <div>
-            <ng2-completer [(ngModel)]="hour_end" name="hour_end" [placeholder]="placeholder_hour" [datasource]="dataServiceHour" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
-            <ng2-completer [(ngModel)]="min_end" name="min_end" [placeholder]="placeholder_min" [datasource]="dataServiceMin"  [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+          <div class="form-row">
+            <strong>Start:</strong>
+            <select [(ngModel)]="hour_start" name="hour_start" class="form-control" (change)=setEndHour()>
+            <option *ngFor="let hour of hours" [value]="hour">{{hour}}</option>
+            </select>
+            <select [(ngModel)]="min_start" name="min_start" class="form-control" (change)=setEndMin()>
+            <option *ngFor="let min of mins" [value]="min">{{min}}</option>
+            </select>
+
           </div>
+          <div class="form-row">
+            <strong>End  :</strong>
+            <select [(ngModel)]="hour_end" name="hour_end" class="form-control">
+            <option *ngFor="let hour of hours" [value]="hour">{{hour}}</option>
+            </select>
+            <select [(ngModel)]="min_end" name="min_end" class="form-control">
+            <option *ngFor="let min of mins" [value]="min">{{min}}</option>
+            </select>
+
+          </div>
+
         </div>
       </form>
     </td>
     <td valign="top">
       <form>
-        <div class="to-left">
-          <strong> Subject</strong>
-        </div>
-      <div class="form-group">
-        <textarea rows="4" cols="30" class="form-control" name="subject" [(ngModel)]="subject" (keydown.enter)="create()" style="padding-top:0px">
-        </textarea>
-      </div>
-
-      <div class="to-left">
-        <strong> Group</strong>
-        </div>
         <div class="form-group">
-                <ng2-completer class="group-completer" [(ngModel)]="group" name="group" [placeholder]="placeholder" [datasource]="dataService" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+          <div class="to-left">
+            <strong> Subject</strong>
+          </div>
+          <textarea rows="4" cols="30" class="form-control" name="subject" [(ngModel)]="subject" (keydown.enter)="create()" style="padding-top:0px">
+          </textarea>
 
+        <div class="form-row">
+          <strong> Group</strong>
+          <div class="form-group">
+                  <ng2-completer class="group-completer" [(ngModel)]="group" name="group" [placeholder]="placeholder" [datasource]="dataService" [minSearchLength]="0" [openOnClick]=true></ng2-completer>
+          </div>
         </div>
-      <div class="form-group">
-        <button class="btn btn-success" [disabled]="group==null || subject==null" (click)="create()">Create</button>
-      </div>
+        <div>
+          <button class="btn btn-success" [disabled]="group==null || subject==null" (click)="create()">Create</button>
+        </div>
+    </div>
     </form>
     </td>
   </tr>
