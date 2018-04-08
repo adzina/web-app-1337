@@ -16,11 +16,15 @@
         <th>Progress</th>
       </tr>
       <tr *ngFor=" let student of students; let i=index" [attr.data-index]="i" >
-        <td class="text-center link" (click)="info(i)">{{student.first_name}} {{student.last_name}}</td>
-        <td><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="hey" aria-valuemin="0" aria-valuemax ="100"
-        style="min-width: 2em;" [style.width]="(progress[i]/100)*100 + '%'">
-         {{progress[i]}}%
-        </div></td>
+        <td class="text-center" (click)="info(i)">{{student.first_name}} {{student.last_name}}</td>
+        <td>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" [attr.aria-valuenow]="progress[i]" aria-valuemin="0" aria-valuemax ="100"
+             [style.width]="(progress[i]/100)*100 + '%'">
+             {{progress[i]}}%
+            </div>
+          </div>
+        </td>
         </tr>
     </table>
   </div>
