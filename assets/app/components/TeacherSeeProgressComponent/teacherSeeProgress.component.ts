@@ -7,15 +7,18 @@ import { User } from '../../models/user';
 
 @Component({
   selector: 'teacherSeeProgress',
-  templateUrl: './teacherSeeProgress.component.html'
+  templateUrl: './teacherSeeProgress.component.html',
+  styleUrls: ['./teacherSeeProgress.component.scss']
 })
 export class TeacherSeeProgressComponent{
   groups: Group[];
   students:User[];
   groupChosen=false;
+  progress:number[];
   constructor(private _loginService: LoginService,
               private _backendService: BackendService) {
     this.students=[];
+    this.progress=[];
     _backendService.getAllMyGroups().subscribe(
       data=>{
         this.groups=data
@@ -38,8 +41,22 @@ export class TeacherSeeProgressComponent{
     this._backendService.getActiveUsers(this.groups[i].id).subscribe(
       data=>{
            for(let user of data){
-             if(this.isStudent(user))
+             let ids=[]
+             if(this.isStudent(user)){
                 this.students.push(user);
+                ids.push(user.id);
+             }
+             this._backendService.countWordsForManyStudents(ids)
+             .subscribe(data=>{
+               for (let record of data){
+                 if(record.all!=0)
+                      this.progress.push(record.guessed/record.all)
+                  else
+                      this.progress.push(0) 
+               }
+             }
+             )
+
            }
           this.groupChosen=true;
       }

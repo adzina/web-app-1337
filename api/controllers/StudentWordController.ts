@@ -80,8 +80,52 @@ module.exports = {
       sails.log.debug(number);
       res.json(number)
     });
-  }
+  },
+  countAllCB:function(_studentID,cb){
+    sails.models.studentword.count({studentID: _studentID})
+    .exec(function countCB(error, number) {
+      sails.log.debug("All words counted");
+      sails.log.debug(number);
+      return cb(number);
+    });
+  },
+  countGuessedCB:function(_studentID,cb){
+    sails.models.studentword.count({studentID: _studentID,guessed:true})
+    .exec(function countGuessedCB(error, number) {
+      sails.log.debug("Guessed words counted");
+      sails.log.debug(number);
+      return cb(number);
+    });
+  },
+  countWordsForManyStudents:function(req,res){
+    var StudentsID = req.param("studentsID");
+    var output:any[];
+    output=[];
+    var tmp=this;
+    console.log(StudentsID)
+    async.each(StudentsID, async function (studentID, cb) {
+      var allWordsPromise = sails.models.studentword.count({studentID: studentID })
 
+      var guessedWordsPromise = sails.models.studentword.count({studentID: studentID,guessed:true })
+      var allWords = await allWordsPromise;
+      var guessedWords = await guessedWordsPromise;
+       output.push({studentID:studentID,all:allWords,guessed:guessedWords});
+       console.log("pośredni output")
+       console.log(output)
+       cb()
+
+   },  function(error){
+       if(error)
+         res.negotiate(error);
+       else
+         {
+           sails.log.debug(output);
+           console.log("ostateczny output")
+           console.log(output)
+           return res.json(output);
+         }
+     })
+  }
 
 
 };
