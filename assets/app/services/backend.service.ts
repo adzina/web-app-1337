@@ -19,7 +19,7 @@ import * as async from "async";
 export class BackendService{
 
   g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
-  //g_url = 'http://localhost:1337/';
+  // g_url = 'http://localhost:1337/';
 
 
   constructor(private http:AuthHttp,
@@ -167,34 +167,36 @@ getApiUrl(){
       .map(res =>res.json())
       .catch((error:any)=>Observable.throw('Error counting words'));
     }
-  createGroup(name:string):Observable<any>{
+  createGroup(name:string):Observable<Group>{
     var body={name:name};
     var url=this.g_url+"group";
     return this.http.post(url,body)
     .map(res => res.json())
-    .catch((error:any) => Observable.throw('Error creating lesson'));
+    .catch((error:any) => Observable.throw('Error creating group'));
 
   }
   countAllWords(studentID:string):Observable<any>{
     var url=this.g_url+"studentword/countAll";
     return this.http.post(url,JSON.stringify({studentID:studentID}))
     .map(res => res.json())
-    .catch((error:any) => Observable.throw('Error creating lesson'));
+    .catch((error:any) => Observable.throw('Error counting words'));
   }
   countAllGuessedWords(studentID:string):Observable<any>{
     var url=this.g_url+"studentword/countAllGuessed";
     return this.http.post(url,JSON.stringify({studentID:studentID}))
     .map(res => res.json())
-    .catch((error:any) => Observable.throw('Error creating lesson'));
+    .catch((error:any) => Observable.throw('Error counting words'));
   }
 
-createUser(first_name:string,last_name:string,email:string,password:string,role:string):Observable<any>{
+createUser(first_name:string,last_name:string,email:string,password:string,role:string):Observable<User>{
   var body={first_name: first_name,last_name: last_name, email: email, password: password,role: [role]};
   var url=this.g_url+"user";
   return this.http.post(url,body)
+        .map(res=>res.json)
+        .catch((error:any) => Observable.throw('Error creating user'))
 
 }
-createLesson(login:string,groupID: string,subject:string,date:Date,hour:string):Observable<any>{
+createLesson(login:string,groupID: string,subject:string,date:Date,hour:string):Observable<Lesson>{
   var body={teacherID:login,groupID:groupID,subject:subject, date:date.toISOString(), hour:hour};
   var url=this.g_url+"lesson";
   return this.http.post(url,body)
@@ -202,22 +204,35 @@ createLesson(login:string,groupID: string,subject:string,date:Date,hour:string):
   .catch((error:any) => Observable.throw('Error creating lesson'));
 
 }
-addWord(polish:string,english:string,lessonID:string):Observable<any>{
+addWord(polish:string,english:string,lessonID:string):Observable<Word>{
   var url=this.g_url+'word';
   var body=JSON.stringify({polish:polish,english:english,lessonID: lessonID});
   return this.http.post(url,body)
+        .map(res=>res.json)
+        .catch((error:any) => Observable.throw('Error adding word'))
 
 }
-adminChangePassword(email:string,new_password:string):Observable<any>{
+adminChangePassword(email:string,new_password:string):Observable<User>{
   var url=this.g_url+'user/adminChangePassword';
   var body=JSON.stringify({email:email,new_password:new_password});
-  return this.http.post(url,body);
+  return this.http.post(url,body)
+        .map(res=>res.json)
+        .catch((error:any) => Observable.throw('Error changing password'))
 }
-updateMyProfile(old_password:string,new_password:string):Observable<any>{
+updateMyProfile(old_password:string,new_password:string):Observable<User>{
   var url=this.g_url+'user/changeMyPassword';
   var id = this._loginService.getUserID();
   var body=JSON.stringify({id:id,old_password:old_password,new_password:new_password});
-  return this.http.post(url,body);
+  return this.http.post(url,body)
+        .map(res=>res.json)
+        .catch((error:any) => Observable.throw('Error updating profile'))
+}
+updateWord(id:string, pol:string, eng:string):Observable<Word>{
+  var url = this.g_url+"word/update"
+  var body = JSON.stringify({id:id,pol:pol,eng:eng})
+  return this.http.post(url,body)
+        .map(res=>res.json)
+        .catch((error:any) => Observable.throw('Error updating word'))
 }
 
 }

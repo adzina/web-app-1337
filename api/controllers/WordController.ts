@@ -37,6 +37,20 @@ module.exports = {
          }
        })
 },
+update: function(req, res){
+  let id = req.param("id"),
+      pol = req.param("pol"),
+      eng = req.param("eng")
+  let data = {id:id, polish:pol, english:eng}
+  sails.models.word.update({ id: id },data,function(err,updated){
+      if(err){
+        sails.log.err(err)
+        sails.log.debug("Error updating word")
+      }
+      sails.log.debug("word updated")
+      return res.json(updated);
+  })
+},
 
   addToLesson: function(lessonID,wordID,callback){
     sails.models.lessonword.create({

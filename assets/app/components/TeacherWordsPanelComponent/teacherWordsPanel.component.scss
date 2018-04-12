@@ -17,3 +17,7 @@ ol:after{
 .table td {
    text-align: center;
 }
+div.clickable{
+  z-index: 1;
+  cursor: pointer;
+}

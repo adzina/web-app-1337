@@ -83,6 +83,7 @@ module.exports.routes = {
      'POST /lesson/id': 'LessonController.getLessonID',
 
      'POST /word': 'WordController.add',
+     'POST /word/update': 'WordController.update',
 
      'POST /lessonword/getLessonsWords': 'LessonWordController.getLessonsWords',
      'POST /lessonWord': 'LessonWordController.create',
@@ -104,7 +105,5 @@ module.exports.routes = {
 
      'POST /studentword/addOrUpdateStudentWord': 'StudentWordController.addOrUpdateStudentWord',
      'POST /studentword/getAllGuessed': 'StudentWordController.getAllGuessed',
-     'POST /studentword/countAll': 'StudentWordController.countAll',
-     'POST /studentword/countAllGuessed': 'StudentWordController.countAllGuessed'
 
 };
