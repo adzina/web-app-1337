@@ -65,22 +65,7 @@ module.exports = {
         res.json(found);
       })
   },
-  countAllGuessed:function(req,res){
-    var studentID = req.param("studentID");
-    return sails.models.studentword.count({studentID: studentID,guessed:true}).exec(function countCB(error, number) {
-      sails.log.debug("All guessed counted");
-      sails.log.debug(number);
-      res.json(number)
-    });
-  },
-  countAll:function(req,res){
-    var studentID = req.param("studentID");
-    return sails.models.studentword.count({studentID: studentID}).exec(function countCB(error, number) {
-      sails.log.debug("All words counted");
-      sails.log.debug(number);
-      res.json(number)
-    });
-  },
+
   countWordsForManyStudents:function(req,res){
     var StudentsID = req.param("studentsID");
     var output:any[];
