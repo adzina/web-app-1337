@@ -1,0 +1,13 @@
+<navbar></navbar>
+<div class="container">
+
+  <table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+      <th>Group name</th>
+    </tr>
+    <tr *ngFor=" let group of groups; let i=index" [attr.data-index]="i" >
+      <td class="text-center link" (click)="choose(i)">{{group.name}}</td>
+      </tr>
+  </table>
+
+</div>

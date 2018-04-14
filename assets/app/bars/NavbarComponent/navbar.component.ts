@@ -30,7 +30,7 @@ export class NavbarComponent{
               break;
       case(2): this._router.navigate(['./admin-user']);break;
       case(5): this._router.navigate(['./see-all-lessons']);break;
-      case(8): this._router.navigate(['./see-progress']);break;
+      case(8): this._router.navigate(['./choose-progress']);break;
       case(9): this._router.navigate(['./update-profile']);break;
       case(10): this._router.navigate(['./goodbye']);break;
     }

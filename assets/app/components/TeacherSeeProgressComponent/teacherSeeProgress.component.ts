@@ -11,7 +11,7 @@ import { User } from '../../models/user';
   styleUrls: ['./teacherSeeProgress.component.scss']
 })
 export class TeacherSeeProgressComponent{
-  groups: Group[];
+  group: Group;
   students:User[];
   groupChosen=false;
   progress:number[];
@@ -19,11 +19,8 @@ export class TeacherSeeProgressComponent{
               private _backendService: BackendService) {
     this.students=[];
     this.progress=[];
-    _backendService.getAllMyGroups().subscribe(
-      data=>{
-        this.groups=data
-      }
-    )
+    this.group = _loginService.getChosenGroup();
+    this.getData();
   }
   isStudent(user){
     for(let role of user.role){
@@ -36,9 +33,8 @@ export class TeacherSeeProgressComponent{
     }
     return false;
   }
-  choose(i){
-    this.students=[];
-    this._backendService.getActiveUsers(this.groups[i].id).subscribe(
+  getData(){
+    this._backendService.getActiveUsers(this.group.id).subscribe(
       data=>{
            for(let user of data){
              let ids=[]
@@ -58,7 +54,6 @@ export class TeacherSeeProgressComponent{
              )
 
            }
-          this.groupChosen=true;
       }
     )
   }
