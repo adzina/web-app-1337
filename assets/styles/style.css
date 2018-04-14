@@ -22,6 +22,12 @@ body {
 div{
   text-align: center;
 }
+.no_lessons{
+  border-radius: 5px;
+  border-style: solid;
+  margin-top: 3%;
+}
+
 /*
 div.login{
   position: fixed;
