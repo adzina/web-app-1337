@@ -25,10 +25,10 @@ export class TeacherCreateLessonComponent {
   backend_error:string;
   placeholder="click to see all groups";
 
-  hour_start:number;
-  hour_end:number;
-  min_start:number;
-  min_end:number;
+  hour_start:string;
+  hour_end:string;
+  min_start:string;
+  min_end:string;
   group: string;
 
   hours: number[];
@@ -52,8 +52,10 @@ export class TeacherCreateLessonComponent {
                     );
   }
   setEndHour(){
-    if(this.hour_start<23)
-      this.hour_end=this.hour_start+1;
+    if(parseInt(this.hour_start)<23){
+      let val=parseInt(this.hour_start)+1;
+      this.hour_end=val.toString();
+    }
     else
       this.hour_end=this.hour_start;
 
