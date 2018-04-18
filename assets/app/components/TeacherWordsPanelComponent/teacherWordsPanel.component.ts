@@ -107,7 +107,7 @@ export class TeacherWordsPanelComponent {
     this._router.navigate(['./see-all-lessons']);
   }
   goBackGroups(){
-    this.router.navigate(['./see-groups']);
+    this._router.navigate(['./see-groups']);
   }
 }
 
