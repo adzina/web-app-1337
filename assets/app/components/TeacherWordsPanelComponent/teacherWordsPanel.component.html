@@ -8,6 +8,13 @@
     <li class="breadcrumb-item"><a (click)="goBack()">Lessons</a></li>
     <li class="breadcrumb-item active">Adding words to {{subject}}</li>
   </ol>
+  <div class="info">
+    hour:{{lesson.hour}}</br>
+    date:{{lesson.date.getDate()}}.{{lesson.date.getMonth()+1}}.{{lesson.date.getFullYear()}}</br>
+    teacher:</br>
+    students:</br>
+    group: </br>
+  <div>
   <div *ngIf="chosenLesson!=null" style="clear: left">
     <table class="table table-condensed add-words">
       <tr>
