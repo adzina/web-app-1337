@@ -56,8 +56,7 @@ export class LoginComponent{
               this._router.navigate(['./see-all-lessons']);
           },
           error => {
-            console.log(error);
-            this.backendError=error._body;
+            this.backendError="Invalid credentials";
           }
         );
 
