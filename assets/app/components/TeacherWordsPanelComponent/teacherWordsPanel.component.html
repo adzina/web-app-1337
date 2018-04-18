@@ -2,8 +2,11 @@
 
 <div class="container">
   <ol class="breadcrumb pull-left">
+
+    <li class="breadcrumb-item"><a (click)="goBackGroups()">Groups</a></li>
+    <li class="breadcrumb-item"><a (click)="seeGroup()">{group.name}</a></li>
     <li class="breadcrumb-item"><a (click)="goBack()">Lessons</a></li>
-    <li class="breadcrumb-item active">Add words to {{subject}}</li>
+    <li class="breadcrumb-item active">Adding words to {{subject}}</li>
   </ol>
   <div *ngIf="chosenLesson!=null" style="clear: left">
     <table class="table table-condensed add-words">

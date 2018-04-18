@@ -49,7 +49,11 @@ export class TeacherSeeGroupsLessonsComponent {
   navigate(){
     this.router.navigate(['./create-lesson']);
   }
-  goBack(){
-    this.router.navigate(['./see-all-lessons']);
+  goBackGroups(){
+    this.router.navigate(['./see-groups']);
+  }
+  seeGroup(){
+    this.router.navigate(['./see-groups']);
+
   }
 }
