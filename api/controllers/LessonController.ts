@@ -53,5 +53,20 @@ module.exports = {
                   sails.log.debug(lesson.id);
                   res.json(200, {id:lesson.id});
 			             });
+ },
+ getLessonsGroup: function(req, res){
+   var lessonId=req.param('lessonId');
+   return sails.models.lesson.findOne({id:lessonId})
+                              .populate('groupID')
+                              .exec(function (err, _lesson){
+                                    if (err) {
+                                      sails.log.debug("Error getting lesson's group");
+                                      sails.log.error(err);
+                                      return res.serverError(err); }
+                                    sails.log.debug("Lesson's group collected");
+                                    sails.log.debug(_lesson.groupID);
+                                    res.json(200,_lesson.groupID);
+                                  })
  }
+
 };

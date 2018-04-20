@@ -192,7 +192,7 @@ createUser(first_name:string,last_name:string,email:string,password:string,role:
   var body={first_name: first_name,last_name: last_name, email: email, password: password,role: [role]};
   var url=this.g_url+"user";
   return this.http.post(url,body)
-        .map(res=>res.json)
+        .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error creating user'))
 
 }
@@ -208,7 +208,7 @@ addWord(polish:string,english:string,lessonID:string):Observable<Word>{
   var url=this.g_url+'word';
   var body=JSON.stringify({polish:polish,english:english,lessonID: lessonID});
   return this.http.post(url,body)
-        .map(res=>res.json)
+        .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error adding word'))
 
 }
@@ -216,7 +216,7 @@ adminChangePassword(email:string,new_password:string):Observable<User>{
   var url=this.g_url+'user/adminChangePassword';
   var body=JSON.stringify({email:email,new_password:new_password});
   return this.http.post(url,body)
-        .map(res=>res.json)
+        .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error changing password'))
 }
 updateMyProfile(old_password:string,new_password:string):Observable<User>{
@@ -224,15 +224,22 @@ updateMyProfile(old_password:string,new_password:string):Observable<User>{
   var id = this._loginService.getUserID();
   var body=JSON.stringify({id:id,old_password:old_password,new_password:new_password});
   return this.http.post(url,body)
-        .map(res=>res.json)
+        .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error updating profile'))
 }
 updateWord(id:string, pol:string, eng:string):Observable<Word>{
   var url = this.g_url+"word/update"
   var body = JSON.stringify({id:id,pol:pol,eng:eng})
   return this.http.post(url,body)
-        .map(res=>res.json)
+        .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error updating word'))
+}
+getLessonsGroup(lessonID:string):Observable<any>{
+  var url = this.g_url+"lesson/getLessonsGroup"
+  var body = JSON.stringify({lessonId:lessonID})
+  return this.http.post(url,body)
+        .map(res=>res.json())
+        .catch((error:any)=>Observable.throw('Error getting lessons group'))
 }
 
 }

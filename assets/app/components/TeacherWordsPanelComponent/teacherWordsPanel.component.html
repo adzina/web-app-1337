@@ -4,16 +4,20 @@
   <ol class="breadcrumb pull-left">
 
     <li class="breadcrumb-item"><a (click)="goBackGroups()">Groups</a></li>
-    <li class="breadcrumb-item"><a (click)="seeGroup()">{group.name}</a></li>
+    <li class="breadcrumb-item"><a (click)="seeGroup()">{{group.name}}</a></li>
     <li class="breadcrumb-item"><a (click)="goBack()">Lessons</a></li>
-    <li class="breadcrumb-item active">Adding words to {{subject}}</li>
+    <li class="breadcrumb-item active">Adding words to {{chosenLesson.subject}}</li>
   </ol>
   <div class="info">
-    hour:{{lesson.hour}}</br>
-    date:{{lesson.date.getDate()}}.{{lesson.date.getMonth()+1}}.{{lesson.date.getFullYear()}}</br>
-    teacher:</br>
-    students:</br>
-    group: </br>
+    <b>hour:</b>{{chosenLesson.hour}}<br>
+    <b>date:</b>{{chosenLesson.date.getDate()}}.{{chosenLesson.date.getMonth()+1}}.{{chosenLesson.date.getFullYear()}}<br>
+    <b>teachers:</b><br>  <div *ngFor=" let teacher of teachers; let i=index" [attr.data-index]="i">
+        {{teacher.name}}<br>
+      </div>
+    <b>students:</b><br><div *ngFor=" let student of students; let i=index" [attr.data-index]="i">
+        {{student.name}}<br>
+      </div><br>
+    <b>group:</b> {{group.name}}<br>
   <div>
   <div *ngIf="chosenLesson!=null" style="clear: left">
     <table class="table table-condensed add-words">

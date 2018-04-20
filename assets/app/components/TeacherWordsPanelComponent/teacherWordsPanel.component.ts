@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { BackendService} from '../../services/backend.service';
 import { Router } from '@angular/router';
-import {Http} from '@angular/http';
-import {Word} from '../../models/word';
-import {Lesson} from '../../models/lesson';
+import { Http } from '@angular/http';
+import { Word } from '../../models/word';
+import { Lesson } from '../../models/lesson';
+import { Group } from '../../models/group';
+import { User } from '../../models/user';
 @Component({
   selector: 'teacher-words-panel',
   templateUrl: 'teacherWordsPanel.component.html',
@@ -15,6 +17,10 @@ export class TeacherWordsPanelComponent {
   polish: string;
   english: string;
   words: Word[];
+  group: Group;
+  users: User[];
+  teachers: User[];
+  students: User[];
   chosenLesson: Lesson;
   subject: string;
   buttonClass: string;
@@ -22,6 +28,7 @@ export class TeacherWordsPanelComponent {
   showInputPol = false;
   editedPolish = "";
   editedEnglish = "";
+
   constructor(private _loginService: LoginService,
               private http: Http,
               private _backendService: BackendService,
@@ -29,8 +36,18 @@ export class TeacherWordsPanelComponent {
     this.words=[];
     this.buttonClass="btn btn-success disabled";
     this.chosenLesson=this._loginService.getChosenLesson();
-    if(this.chosenLesson!=null)
-      this.prepare();
+    if(this.chosenLesson!=null){
+        this._backendService.getLessonsGroup(this.chosenLesson.id)
+        .subscribe(elem=>{
+          this.group=elem;
+          this._backendService.getActiveUsersMergeName(this.group.id)
+              .subscribe(users=>{
+                this.users=users;
+                this.divideUsersByRole()
+                this.prepare();
+              })
+        })
+    }
 
   }
 
@@ -44,6 +61,29 @@ export class TeacherWordsPanelComponent {
 
       this.buttonClass="btn btn-success active";
   });
+  }
+  divideUsersByRole(){
+    this.students=[]
+    this.teachers=[]
+    for (let user of this.users){
+      if(this.isStudent(user.role))
+        this.students.push(user)
+      else if(this.isTeacher(user.role))
+          this.teachers.push(user)
+    }
+    console.log(this.students)
+    console.log(this.teachers)
+
+  }
+  isStudent(role){
+    if(role[0]=="student")
+      return true
+    return false
+  }
+  isTeacher(role){
+    if(role[0]=='teacher')
+      return true
+    return false
   }
   delete(i:number){
     var word=this.words[i];

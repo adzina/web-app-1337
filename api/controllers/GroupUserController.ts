@@ -64,8 +64,8 @@ module.exports = {
         }, function(error){
           //... and handle it in the final callback
           if(error) return res.negotiate(error);
-
-          //here we can return our finished use
+          sails.log.debug("Found group\'s users")
+          sails.log.debug(output)
           return res.json(output);
   });
     })
