@@ -16,7 +16,8 @@ export class TeacherSeeProgressComponent{
   groupChosen=false;
   progress:number[];
   constructor(private _loginService: LoginService,
-              private _backendService: BackendService) {
+              private _backendService: BackendService,
+              private _router: Router) {
     this.students=[];
     this.progress=[];
     this.group = _loginService.getChosenGroup();
@@ -57,6 +58,8 @@ export class TeacherSeeProgressComponent{
       }
     )
   }
-
+goBack(){
+  this._router.navigate(['./choose-progress']);
+}
 
 }
