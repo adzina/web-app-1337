@@ -102,6 +102,7 @@ module.exports.routes = {
 
      'GET /allGroups': 'GroupController.getGroups',
      'POST /group/getGroupsLessons': 'GroupController.getGroupsLessons',
+     'POST /group/delete': 'GroupController.delete',
 
 
      'POST /studentword/addOrUpdateStudentWord': 'StudentWordController.addOrUpdateStudentWord',

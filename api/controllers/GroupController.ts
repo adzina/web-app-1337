@@ -44,6 +44,36 @@ module.exports = {
                   sails.log.debug(group.lessons)
                   res.json(200,group.lessons);
                    });
+  },
+  delete: function(req:any,res:any){
+    let _groupID = req.param('groupID');
+    this.canRemove(_groupID, can=>{
+      if(can){
+        console.log(_groupID)
+        return sails.models.group.destroy({id:_groupID}).exec(function(err:any, group:any){
+          sails.log(err)
+          console.log(group)
+          return res.json(200)
+    })
+      }
+
+    else
+      return res.json(200)
+  })
+
+  },
+  canRemove: function(_groupID, callback){
+    sails.models.groupuser.findOne({groupID:_groupID})
+      .exec(function(err,groups){
+        if(err) {
+            sails.log.debug("no users");
+            sails.log.error(err);
+        }
+      let output=true
+      if(groups)
+        output=false
+      return callback(output);
+      })
   }
 
 };

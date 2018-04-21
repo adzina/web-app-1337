@@ -241,5 +241,12 @@ getLessonsGroup(lessonID:string):Observable<any>{
         .map(res=>res.json())
         .catch((error:any)=>Observable.throw('Error getting lessons group'))
 }
+deleteGroup(groupID:string):Observable<any>{
+  var url = this.g_url+"group/delete"
+  var body = JSON.stringify({groupID:groupID})
+  return this.http.post(url,body)
+        .map(res=>res.json())
+        .catch((error:any)=>Observable.throw('Error deleting group'))
+}
 
 }

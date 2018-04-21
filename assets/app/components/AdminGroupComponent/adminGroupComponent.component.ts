@@ -34,5 +34,12 @@ export class AdminGroupComponent{
       this._loginService.setChosenGroup(group);
       this._router.navigate(['./admin-add-users']);
     }
+    delete(i:number){
+      let group = this.groups[i]
+      this._backendService.deleteGroup(group.id).subscribe(data=>{
+        this._router.navigate(['./admin-group'])
+      })
+
+    }
 
     }
