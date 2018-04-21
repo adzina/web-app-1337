@@ -67,6 +67,35 @@ module.exports = {
                                     sails.log.debug(_lesson.groupID);
                                     res.json(200,_lesson.groupID);
                                   })
+ },
+ delete: function(req:any,res:any){
+   let _lessonID = req.param('lessonID');
+   this.canRemove(_lessonID, can=>{
+     if(can){
+       return sails.models.lesson.destroy({id:_lessonID}).exec(function(err:any, lesson:any){
+         sails.log(err)
+         console.log(lesson)
+         return res.json(200)
+   })
+     }
+
+   else
+     return res.json(200)
+ })
+
+ },
+ canRemove: function(_lessonID, callback){
+   sails.models.lessonword.findOne({lessonID:_lessonID})
+     .exec(function(err,lessons){
+       if(err) {
+           sails.log.debug("no words");
+           sails.log.error(err);
+       }
+     let output=true
+     if(lessons)
+       output=false
+     return callback(output);
+     })
  }
 
 };

@@ -62,4 +62,10 @@ export class TeacherSeeAllLessonsComponent {
   goBack(){
       this.router.navigate(['./see-all-lessons']);
   }
+  delete(i:number){
+    let lesson = this.lessons[i]
+    this.backendService.deleteLesson(lesson.id).subscribe(data=>{
+      this.router.navigate(['./see-all-lessons'])
+    })
+  }
 }
