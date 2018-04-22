@@ -13,13 +13,16 @@ import { User } from '../../models/user';
 export class TeacherSeeProgressComponent{
   group: Group;
   students:User[];
+  sortedStudents:User[]
   groupChosen=false;
   progress:number[];
+  progress2:number[];
   constructor(private _loginService: LoginService,
               private _backendService: BackendService,
               private _router: Router) {
     this.students=[];
     this.progress=[];
+    this.progress2=[];
     this.group = _loginService.getChosenGroup();
     this.getData();
   }
@@ -43,14 +46,45 @@ export class TeacherSeeProgressComponent{
                 this.students.push(user);
                 ids.push(user.id);
              }
-             this._backendService.countWordsForManyStudents(ids)
+             this.sortedStudents = this.students.sort((obj1, obj2) => {
+               if (obj1.id > obj2.id) return 1
+               if (obj1.id < obj2.id) return -1
+               return 0;
+             });
+             this._backendService.countWordsForManyStudents(ids, this.group.id,1)
              .subscribe(data=>{
-               for (let record of data){
+               var sortedData = data.sort((obj1, obj2) => {
+                 if (obj1.studentID > obj2.studentID) return 1
+                 if (obj1.studentID < obj2.studentID) return -1
+                 return 0;
+               });
+               for (let record of sortedData){
                  if(record.all!=0)
                       this.progress.push(record.guessed/record.all)
                   else
                       this.progress.push(0)
                }
+               console.log("wchodze")
+               this._backendService.countWordsForManyStudents(ids, this.group.id,4)
+               .subscribe(data1=>{
+                 console.log(data1)
+                 var sortedData1 = data1.sort((obj1, obj2) => {
+                   if (obj1.studentID > obj2.studentID) return 1
+                   if (obj1.studentID < obj2.studentID) return -1
+                   return 0;
+                 });
+                 for (let record of sortedData1){
+                   if(record.all!=0)
+                        this.progress2.push(record.guessed/record.all)
+                    else
+                        this.progress2.push(0)
+                 }
+                 console.log(this.progress)
+                 console.log(this.progress2)
+                 console.log(this.sortedStudents)
+               })
+
+
              }
              )
 

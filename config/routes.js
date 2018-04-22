@@ -108,5 +108,5 @@ module.exports.routes = {
 
      'POST /studentword/addOrUpdateStudentWord': 'StudentWordController.addOrUpdateStudentWord',
      'POST /studentword/getAllGuessed': 'StudentWordController.getAllGuessed',
-
+     'POST /studentword/getMyProgress': 'StudentWordController.getMyProgress'
 };

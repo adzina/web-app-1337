@@ -35,14 +35,10 @@ export class AdminCreateGroupComponent{
   }
   sendRequest(){
     this.backendService.createGroup(this.name).subscribe(data => {
-      this.backendService.addUserToGroup(this.loginService.getUserID(),data.id)
-      .subscribe(res =>{
         this.name=null;
         this.error=false;
         this.created=true;
         this.groupCreated = data;
-
-      })
     }
   );
 

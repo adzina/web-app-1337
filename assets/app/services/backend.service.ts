@@ -160,9 +160,9 @@ getApiUrl(){
       )
   }
 
-  countWordsForManyStudents(studentsID: string[]):Observable<any>{
+  countWordsForManyStudents(studentsID: string[], groupID:string, limit:number):Observable<any>{
       var url=this.g_url+'studentword/countWordsForManyStudents';
-      var body=JSON.stringify({studentsID:studentsID})
+      var body=JSON.stringify({studentsID:studentsID,groupID:groupID, limit:limit})
       return this.http.post(url,body)
       .map(res =>res.json())
       .catch((error:any)=>Observable.throw('Error counting words'));

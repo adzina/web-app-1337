@@ -82,7 +82,11 @@ removeWordFromLesson:function(req,res){
           return res.serverError(err); }
         sails.log.debug("Word removed from lesson");
         sails.log.debug(deleted);
-        return res.json(deleted);
+        sails.models.studentword.destroy({wordID:_wordID})
+        .exec(function(err,removed){
+          return res.json(removed);
+
+        })
       });
 }
 }

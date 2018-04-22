@@ -72,34 +72,107 @@ module.exports = {
         res.json(found);
       })
   },
+  getMyProgress: function(req, res){
+    var studentID = req.param("studentID");
+    var lessonID  = req.param("lessonID");
+    var all_guessed = 0
+    var all = 0
+    this.getWordsID(lessonID, ids=>{
+      async.each(ids, async function(id,cb){
+        var guessedPromise = sails.models.studentword
+                      .find({studentID:studentID,wordID:id, guessed:true})
+        var guessed = await guessedPromise
+        console.log(guessed)
+        if(guessed.length>0)
+                  all_guessed += 1
+        all+=1
+        cb()
+      }, function(error){
+        if (error)
+          sails.log.error(error);
+        else {
+          sails.log.debug({guessed:all_guessed,all:all});
+          return res.json(200,{guessed:all_guessed,all:all})
+        }
+      }
+    )
+  })
 
+
+  },
+  getWordsID:function(_lessonID,callback){
+      var output: any[];
+      output = []
+      async.each(_lessonID, async function(lessonID, cb) {
+        var wordsPromise = sails.models.lessonword.find({ lessonID: lessonID })
+        var words = await wordsPromise;
+        for(var i=0;i<words.length;i++){
+          output.push(words[i].wordID)
+        }
+        cb()
+      }, function(error) {
+        if (error)
+          sails.log.error(error);
+        else {
+          sails.log.debug("words found")
+          sails.log.debug(output);
+          return callback(output)
+        }
+      })
+  },
+  getLastNLessons:function(group, limit, callback){
+    sails.models.lesson.find({groupID:group})
+                        .sort('date DESC')
+                        .limit(limit)
+                        .exec(function(err,lessons){
+                          if(err) {
+                              sails.log.debug("Error getting lessons' id");
+                              sails.log.error(err);
+                          }
+                          var output:string[];
+                          output=[];
+                          for(var i=0;i<lessons.length;i++){
+                            output[i]=lessons[i].id;
+                          }
+                          sails.log.debug("Last n lessons found")
+                          sails.log.debug(lessons)
+                          return callback(output);
+                        })
+  },
   countWordsForManyStudents: function(req, res) {
     var StudentsID = req.param("studentsID");
+    var group = req.param("groupID");
+    var limit = req.param("limit")
     var output: any[];
     output = [];
-    var tmp = this;
-    console.log(StudentsID)
-    async.each(StudentsID, async function(studentID, cb) {
-      var allWordsPromise = sails.models.studentword.count({ studentID: studentID })
 
-      var guessedWordsPromise = sails.models.studentword.count({ studentID: studentID, guessed: true })
-      var allWords = await allWordsPromise;
-      var guessedWords = await guessedWordsPromise;
-      output.push({ studentID: studentID, all: allWords, guessed: guessedWords });
-      console.log("pośredni output")
-      console.log(output)
-      cb()
+    this.getLastNLessons(group, limit, ids=>{
+        this.getWordsID(ids,words=>{
+          var allWords = words.length
 
-    }, function(error) {
-      if (error)
-        res.negotiate(error);
-      else {
-        sails.log.debug(output);
-        console.log("ostateczny output")
-        console.log(output)
-        return res.json(output);
-      }
+          async.each(StudentsID, async function(studentID, cb) {
+
+              var guessedWordsPromise = sails.models.studentword.count({ studentID: studentID, guessed: true })
+
+              var guessedWords = await guessedWordsPromise;
+              output.push({ studentID: studentID, all: allWords, guessed: guessedWords });
+              console.log("pośredni output")
+              console.log(output)
+              cb()
+
+            }, function(error) {
+              if (error)
+                res.negotiate(error);
+              else {
+                sails.log.debug(output);
+                console.log("ostateczny output")
+                console.log(output)
+                return res.json(output);
+              }
+            })
+        })
     })
+
   }
 
 
