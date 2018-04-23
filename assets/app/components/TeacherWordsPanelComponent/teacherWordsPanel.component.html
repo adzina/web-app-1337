@@ -19,6 +19,7 @@
       </div><br>
     <b>group:</b> {{group.name}}<br>
   <div>
+    <input type="file" (change)="uploadFile($event)"/>
   <div *ngIf="chosenLesson!=null" style="clear: left">
     <table class="table table-condensed add-words">
       <tr>

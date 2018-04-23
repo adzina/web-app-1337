@@ -7,6 +7,7 @@ import { Word } from '../../models/word';
 import { Lesson } from '../../models/lesson';
 import { Group } from '../../models/group';
 import { User } from '../../models/user';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'teacher-words-panel',
   templateUrl: 'teacherWordsPanel.component.html',
@@ -148,6 +149,31 @@ export class TeacherWordsPanelComponent {
   }
   goBackGroups(){
     this._router.navigate(['./see-groups']);
+  }
+
+  uploadFile(evt: any) {
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});
+
+      /* grab first sheet */
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      /* save data */
+      var data = (XLSX.utils.sheet_to_json(ws, {header: 1}));
+      for (let i of data){
+        this.english = i[0]
+        this.polish = i[1]
+        this.addWord()
+      }
+    };
+    reader.readAsBinaryString(target.files[0]);
   }
 }
 
