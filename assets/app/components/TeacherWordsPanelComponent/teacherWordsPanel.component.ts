@@ -7,7 +7,10 @@ import { Word } from '../../models/word';
 import { Lesson } from '../../models/lesson';
 import { Group } from '../../models/group';
 import { User } from '../../models/user';
+import { ReversePipe } from '../../pipes/reverse';
 import * as XLSX from 'xlsx';
+
+
 @Component({
   selector: 'teacher-words-panel',
   templateUrl: 'teacherWordsPanel.component.html',

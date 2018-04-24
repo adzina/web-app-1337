@@ -43,6 +43,9 @@ import { FooterComponent } from './bars/FooterComponent/footer.component';
 import { LoginService } from "./services/login.service";
 import { BackendService } from "./services/backend.service";
 
+
+import { ReversePipe } from './pipes/reverse';
+
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
     /*
@@ -74,6 +77,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       TeacherSeeProgressComponent,
       UpdateProfileComponent,
       AdminRegisterComponent,
+      ReversePipe
 
     ],
     imports: [
