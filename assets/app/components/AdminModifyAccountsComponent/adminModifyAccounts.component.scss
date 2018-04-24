@@ -2,16 +2,7 @@
 a {
   cursor: pointer;
 }
-li.breadcrumb-item.active{
-  color: white;
-}
-li.breadcrumb-item.active::before{
-  color: black;
-}
-ol {
-  background-color: #ccc;
-  color: white;
-}
+
 form{
   margin-left:20%;
   margin-right:20%;
