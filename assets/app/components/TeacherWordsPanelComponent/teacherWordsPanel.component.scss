@@ -24,4 +24,21 @@ div.clickable{
 .info{
   clear: both;
   text-align: left;
+  border: solid 1px;
+  border-radius: 5px;
+  background: white;
+  padding: 5%;
+}
+.info label{
+  text-decoration: underline;
+  font-weight: bolder;
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}
+.info input{
+  width: fit-content;
+}
+.form-group{
+  max-width: 60%;
 }

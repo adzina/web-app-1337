@@ -8,17 +8,34 @@
     <li class="breadcrumb-item"><a (click)="goBack()">Lessons</a></li>
     <li class="breadcrumb-item active">Adding words to {{chosenLesson.subject}}</li>
   </ol>
-  <div class="info">
-    <b>hour:</b>{{chosenLesson.hour}}<br>
-    <b>date:</b>{{chosenLesson.date.getDate()}}.{{chosenLesson.date.getMonth()+1}}.{{chosenLesson.date.getFullYear()}}<br>
-    <b>teachers:</b><br>  <div *ngFor=" let teacher of teachers; let i=index" [attr.data-index]="i">
-        {{teacher.name}}<br>
+    <form class="info">
+      <div class="form-group">
+        <label for="group">group:</label>
+        <input id="group" value={{group.name}}>
       </div>
-    <b>students:</b><br><div *ngFor=" let student of students; let i=index" [attr.data-index]="i">
-        {{student.name}}<br>
-      </div><br>
-    <b>group:</b> {{group.name}}<br>
-  <div>
+      <div class="form-group">
+        <label for="hour">hour:</label>
+        <input id="hour" readonly=true value={{chosenLesson.hour}}>
+      </div>
+      <div class="form-group">
+        <label for="date">date:</label>
+        <input id="date" readonly=true value={{chosenLesson.date.getDate()}}.{{chosenLesson.date.getMonth()+1}}.{{chosenLesson.date.getFullYear()}}>
+      </div>
+      <div class="form-group">
+        <label for="teachers">teachers:</label>
+         <span id="teachers" *ngFor=" let teacher of teachers; let i=index" [attr.data-index]="i">
+            <input readonly=true value={{teacher.name}}><br>
+          </span>
+      </div>
+      <div class="form-group">
+        <label for="students">students:</label>
+           <span id="students" *ngFor=" let student of students; let i=index" [attr.data-index]="i">
+              <input readonly=true value={{student.name}}><br>
+            </span>
+      </div>
+
+
+    </form>
     <input type="file" (change)="uploadFile($event)"/>
   <div *ngIf="chosenLesson!=null" style="clear: left">
     <table class="table table-condensed add-words">
