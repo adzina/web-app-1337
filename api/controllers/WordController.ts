@@ -4,9 +4,10 @@ module.exports = {
   add: function(req,res){
       var eng=req.param('english'),
           pol=req.param('polish'),
+          comment=req.param('comment'),
           lessonID=req.param('lessonID');
 
-          this.create(eng,pol, (wordID) => {
+          this.create(eng,pol,comment, (wordID) => {
               this.addToLesson(lessonID,wordID,(wordLesson)=>{
                 sails.log.debug("Word added");
                 sails.log.debug(wordLesson);
@@ -17,13 +18,14 @@ module.exports = {
 
   },
 
-   create: function(eng,pol,callback){
-     sails.models.word.findOne({ english: eng, polish: pol })
+   create: function(eng,pol,comment,callback){
+     sails.models.word.findOne({ english: eng, polish: pol, comment:comment })
        .exec(function(err, word) {
            if(!word){
              sails.models.word.create({
                  english:eng,
-                 polish:pol})
+                 polish:pol,
+                 comment:comment})
              .exec(function (err,word){
                if(err){
                 sails.log.debug("Error creating word");
@@ -40,8 +42,9 @@ module.exports = {
 update: function(req, res){
   let id = req.param("id"),
       pol = req.param("pol"),
-      eng = req.param("eng")
-  let data = {id:id, polish:pol, english:eng}
+      eng = req.param("eng"),
+      comment = req.param("comment")
+  let data = {id:id, polish:pol, english:eng, comment:comment}
   sails.models.word.update({ id: id },data,function(err,updated){
       if(err){
         sails.log.err(err)

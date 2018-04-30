@@ -180,5 +180,6 @@ module.exports = {
 interface word {
   english: string,
   polish: string,
+  comment: string,
   id: string;
 }

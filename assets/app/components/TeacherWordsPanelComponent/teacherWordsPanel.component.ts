@@ -20,6 +20,9 @@ import * as XLSX from 'xlsx';
 export class TeacherWordsPanelComponent {
   polish: string;
   english: string;
+  comment: string;
+  editedRow : number;
+  editedWord: Word;
   words: Word[];
   group: Group;
   users: User[];
@@ -28,10 +31,7 @@ export class TeacherWordsPanelComponent {
   chosenLesson: Lesson;
   subject: string;
   buttonClass: string;
-  showInputEng = false;
-  showInputPol = false;
-  editedPolish = "";
-  editedEnglish = "";
+  showInput = false;
 
   constructor(private _loginService: LoginService,
               private http: Http,
@@ -60,6 +60,7 @@ export class TeacherWordsPanelComponent {
     this._backendService.getWords(this.chosenLesson.id).subscribe(words=>{
       this.polish = "";
       this.english = "";
+      this.comment = "";
       this.words=[];
       this.words=words;
 
@@ -99,12 +100,12 @@ export class TeacherWordsPanelComponent {
   }
   submit(element){
 
-    if (this.polish!="" || this.english!="") this.addWord();
+    if (this.polish!="" && this.english!="") this.addWord();
     else alert("Provide both polish and english version of the word");
     element.focus();
   }
   addWord() {
-    this._backendService.addWord(this.polish,this.english,this.chosenLesson.id)
+    this._backendService.addWord(this.polish,this.english,this.comment,this.chosenLesson.id)
     .subscribe(
       response => {
         this.buttonClass="btn btn-success disabled";
@@ -115,37 +116,25 @@ export class TeacherWordsPanelComponent {
       }
     );
   }
-  updatePolish(i:number){
-    let word = this.words[i]
-    this.update(word.id,this.editedPolish, word.english)
-  }
-  updateEnglish(i:number){
-    let word = this.words[i]
-    this.update(word.id,word.polish, this.editedEnglish)
-  }
-  update(id:string, pol:string, eng:string){
-    this._backendService.updateWord(id, pol, eng)
+
+  update(i: number){
+    let id = this.words[i].id;
+    this._backendService.updateWord(id, this.editedWord.polish, this.editedWord.english,this.editedWord.comment)
     .subscribe(response=>{
       this._backendService.getWords(this.chosenLesson.id).subscribe(words=>{
         this.words=[];
         this.words=words;
-        this.showInputEng = false
-        this.showInputPol = false
+        this.showInput = false
     });
     })
   }
-  toggleShowInputEng(i:number)
+  toggleShowInput(i:number)
    {
-      this.showInputPol = false
-      this.editedEnglish = this.words[i].english
-      this.showInputEng = !this.showInputEng;
+     this.editedRow = i;
+     this.editedWord = this.words[i];
+     this.showInput = !this.showInput
    }
-   toggleShowInputPol(i:number)
-    {
-      this.showInputEng = false
-      this.editedPolish = this.words[i].polish
-      this.showInputPol = !this.showInputPol;
-    }
+
 
   goBack(){
     this._router.navigate(['./see-all-lessons']);
@@ -173,7 +162,14 @@ export class TeacherWordsPanelComponent {
       for (let i of data){
         this.english = i[0]
         this.polish = i[1]
-        this.addWord()
+        this.comment = i[2]
+        if(this.english!="" && this.polish!="")
+          this.addWord()
+        else{
+          this.english = ""
+          this.polish = ""
+          this.comment = ""
+        }
       }
     };
     reader.readAsBinaryString(target.files[0]);

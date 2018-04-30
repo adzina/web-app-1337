@@ -204,9 +204,9 @@ createLesson(login:string,groupID: string,subject:string,date:Date,hour:string):
   .catch((error:any) => Observable.throw('Error creating lesson'));
 
 }
-addWord(polish:string,english:string,lessonID:string):Observable<Word>{
+addWord(polish:string,english:string,comment:string,lessonID:string):Observable<Word>{
   var url=this.g_url+'word';
-  var body=JSON.stringify({polish:polish,english:english,lessonID: lessonID});
+  var body=JSON.stringify({polish:polish,english:english,comment:comment,lessonID: lessonID});
   return this.http.post(url,body)
         .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error adding word'))
@@ -227,9 +227,9 @@ updateMyProfile(old_password:string,new_password:string):Observable<User>{
         .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error updating profile'))
 }
-updateWord(id:string, pol:string, eng:string):Observable<Word>{
+updateWord(id:string, pol:string, eng:string, comment: string):Observable<Word>{
   var url = this.g_url+"word/update"
-  var body = JSON.stringify({id:id,pol:pol,eng:eng})
+  var body = JSON.stringify({id:id,pol:pol,eng:eng, comment:comment})
   return this.http.post(url,body)
         .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error updating word'))
