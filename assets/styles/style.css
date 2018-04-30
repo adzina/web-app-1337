@@ -27,7 +27,9 @@ div{
   border-style: solid;
   margin-top: 3%;
 }
-
+table{
+  min-width: 100%;
+}
 /*
 div.login{
   position: fixed;

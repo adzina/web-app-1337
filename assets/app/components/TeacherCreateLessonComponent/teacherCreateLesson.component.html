@@ -19,7 +19,8 @@
     <td>
       <form>
         <div class="form-group to-left">
-          <strong id="calendarHeader" (click)="toggleCalendar()">Show calendar</strong><br>
+          <strong>Date</strong>:{{date.getDate()}}.{{date.getMonth()+1}}.{{date.getFullYear()}} 
+          <strong id="calendarHeader" (click)="toggleCalendar()">[calendar]</strong><br>
 
           <datepicker
                         id="calendar"
@@ -29,25 +30,21 @@
                          [minDate]="minDate"
           ></datepicker>
           <div class="form-row">
-            <strong>Start:</strong>
+            <strong>Time:</strong>
             <select [(ngModel)]="hour_start" name="hour_start" class="form-control" (change)=setEndHour()>
             <option *ngFor="let hour of hours" [value]="hour">{{hour}}</option>
-            </select>
+            </select> :
             <select [(ngModel)]="min_start" name="min_start" class="form-control" (change)=setEndMin()>
             <option *ngFor="let min of mins" [value]="min">{{min}}</option>
-            </select>
-
-          </div>
-          <div class="form-row">
-            <strong>End  :</strong>
+            </select> -
             <select [(ngModel)]="hour_end" name="hour_end" class="form-control">
             <option *ngFor="let hour of hours" [value]="hour">{{hour}}</option>
-            </select>
+            </select> :
             <select [(ngModel)]="min_end" name="min_end" class="form-control">
             <option *ngFor="let min of mins" [value]="min">{{min}}</option>
             </select>
-
           </div>
+
 
         </div>
       </form>

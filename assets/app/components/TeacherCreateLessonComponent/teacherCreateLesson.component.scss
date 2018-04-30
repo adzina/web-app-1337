@@ -18,7 +18,7 @@ display: inline;
 }
 select.form-control{
   display:inline;
-  width:90px;
+  width:63px;
 }
 
 a {
@@ -37,6 +37,9 @@ datepicker.visible{
 #calendarHeader{
   cursor: pointer;
   text-decoration: underline;
+}
+.well-sm {
+    max-width: 70%;
 }
 .form-row{
     text-align: left;
