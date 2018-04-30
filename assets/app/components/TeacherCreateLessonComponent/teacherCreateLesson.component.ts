@@ -24,7 +24,7 @@ export class TeacherCreateLessonComponent {
   minDate=new Date();
   backend_error:string;
   placeholder="click to see all groups";
-
+  now = new Date(Date.now());
   hour_start:string;
   hour_end:string;
   min_start:string;
@@ -39,8 +39,9 @@ export class TeacherCreateLessonComponent {
               private _loginService:LoginService,
               private _backendService: BackendService,
               private completerService: CompleterService){
-                this.hours = this.generateHours()[0];
-                this.mins = this.generateHours()[1];
+                let time = this.generateHours()
+                this.hours = time[0];
+                this.mins = time[1];
 
                 this.minDate.setDate(this.date.getDate()-8);
 
@@ -61,7 +62,6 @@ export class TeacherCreateLessonComponent {
 
   }
   setEndMin(){
-
     this.min_end=this.min_start;
   }
   create(){
@@ -97,6 +97,7 @@ export class TeacherCreateLessonComponent {
   );
   }
   generateHours(){
+
     let hours:number[]
     let mins:number[]
     hours=[]
@@ -106,6 +107,14 @@ export class TeacherCreateLessonComponent {
     for(let i=0;i<60;i+=5){
           mins.push(i)
     }
+    console.log(this.now.getMinutes())
+    let min = Math.round(this.now.getMinutes()/10)*10
+    console.log(min)
+    this.min_start = min.toString()
+    console.log(this.min_start)
+    this.hour_start = this.now.getHours().toString()
+    this.setEndHour()
+    this.setEndMin()
     return [hours,mins]
   }
   goBack(){
