@@ -12,13 +12,19 @@
       <th>Date</th>
       <th>Time</th>
       <th>Group</th>
-      <th class="text-center" style="width:10px">Delete</th>
+      <th style="width:10px">View</th>
+      <th style="width:10px">Delete</th>
     </tr>
     <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
       <td (click)="chooseLesson(i)" class="text-center link">{{lesson.subject}}</td>
       <td class="text-center">{{lesson.date.getDate()}}.{{lesson.date.getMonth()+1}}.{{lesson.date.getFullYear()}}</td>
       <td class="text-center">{{lesson.hour}}</td>
       <td (click)="chooseGroup(i)" class="text-center link">{{lesson.groupID.name}}</td>
+      <td class="text-center">
+        <button type="button" class="close danger" aria-label="Close" (click)="chooseLesson(i)">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+      </td>
       <td class="text-center">
         <button type="button" class="close danger" aria-label="Close" (click)="delete(i)">
           <span class="glyphicon glyphicon-remove"></span>
