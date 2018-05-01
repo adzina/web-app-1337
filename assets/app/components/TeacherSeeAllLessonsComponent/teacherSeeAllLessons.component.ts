@@ -18,7 +18,7 @@ export class TeacherSeeAllLessonsComponent {
   backendError:string;
   maxLessonsPerPage = 20;
   pager: any = {};
-  pagedLessons: any[];
+  pagedLessons: Lesson[];
   @Output() lessonChosen = new EventEmitter<Lesson>();
   constructor(private backendService:BackendService,
               private loginService:LoginService,
