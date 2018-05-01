@@ -19,11 +19,10 @@ export class AdminCreateGroupComponent{
   user: string;
   groupCreated: Group;
   constructor(private _router:Router,
-              private http:AuthHttp,
-              private loginService:LoginService,
-              private backendService: BackendService){
+              private _loginService:LoginService,
+              private _backendService: BackendService){
     this.name=null;
-    this.user=this.loginService.getUserName();
+    this.user=this._loginService.getUserName();
   }
   create(){
     if(this.name!=null){
@@ -34,7 +33,7 @@ export class AdminCreateGroupComponent{
     }
   }
   sendRequest(){
-    this.backendService.createGroup(this.name).subscribe(data => {
+    this._backendService.createGroup(this.name).subscribe(data => {
         this.name=null;
         this.error=false;
         this.created=true;
@@ -44,7 +43,7 @@ export class AdminCreateGroupComponent{
 
   }
   goto(){
-    this.loginService.setChosenGroup(this.groupCreated);
+    this._loginService.setChosenGroup(this.groupCreated);
     this._router.navigate(['./admin-add-users']);
 
   }

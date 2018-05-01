@@ -20,7 +20,7 @@ export class TeacherGroupComponent{
   pagedGroups: Group[];
   constructor(private _backendService: BackendService,
               private _loginService: LoginService,
-              private pagerService: PagerService,
+              private _pagerService: PagerService,
               private _router:Router) {
             this.groups = null;
             _backendService.getAllMyGroups().
@@ -40,7 +40,7 @@ export class TeacherGroupComponent{
        return;
      }
      // get pager object from service
-     this.pager = this.pagerService.getPager(this.groups.length, page);
+     this.pager = this._pagerService.getPager(this.groups.length, page);
      // get current page of items
      this.pagedGroups = this.groups.slice(this.pager.startIndex,
        this.pager.endIndex + 1);

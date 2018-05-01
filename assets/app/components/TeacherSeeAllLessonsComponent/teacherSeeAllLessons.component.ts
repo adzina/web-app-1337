@@ -19,16 +19,15 @@ export class TeacherSeeAllLessonsComponent {
   maxLessonsPerPage = 20;
   pager: any = {};
   pagedLessons: Lesson[];
-  @Output() lessonChosen = new EventEmitter<Lesson>();
-  constructor(private backendService:BackendService,
-              private loginService:LoginService,
-              private pagerService: PagerService,
-              private router:Router) {
+  constructor(private _backendService:BackendService,
+              private _loginService:LoginService,
+              private _pagerService: PagerService,
+              private _router:Router) {
 
     this.lessons=[];
     this.backendError=null;
 
-    backendService.getTeachersLessons().
+    _backendService.getTeachersLessons().
         subscribe(response=>{
 
 
@@ -39,8 +38,6 @@ export class TeacherSeeAllLessonsComponent {
               i++;
             }
 
-
-          this.lessonChosen.emit(this.loginService.getChosenLesson());
           this.setPage(1)
           },
           error=>{
@@ -54,31 +51,31 @@ export class TeacherSeeAllLessonsComponent {
      return;
    }
    // get pager object from service
-   this.pager = this.pagerService.getPager(this.lessons.length, page);
+   this.pager = this._pagerService.getPager(this.lessons.length, page);
    // get current page of items
    this.pagedLessons = this.lessons.slice(this.pager.startIndex,
      this.pager.endIndex + 1);
  }
   chooseLesson(nr:string) {
     var lesson=this.pagedLessons[nr];
-    this.loginService.setChosenLesson(lesson);
+    this._loginService.setChosenLesson(lesson);
     this.router.navigate(['./words-panel']);
   }
   chooseGroup(nr:string){
     var groupID=this.pagedLessons[nr].groupID;
-    this.loginService.setChosenGroup(groupID);
-    this.router.navigate(['./see-groups-lessons']);
+    this._loginService.setChosenGroup(groupID);
+    this._router.navigate(['./see-groups-lessons']);
   }
   navigate(){
-    this.router.navigate(['./create-lesson']);
+    this._router.navigate(['./create-lesson']);
   }
   goBack(){
-      this.router.navigate(['./see-all-lessons']);
+      this._router.navigate(['./see-all-lessons']);
   }
   delete(i:number){
     let lesson = this.pagedLessons[i]
-    this.backendService.deleteLesson(lesson.id).subscribe(data=>{
-      this.router.navigate(['./see-all-lessons'])
+    this._backendService.deleteLesson(lesson.id).subscribe(data=>{
+      this._router.navigate(['./see-all-lessons'])
     })
   }
 }

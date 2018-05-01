@@ -21,7 +21,7 @@ export class LoginComponent{
   headers = new Headers({ 'Content-Type': 'application/json' });
   constructor(private _router:Router,
               private _loginService: LoginService,
-              private http: Http,
+              private _http: Http,
               private _backendService: BackendService){
     this.inputType = 'password';
     this.email="";
@@ -42,7 +42,7 @@ export class LoginComponent{
     let body = JSON.stringify({ email, pswd });
 
       this.url=this._backendService.getApiUrl()+'user/login';
-      this.http.post(this.url, body)
+      this._http.post(this.url, body)
         .map(res=>res.json())
         .subscribe(
           response => {

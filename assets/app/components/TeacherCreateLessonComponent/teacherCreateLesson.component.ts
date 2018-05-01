@@ -38,7 +38,7 @@ export class TeacherCreateLessonComponent {
               private http:AuthHttp,
               private _loginService:LoginService,
               private _backendService: BackendService,
-              private completerService: CompleterService){
+              private _completerService: CompleterService){
                 let time = this.generateHours()
                 this.hours = time[0];
                 this.mins = time[1];
@@ -48,7 +48,7 @@ export class TeacherCreateLessonComponent {
                 _backendService.getAllMyGroups().
                   subscribe(response=>{
                     this.groups=response;
-                     this.dataService=completerService.local(this.groups,'name','name');
+                     this.dataService=_completerService.local(this.groups,'name','name');
                       }
                     );
   }
@@ -107,11 +107,8 @@ export class TeacherCreateLessonComponent {
     for(let i=0;i<60;i+=5){
           mins.push(i)
     }
-    console.log(this.now.getMinutes())
     let min = Math.round(this.now.getMinutes()/10)*10
-    console.log(min)
     this.min_start = min.toString()
-    console.log(this.min_start)
     this.hour_start = this.now.getHours().toString()
     this.setEndHour()
     this.setEndMin()

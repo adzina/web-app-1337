@@ -18,15 +18,14 @@ export class TeacherSeeGroupsLessonsComponent {
   backendError:string;
   group:Group;
 
-  @Output() lessonChosen = new EventEmitter<Lesson>();
-  constructor(private backendService:BackendService,
-              private loginService:LoginService,
-              private router:Router) {
-    this.group = this.loginService.getChosenGroup();
+  constructor(private _backendService:BackendService,
+              private _loginService:LoginService,
+              private _router:Router) {
+    this.group = this._loginService.getChosenGroup();
     this.lessons=[];
     this.backendError=null;
 
-    backendService.getGroupsLessons(this.group.id).
+    _backendService.getGroupsLessons(this.group.id).
         subscribe(response=>{
           for (let index in response){
               this.lessons[index]=response[index];
@@ -43,17 +42,17 @@ export class TeacherSeeGroupsLessonsComponent {
 
   choose(nr:string) {
     var lesson=this.lessons[nr];
-    this.loginService.setChosenLesson(lesson);
-    this.router.navigate(['./words-panel']);
+    this._loginService.setChosenLesson(lesson);
+    this._router.navigate(['./words-panel']);
   }
   navigate(){
-    this.router.navigate(['./create-lesson']);
+    this._router.navigate(['./create-lesson']);
   }
   goBackGroups(){
-    this.router.navigate(['./see-groups']);
+    this._router.navigate(['./see-groups']);
   }
   seeGroup(){
-    this.router.navigate(['./see-groups']);
+    this._router.navigate(['./see-groups']);
 
   }
 }
