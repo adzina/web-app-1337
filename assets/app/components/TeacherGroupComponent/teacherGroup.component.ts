@@ -31,7 +31,7 @@ export class TeacherGroupComponent{
                 );
       }
     select(nr:string) {
-      var group=this.groups[nr];
+      var group=this.pagedGroups[nr];
       this._loginService.setChosenGroup(group);
       this._router.navigate(['./see-groups-lessons']);
     }

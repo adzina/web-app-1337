@@ -17,12 +17,30 @@
       <th>Role</th>
       <th>Action</th>
     </tr>
-    <tr *ngFor=" let user of users; let i=index" [attr.data-index]="i">
+    <tr *ngFor=" let user of pagedUsers; let i=index" [attr.data-index]="i">
       <td class="text-center">{{user.first_name}}</td>
       <td class="text-center">{{user.last_name}}</td>
       <td class="text-center">{{user.role[0]}}</td>
       <td class="text-center link" (click)="modify(i)" >Change password</td>
     </tr>
   </table>
-
+  <nav aria-label="Data grid navigation">
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination justify-content-end">
+                  <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a class="page-link" (click)="setPage(1)">First</a>
+                  </li>
+                  <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                      <a class="page-link" (click)="setPage(pager.currentPage - 1)">Previous</a>
+                  </li>
+                  <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                      <a class="page-link" (click)="setPage(page)">{{page}}</a>
+                  </li>
+                  <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a class="page-link" (click)="setPage(pager.currentPage + 1)">Next</a>
+                  </li>
+                  <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                      <a class="page-link" (click)="setPage(pager.totalPages)">Last</a>
+                  </li>
+      </ul>
+  </nav>
 </div>
