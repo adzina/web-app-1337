@@ -15,7 +15,7 @@
       <th style="width:10px">View</th>
       <th style="width:10px">Delete</th>
     </tr>
-    <tr *ngFor=" let lesson of lessons; let i=index" [attr.data-index]="i">
+    <tr *ngFor=" let lesson of pagedLessons; let i=index" [attr.data-index]="i">
       <td (click)="chooseLesson(i)" class="text-center link">{{lesson.subject}}</td>
       <td class="text-center">{{lesson.date.getDate()}}.{{lesson.date.getMonth()+1}}.{{lesson.date.getFullYear()}}</td>
       <td class="text-center">{{lesson.hour}}</td>
@@ -36,4 +36,23 @@
 <div  class="no_lessons" *ngIf="lessons[0]==null">
   <h3>No lessons yet</h3>
 </div>
+<nav aria-label="Data grid navigation">
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination justify-content-end">
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a class="page-link" (click)="setPage(1)">First</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a class="page-link" (click)="setPage(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a class="page-link" (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a class="page-link" (click)="setPage(pager.currentPage + 1)">Next</a>
+                </li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a class="page-link" (click)="setPage(pager.totalPages)">Last</a>
+                </li>
+    </ul>
+</nav>
 </div>
