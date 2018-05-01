@@ -59,7 +59,7 @@ export class TeacherSeeAllLessonsComponent {
   chooseLesson(nr:string) {
     var lesson=this.pagedLessons[nr];
     this._loginService.setChosenLesson(lesson);
-    this.router.navigate(['./words-panel']);
+    this._router.navigate(['./words-panel']);
   }
   chooseGroup(nr:string){
     var groupID=this.pagedLessons[nr].groupID;
