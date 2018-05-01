@@ -18,8 +18,8 @@ import * as async from "async";
 
 export class BackendService{
 
-  // g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
-  g_url = 'http://localhost:1337/';
+   g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
+  //g_url = 'http://localhost:1337/';
 
 
   constructor(private http:AuthHttp,
