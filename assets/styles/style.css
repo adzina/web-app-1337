@@ -25,10 +25,12 @@ div{
 .no_lessons{
   border-radius: 5px;
   border-style: solid;
-  margin-top: 3%;
 }
 table{
   min-width: 100%;
+}
+a .link{
+  cursor: pointer;
 }
 /*
 div.login{

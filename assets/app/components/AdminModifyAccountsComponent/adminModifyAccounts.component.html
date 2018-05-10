@@ -1,36 +1,38 @@
 <navbar></navbar>
-<div class="text-centered" style="margin-bottom:40px">
-  <ol class="breadcrumb pull-left">
-    <li class="breadcrumb-item"><a (click)="goBack()">Users</a></li>
-    <li class="breadcrumb-item active">Modify {{user.first_name}} {{user.last_name}}</li>
-  </ol>
-  <br><br>
-  <h1><strong>Modify account</strong></h1>
-</div>
-<form>
-  <div>
-    <p align="left" id="InputEmail1" aria-describedby="emailHelp" name="email">User's email: <b>{{email}}</b></p>
+<div class="container">
+  <div class="row">
+    <ol class="breadcrumb pull-left">
+      <li class="breadcrumb-item"><a (click)="goBack()">Users</a></li>
+      <li class="breadcrumb-item active">Modify {{user.first_name}} {{user.last_name}}</li>
+    </ol>
   </div>
-  <div class="form-group">
-    <label for="InputPassword1">New password</label>
-    <input type="{{inputType}}" (keydown.enter)="submit()" class="form-control" id="InputPassword1" name="new_password" [(ngModel)]="new_password" placeholder="Enter new password">
+    <br><br>
+    <h1><strong>Modify account</strong></h1>
+  <form>
+    <div>
+      <p align="left" id="InputEmail1" aria-describedby="emailHelp" name="email">User's email: <b>{{email}}</b></p>
+    </div>
+    <div class="form-group">
+      <label for="InputPassword1">New password</label>
+      <input type="{{inputType}}" (keydown.enter)="submit()" class="form-control" id="InputPassword1" name="new_password" [(ngModel)]="new_password" placeholder="Enter new password">
 
-      <input type="checkbox" name="passwordCheckBox1" (click)="hideShowPassword()" />
-      <label for="checkbox" *ngIf="passwordCheckbox1">Hide password</label>
-      <label for="checkbox" *ngIf="!passwordCheckbox1">Show password</label><hr>
+        <input type="checkbox" name="passwordCheckBox1" (click)="hideShowPassword()" />
+        <label for="checkbox" *ngIf="passwordCheckbox1">Hide password</label>
+        <label for="checkbox" *ngIf="!passwordCheckbox1">Show password</label><hr>
+    </div>
+
+  </form>
+  <div class="container text-center">
+        <button class="btn btn-success" (click)="submit()">Change password</button>
+      <hr>
+      <div class="alert alert-success" *ngIf="registered">
+     <strong>Password changed</strong>.
+      </div>
+      <div class="alert alert-danger" *ngIf="empty_field">
+     <strong>Fill in all the fields!</strong>
+      </div>
+      <div class="alert alert-danger" *ngIf="backend_error!=null">
+     <strong>{{backend_error}}</strong>
+      </div>
   </div>
-
-</form>
-<div class="container text-center">
-      <button class="btn btn-success" (click)="submit()">Change password</button>
-    <hr>
-    <div class="alert alert-success" *ngIf="registered">
-   <strong>Password changed</strong>.
-    </div>
-    <div class="alert alert-danger" *ngIf="empty_field">
-   <strong>Fill in all the fields!</strong>
-    </div>
-    <div class="alert alert-danger" *ngIf="backend_error!=null">
-   <strong>{{backend_error}}</strong>
-    </div>
 </div>

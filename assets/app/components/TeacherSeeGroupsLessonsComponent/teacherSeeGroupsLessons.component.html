@@ -7,7 +7,7 @@
         <li class="breadcrumb-item active"><a>Lessons</a></li>
       </ol>
     </div>
-  <div *ngIf="lessons[0]!=null">
+  <div *ngIf="lessons[0]!=null" class="row">
     <table class="table table-striped table-bordered table-hover table-condensed">
       <tr>
         <th>Name</th>
@@ -21,7 +21,7 @@
       </tr>
     </table>
   </div>
-  <div class="no_lessons" *ngIf="lessons[0]==null">
+  <div class="no_lessons row" *ngIf="lessons[0]==null">
     <h3>No lessons yet.</h3>
   </div>
 </div>

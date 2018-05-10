@@ -116,7 +116,7 @@ module.exports = {
     })
       .exec(function(err, user) {
         if (err) {
-          sails.log("Erro creating user");
+          sails.log("Error creating user");
           sails.log(err);
           return res.serverError(err); }
         sails.log.debug("User created");
