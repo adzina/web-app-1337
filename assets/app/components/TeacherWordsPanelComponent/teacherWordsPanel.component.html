@@ -75,18 +75,18 @@
     </table>
   </div>
       <table *ngIf="chosenLesson!=null" class="table table-striped table-bordered table-hover table-condensed">
-        <tr *ngFor=" let word of words; let i=index " [attr.data-index]="i">
+        <tr *ngFor=" let word of words | reverse; let i=index " [attr.data-index]="i">
           <th class="text-center">
-              <div class="clickable" (click)='toggleShowInput(i)' *ngIf='i != editedRow' >{{word.english}}</div>
-              <input *ngIf='i == editedRow' [(ngModel)]="editedWord.english" value={{word.english}} (keyup.enter)="update(i)">
+              <div class="clickable" (click)='funShowInput(i)' *ngIf='i != editedRow' >{{word.english}}</div>
+              <input *ngIf='i == editedRow && showInput' [(ngModel)]="editedWord.english" value={{word.english}} (keyup.enter)="update(i)">
           </th>
           <th class="text-center">
-              <div class="clickable" (click)='toggleShowInput(i)' *ngIf='i != editedRow' >{{word.polish}}</div>
-              <input *ngIf='i == editedRow' [(ngModel)]="editedWord.polish" value={{word.polish}} (keyup.enter)="update(i)">
+              <div class="clickable" (click)='funShowInput(i)' *ngIf='i != editedRow' >{{word.polish}}</div>
+              <input *ngIf='i == editedRow && showInput' [(ngModel)]="editedWord.polish" value={{word.polish}} (keyup.enter)="update(i)">
           </th>
           <th class="text-center">
-              <div class="clickable" (click)='toggleShowInput(i)' *ngIf='i != editedRow' >{{word.comment}}</div>
-              <input *ngIf='i == editedRow' [(ngModel)]="editedWord.comment" value={{word.comment}} (keyup.enter)="update(i)">
+              <div class="clickable" (click)='funShowInput(i)' *ngIf='i != editedRow' >{{word.comment}}</div>
+              <input *ngIf='i == editedRow && showInput' [(ngModel)]="editedWord.comment" value={{word.comment}} (keyup.enter)="update(i)">
           </th>
           <th class="text-center" style="width:10px">
             <button type="button" class="close danger" aria-label="Close" (click)="delete(i)">

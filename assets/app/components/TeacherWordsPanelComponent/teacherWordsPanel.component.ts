@@ -95,7 +95,8 @@ export class TeacherWordsPanelComponent implements OnInit {
     return false
   }
   delete(i:number){
-    var word=this.words[i];
+    let len = this.words.length-1
+    var word=this.words[len-i];
     this._backendService.removeWordFromLesson(this.chosenLesson.id,word.id)
     .subscribe(deleted=>{
       this.buttonClass="btn btn-success disabled";
@@ -122,23 +123,23 @@ export class TeacherWordsPanelComponent implements OnInit {
   }
 
   update(i: number){
-    let id = this.words[i].id;
-    this._backendService.updateWord(id, this.editedWord.polish, this.editedWord.english,this.editedWord.comment)
+    this._backendService.updateWord(this.editedWord.id, this.editedWord.polish, this.editedWord.english,this.editedWord.comment)
     .subscribe(response=>{
       this._backendService.getWords(this.chosenLesson.id).subscribe(words=>{
         this.words=[];
         this.words=words;
-        this.showInput = false
+        this.showInput = false;
+        this.editedRow = -1;
     });
     })
   }
-  toggleShowInput(i:number)
+  funShowInput(i:number)
    {
+     let len = this.words.length-1
      this.editedRow = i;
-     this.editedWord = this.words[i];
+     this.editedWord = this.words[len-i];
      this.showInput = !this.showInput
    }
-
 
   goBack(){
     this._router.navigate(['./see-all-lessons']);
