@@ -71,13 +71,23 @@ export class TeacherCreateLessonComponent {
     else{
       this.error=true;
     }
-    if(this.hour_end<this.hour_start || (this.hour_end==this.hour_start && this.min_end<this.min_start)){
+    if(Number(this.hour_end)<Number(this.hour_start) || (Number(this.hour_end)==Number(this.hour_start) && Number(this.min_end) < Number(this.min_start))){
       this.hourError=true;
     }
   }
   sendRequest(){
-    this.date.setDate(this.date.getDate() + 1);
-    let hour=this.hour_start.toString()+":"+this.min_start.toString()+" - "+this.hour_end.toString()+":"+this.min_end.toString();
+    let tmp_date = this.date
+    tmp_date.setDate(this.date.getDate()+1)
+    if(this.hour_start.length==1)
+      this.hour_start= "0"+this.hour_start
+    if(this.hour_end.length==1)
+      this.hour_end= "0"+this.hour_end
+    if(this.min_start.length==1)
+      this.min_start= "0"+this.min_start
+    if(this.min_end.length==1)
+      this.min_end= "0"+this.min_end
+
+    let hour=this.hour_start+":"+this.min_start+" - "+this.hour_end+":"+this.min_end;
     let groupID;
     for(var i=0;i<this.groups.length;i++){
       if(this.group==this.groups[i].name)
@@ -85,7 +95,8 @@ export class TeacherCreateLessonComponent {
           groupID = this.groups[i].id
         }
     }
-    this._backendService.createLesson(this._loginService.getUserID(),groupID,this.subject,this.date,hour).subscribe(data => {
+    this._backendService.createLesson(this._loginService.getUserID(),groupID,this.subject,tmp_date,hour).subscribe(data => {
+        data.date=new Date(data.date)
         this._loginService.setChosenLesson(data);
         this.subject=null;
           this.error=false;
