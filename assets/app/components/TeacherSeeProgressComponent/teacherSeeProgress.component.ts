@@ -65,10 +65,8 @@ export class TeacherSeeProgressComponent{
                   else
                       this.progress.push(0)
                }
-               console.log("wchodze")
                this._backendService.countWordsForManyStudents(ids, this.group.id,4)
                .subscribe(data1=>{
-                 console.log(data1)
                  var sortedData1 = data1.sort((obj1, obj2) => {
                    if (obj1.studentID > obj2.studentID) return 1
                    if (obj1.studentID < obj2.studentID) return -1
@@ -80,9 +78,6 @@ export class TeacherSeeProgressComponent{
                     else
                         this.progress2.push(0)
                  }
-                 console.log(this.progress)
-                 console.log(this.progress2)
-                 console.log(this.sortedStudents)
                })
 
 

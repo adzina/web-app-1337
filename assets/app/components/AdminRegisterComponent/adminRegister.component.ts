@@ -37,16 +37,19 @@ export class AdminRegisterComponent {
 
   submit(role:string){
     this._backendService.createUser(this.first_name,this.last_name,this.email,this.password,role).subscribe(data=>{
+            this.backend_error=null
 
-            this.registered=true;
-            this.first_name=""
-            this.last_name=""
-            this.email="";
-            this.password="";
     },(error:HttpErrorResponse) => {
-
-      this.backend_error=`Backend returned code ${error.status}`;
-    })
+      if(error.status)
+        this.backend_error=`Backend returned code ${error.status}`;
+      else{
+        this.registered=true;
+        this.first_name=""
+        this.last_name=""
+        this.email="";
+        this.password="";
+      }
+    },)
 
   }
 

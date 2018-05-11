@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { BackendService} from '../../services/backend.service';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['teacherWordsPanel.component.scss']
 })
 
-export class TeacherWordsPanelComponent {
+export class TeacherWordsPanelComponent implements OnInit {
   polish: string;
   english: string;
   comment: string;
@@ -32,11 +32,8 @@ export class TeacherWordsPanelComponent {
   subject: string;
   buttonClass: string;
   showInput = false;
-
-  constructor(private _loginService: LoginService,
-              private http: Http,
-              private _backendService: BackendService,
-              private _router: Router) {
+  contentReady = false;
+  ngOnInit(){
     this.words=[];
     this.buttonClass="btn btn-success disabled";
     this.chosenLesson=this._loginService.getChosenLesson();
@@ -47,13 +44,22 @@ export class TeacherWordsPanelComponent {
           this._backendService.getActiveUsersMergeName(this.group.id)
               .subscribe(users=>{
                 this.users=users;
-                this.divideUsersByRole()
+                this.divideUsersByRole();
                 this.prepare();
+                this.contentReady = true;
               })
         })
     }
+  }
+
+  constructor(private _loginService: LoginService,
+              private http: Http,
+              private _backendService: BackendService,
+              private _router: Router) {
+
 
   }
+
 
   prepare(){
     this.subject=this.chosenLesson.subject;
@@ -76,8 +82,6 @@ export class TeacherWordsPanelComponent {
       else if(this.isTeacher(user.role))
           this.teachers.push(user)
     }
-    console.log(this.students)
-    console.log(this.teachers)
 
   }
   isStudent(role){

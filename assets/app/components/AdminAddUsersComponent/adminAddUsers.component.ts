@@ -3,7 +3,6 @@ import { LoginService } from '../../services/login.service';
 import { BackendService } from '../../services/backend.service';
 import { CompleterService, CompleterData, CompleterItem } from 'ng2-completer';
 import { Router } from '@angular/router';
-import { SidePanelGroupsComponent } from '../../bars/SidePanelGroupsComponent/sidePanelGroups.component';
 import { Group } from '../../models/group';
 import { Lesson } from '../../models/lesson';
 import { User } from '../../models/user';

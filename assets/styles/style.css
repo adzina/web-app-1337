@@ -32,6 +32,9 @@ table{
 a .link{
   cursor: pointer;
 }
+a{
+  cursor: pointer;
+}
 /*
 div.login{
   position: fixed;
