@@ -26,25 +26,28 @@ export class TeacherSeeAllLessonsComponent {
 
     this.lessons=[];
     this.backendError=null;
+    this.getLessons();
 
-    _backendService.getTeachersLessons().
-        subscribe(response=>{
+  }
+  getLessons(){
+
+        this._backendService.getTeachersLessons().
+            subscribe(response=>{
 
 
-            let i=0;
-            while(i<response.length){
-              this.lessons[i]=response[i];
-              this.lessons[i].date=new Date(response[i].date)
-              i++;
-            }
+                let i=0;
+                while(i<response.length){
+                  this.lessons[i]=response[i];
+                  this.lessons[i].date=new Date(response[i].date)
+                  i++;
+                }
 
-          this.setPage(1)
-          },
-          error=>{
-              this.backendError=error._body;
-            }
-          );
-
+              this.setPage(1)
+              },
+              error=>{
+                  this.backendError=error._body;
+                }
+              );
   }
   setPage(page: number) {
    if (page < 1 || page > this.pager.totalPages) {
@@ -75,7 +78,8 @@ export class TeacherSeeAllLessonsComponent {
   delete(i:number){
     let lesson = this.pagedLessons[i]
     this._backendService.deleteLesson(lesson.id).subscribe(data=>{
-      this._router.navigate(['./see-all-lessons'])
+      this.lessons = [];
+      this.getLessons();
     })
   }
 }
