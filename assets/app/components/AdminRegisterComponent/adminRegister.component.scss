@@ -1,17 +1,3 @@
-
-a {
-  cursor: pointer;
-}
-li.breadcrumb-item.active{
-  color: white;
-}
-li.breadcrumb-item.active::before{
-  color: black;
-}
-ol {
-  background-color: #ccc;
-  color: white;
-}
 .alert{
   margin-left:10%;
   margin-right:10%
