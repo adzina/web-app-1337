@@ -1,45 +1,49 @@
 <navbar></navbar>
-<div class="text-centered" >
+<div class="container" >
+  <div class="row">
   <ol class="breadcrumb pull-left">
     <li class="breadcrumb-item"><a (click)="goBack()">Users</a></li>
     <li class="breadcrumb-item active">Add user</li>
   </ol>
-  <br><br>
-  <h1><strong>Register</strong></h1>
-</div>
-<form>
-  <div class="form-group">
-    <label for="InputFirstName">First Name</label>
-    <input required type="text" class="form-control" id="InputFirstName" name="first_name" [(ngModel)]="first_name" placeholder="Enter first name">
   </div>
-  <div class="form-group">
-    <label for="InputLastName">Last Name</label>
-    <input type="text" class="form-control" id="InputLastName" name="last_name" [(ngModel)]="last_name" placeholder="Enter last name">
-  </div>
-  <div class="form-group">
-    <label for="InputEmail1">Email address</label>
-    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" name="email" [(ngModel)]="email" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="InputPassword1">Password</label>
-    <input type="{{inputType}}" class="form-control" id="InputPassword1" name="password" [(ngModel)]="password" placeholder="Password">
+  <div class="row">
+    <h1><strong>Register</strong></h1>
+    <form>
+      <div class="form-group">
+        <label for="InputFirstName">First Name</label>
+        <input required type="text" class="form-control" id="InputFirstName" name="first_name" [(ngModel)]="first_name" placeholder="Enter first name">
+      </div>
+      <div class="form-group">
+        <label for="InputLastName">Last Name</label>
+        <input type="text" class="form-control" id="InputLastName" name="last_name" [(ngModel)]="last_name" placeholder="Enter last name">
+      </div>
+      <div class="form-group">
+        <label for="InputEmail1">Email address</label>
+        <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" name="email" [(ngModel)]="email" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="InputPassword1">Password</label>
+        <input type="{{inputType}}" class="form-control" id="InputPassword1" name="password" [(ngModel)]="password" placeholder="Password">
 
-      <input type="checkbox" name="passwordCheckBox" (click)="hideShowPassword()" />
-      <label for="checkbox" *ngIf="passwordCheckbox">Hide password</label>
-      <label for="checkbox" *ngIf="!passwordCheckbox">Show password</label><hr>
+          <input type="checkbox" name="passwordCheckBox" (click)="hideShowPassword()" />
+          <label for="checkbox" *ngIf="passwordCheckbox">Hide password</label>
+          <label for="checkbox" *ngIf="!passwordCheckbox">Show password</label><hr>
+      </div>
+
+    </form>
+    <div class="container text-center">
+          <button class="btn btn-success" (click)="submit('student')">Register new student</button>
+          <button class="btn btn-success" (click)="submit('teacher')">Register new teacher</button>
+          <button class="btn btn-danger" (click)="submit('admin')">Register new admin</button>
+        <hr>
+        <div class="alert alert-danger" *ngIf="registered==false">
+       <strong>Fill in all the fields!</strong>
+        </div>
+        <div class="alert alert-danger" *ngIf="backend_error!=null">
+       <strong>{{backend_error}}</strong>
+        </div>
+    </div>
   </div>
 
-</form>
-<div class="container text-center">
-      <button class="btn btn-success" (click)="submit('student')">Register new student</button>
-      <button class="btn btn-success" (click)="submit('teacher')">Register new teacher</button>
-      <button class="btn btn-danger" (click)="submit('admin')">Register new admin</button>
-    <hr>
-    <div class="alert alert-danger" *ngIf="registered==false">
-   <strong>Fill in all the fields!</strong>
-    </div>
-    <div class="alert alert-danger" *ngIf="backend_error!=null">
-   <strong>{{backend_error}}</strong>
-    </div>
 </div>
