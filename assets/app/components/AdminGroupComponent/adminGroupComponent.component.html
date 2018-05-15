@@ -10,7 +10,7 @@
       <span class="glyphicon glyphicon-plus"></span> Add new group
     </a>
   </p>
-  <div *ngIf="groups!=null" class="row">
+  <div *ngIf="groups[0]!=null" class="row">
     <table class="table table-striped table-bordered table-hover table-condensed">
       <tr>
         <th>Name</th>
@@ -26,7 +26,7 @@
       </tr>
     </table>
   </div>
-  <div class ="no_lessons row" *ngIf="groups==null">
+  <div class ="no_lessons row" *ngIf="groups[0]==null">
     <h3>No groups yet.</h3>
   </div>
   <nav aria-label="Data grid navigation">
