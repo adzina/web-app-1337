@@ -130,11 +130,11 @@ export class TeacherCreateLessonComponent {
   }
   toggleCalendar(){
     document.getElementById("calendar").classList.toggle("visible");
-    if(document.getElementById("calendarHeader").innerHTML=="Show calendar"){
+    if(document.getElementById("calendarHeader").innerHTML=="[calendar]"){
         document.getElementById("calendarHeader").innerHTML="Hide calendar"
     }
     else{
-      document.getElementById("calendarHeader").innerHTML="Show calendar"
+      document.getElementById("calendarHeader").innerHTML="[calendar]"
     }
   }
 
