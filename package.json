@@ -19,6 +19,7 @@
     "angular-in-memory-web-api": "~0.3.0",
     "angular2-jwt": "^0.2.3",
     "async": "^2.6.0",
+    "aws-sdk": "^2.266.1",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.0.0",
     "copy-webpack-plugin": "^4.0.1",
