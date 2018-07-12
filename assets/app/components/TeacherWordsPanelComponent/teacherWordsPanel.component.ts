@@ -71,6 +71,7 @@ export class TeacherWordsPanelComponent implements OnInit {
       this.comment = "";
       this.words=[];
       this.words=words;
+      console.log(words);
 
       this.buttonClass="btn btn-success active";
   });

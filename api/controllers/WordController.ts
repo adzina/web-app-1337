@@ -17,8 +17,8 @@ module.exports = {
 	    LogType: 'Tail'
     };
 		const lambdaResult = await lambda.invoke(params).promise();
-		console.log('Lambda completed, result: ', lambdaResult.Payload);
-		const resultObject = JSON.parse(lambdaResult.Payload);
+		//removing quotes
+		lambdaResult.Payload = lambdaResult.Payload.substring(1, lambdaResult.Payload.length-1);
 		return lambdaResult.Payload;
 
   },

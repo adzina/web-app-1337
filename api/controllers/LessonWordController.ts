@@ -32,7 +32,11 @@ getLessonsWords:function(req,res){
         sails.models.word.findOne({id: wordID})
           .then(function(word){
             var elem:word;
-            elem={id:<string>word.id,polish: <string>word.polish, english: <string>word.english, comment: <string>word.comment};
+            elem={id:<string>word.id,
+              polish: <string>word.polish,
+              english: <string>word.english,
+              comment: <string>word.comment,
+              url: <string>word.url};
             output.push(elem);
             //inside the iterator function we call cb() once we are finished
             cb();
@@ -100,7 +104,8 @@ interface word{
   id: string,
   polish: string,
   english: string,
-  comment: string
+  comment: string,
+  url: string
 }
 interface lessonword{
   id: string,
