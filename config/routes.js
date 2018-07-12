@@ -69,6 +69,7 @@ module.exports.routes = {
   	   view: 'homepage'
      },
 
+     'GET /try': 'WordController.try',
      'POST /user': 'UserController.create',
      'POST /user/login': 'UserController.login',
      'GET /users/:email': 'UserController.findOne',

@@ -18,6 +18,7 @@ export class LoginComponent{
   wrong: boolean;
   url: string;
   backendError:string;
+  src = "https://s3.eu-central-1.amazonaws.com/polly-akn-bucket/71154afb-4e4a-4814-8226-33f0acbf0f1a.mp3"
   headers = new Headers({ 'Content-Type': 'application/json' });
   constructor(private _router:Router,
               private _loginService: LoginService,
@@ -62,7 +63,24 @@ export class LoginComponent{
 
 
   }
+  submit1(type:string){
+    //this._backendService.addWord("one","fancy word", "1","1").subscribe(data=>{
+    //  console.log(data);
+  //  });
+     this.url=this._backendService.getApiUrl()+'try';
+     this._http.get(this.url)
+       .map(res=>res.json())
+       .subscribe(
+         response => {
+           console.log(response);
+         },
+         error => {
+           console.log(error);
+         }
+       );
+    }
 }
+
 interface ItemsResponse {
   email: string,
   password: string,

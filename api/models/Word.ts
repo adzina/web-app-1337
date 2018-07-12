@@ -10,6 +10,7 @@ module.exports = {
   attributes: {
     english: {type:'string', required: true},
     polish: {type:'string', required: true},
-    comment: {type: 'string'}
+    comment: {type: 'string'},
+    url: {type: 'string', required: true}
   }
 };
