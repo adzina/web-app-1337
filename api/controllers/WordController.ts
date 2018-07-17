@@ -8,7 +8,7 @@ AWS.config.credentials = credentials;
 var lambda = new AWS.Lambda();
 
 module.exports = {
-	try: async function(english) {
+	getURL: async function(english) {
 
     var params = {
       FunctionName: 'WordReader_NewWord',
@@ -43,7 +43,7 @@ module.exports = {
     sails.models.word.findOne({ english: eng, polish: pol, comment: comment })
       .exec(function(err, word) {
         if (!word) {
-          that.try(eng).then(function(data) {
+          that.getURL(eng).then(function(data) {
             sails.models.word.create({
               english: eng,
               polish: pol,
