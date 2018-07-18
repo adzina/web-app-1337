@@ -69,7 +69,7 @@
           <input type="text" name="comment" [(ngModel)]="comment" placeholder="comment"  (keyup.enter)="submit(focusable)"/>
         </th>
         <th class="text-center" style="width:10px">
-          <button class={{buttonClass}} (click)="submit()">Submit</button>
+          <button class={{buttonClass}} (click)="submit(focusable)">Submit</button>
         </th>
       </tr>
     </table>
