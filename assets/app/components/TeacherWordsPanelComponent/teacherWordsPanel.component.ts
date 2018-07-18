@@ -125,8 +125,8 @@ export class TeacherWordsPanelComponent implements OnInit {
     );
   }
 
-  update(i: number){
-    this._backendService.updateWord(this.editedWord.id, this.editedWord.polish, this.editedWord.english,this.editedWord.comment)
+    update(i: number) {
+        this._backendService.updateWord(this.editedWord.id, this.editedWord.polish, this.editedWord.comment)
     .subscribe(response=>{
       this._backendService.getWords(this.chosenLesson.id).subscribe(words=>{
         this.words=[];

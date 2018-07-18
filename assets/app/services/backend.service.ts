@@ -227,9 +227,9 @@ updateMyProfile(old_password:string,new_password:string):Observable<User>{
         .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error updating profile'))
 }
-updateWord(id:string, pol:string, eng:string, comment: string):Observable<Word>{
+updateWord(id:string, pol:string, comment: string):Observable<Word>{
   var url = this.g_url+"word/update"
-  var body = JSON.stringify({id:id,pol:pol,eng:eng, comment:comment})
+  var body = JSON.stringify({id:id, pol:pol, comment:comment})
   return this.http.post(url,body)
         .map(res=>res.json())
         .catch((error:any) => Observable.throw('Error updating word'))

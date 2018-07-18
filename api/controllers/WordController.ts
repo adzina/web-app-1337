@@ -69,9 +69,8 @@ module.exports = {
   update: function(req, res) {
     let id = req.param("id"),
       pol = req.param("pol"),
-      eng = req.param("eng"),
       comment = req.param("comment")
-    let data = { id: id, polish: pol, english: eng, comment: comment }
+    let data = { id: id, polish: pol, comment: comment }
     sails.models.word.update({ id: id }, data, function(err, updated) {
       if (err) {
         sails.log.err(err)
