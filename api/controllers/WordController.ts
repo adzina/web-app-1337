@@ -9,33 +9,30 @@ var lambda = new AWS.Lambda();
 
 module.exports = {
 	getURL: async function(english) {
-
+ 
     var params = {
-      FunctionName: 'WordReader_NewWord',
-      Payload: JSON.stringify({ "english": english }),
-	    InvocationType: 'RequestResponse',
-	    LogType: 'Tail'
-    };
-		const lambdaResult = await lambda.invoke(params).promise();
-		//removing quotes
-		lambdaResult.Payload = lambdaResult.Payload.substring(1, lambdaResult.Payload.length-1);
-		return lambdaResult.Payload;
-
-  },
+            FunctionName: 'WordReader_NewWord',
+            Payload: JSON.stringify({ "english": english }),
+	        InvocationType: 'RequestResponse',
+	        LogType: 'Tail'
+        };
+    const lambdaResult = await lambda.invoke(params).promise();
+    //removing quotes
+    lambdaResult.Payload = lambdaResult.Payload.substring(1, lambdaResult.Payload.length-1);
+    return lambdaResult.Payload;
+    },
   add: function(req, res) {
     var eng = req.param('english'),
-      pol = req.param('polish'),
-      comment = req.param('comment'),
-      lessonID = req.param('lessonID');
+        pol = req.param('polish'),
+        comment = req.param('comment'),
+        lessonID = req.param('lessonID');
     this.create(eng, pol, comment, (wordID) => {
-      this.addToLesson(lessonID, wordID, (wordLesson) => {
+        this.addToLesson(lessonID, wordID, (wordLesson) => {
         sails.log.debug("Word added");
         sails.log.debug(wordLesson);
         return res.json(200);
-      })
+        })
     });
-
-
   },
 
   create: function(eng, pol, comment, callback) {
