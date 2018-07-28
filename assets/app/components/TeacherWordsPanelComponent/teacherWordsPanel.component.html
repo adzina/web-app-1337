@@ -88,9 +88,9 @@
               <input *ngIf='i == editedRow && showInput' [(ngModel)]="editedWord.comment" value={{word.comment}} (keyup.enter)="update(i)">
           </th>
           <th class="text-center" class="play-div">
-            <audio id="player" src={{word.url}}></audio>
+            <audio [attr.id]="'player' + word.id" src={{word.url}}></audio>
             <div>
-              <button onclick="document.getElementById('player').play()">Play</button>
+              <button (click)="play(word.id)">Play</button>
             </div>
           </th>
           <th class="text-center" style="width:10px">

@@ -182,6 +182,10 @@ export class TeacherWordsPanelComponent implements OnInit {
     };
     reader.readAsBinaryString(target.files[0]);
   }
+  play(id:string){
+    let audioPlayer: HTMLAudioElement = <HTMLAudioElement>document.getElementById('player'+id);
+    audioPlayer.play();
+  }
 }
 
 interface word {

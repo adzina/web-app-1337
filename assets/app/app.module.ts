@@ -36,7 +36,6 @@ import { UpdateProfileComponent } from './components/UpdateProfileComponent/upda
 import { GoodbyeComponent } from './components/GoodbyeComponent/goodbye.component';
 
 import {NavbarComponent} from "./bars/NavbarComponent/navbar.component";
-import { SidePanelGroupsComponent } from './bars/SidePanelGroupsComponent/sidePanelGroups.component';
 import { FooterComponent } from './bars/FooterComponent/footer.component';
 
 
@@ -59,7 +58,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     declarations: [
       AppComponent,
       LoginComponent,
-      SidePanelGroupsComponent,
       NavbarComponent,
       FooterComponent,
       AdminGroupComponent,
