@@ -86,6 +86,7 @@ module.exports.routes = {
 
      'POST /word': 'WordController.add',
      'POST /word/update': 'WordController.update',
+     'GET /word/audio/:id': 'WordController.getAudio',
 
      'POST /lessonword/getLessonsWords': 'LessonWordController.getLessonsWords',
      'POST /lessonWord': 'LessonWordController.create',

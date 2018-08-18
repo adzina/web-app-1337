@@ -1,20 +1,21 @@
 declare var sails: any;
 
-var AWS = require('aws-sdk');
+var AWS = require("aws-sdk");
+var s3 = new AWS.S3({signatureVersion: "v4", region: "eu-central-1"});
 const url_base = "https://s3.eu-central-1.amazonaws.com/polly-akn-bucket/"
-AWS.config.update({ region: 'eu-central-1' });
-var credentials = new AWS.SharedIniFileCredentials({ profile: 'default' });
+AWS.config.update({ region: "eu-central-1", });
+var credentials = new AWS.SharedIniFileCredentials({ profile: "default" });
 AWS.config.credentials = credentials;
 var lambda = new AWS.Lambda();
 
 module.exports = {
-	getURL: async function(english) {
- 
+	getURL: async function(english: string) {
+
     var params = {
-            FunctionName: 'WordReader_NewWord',
+            FunctionName: "WordReader_NewWord",
             Payload: JSON.stringify({ "english": english }),
-	        InvocationType: 'RequestResponse',
-	        LogType: 'Tail'
+	        	InvocationType: "RequestResponse",
+	        	LogType: "Tail"
         };
     const lambdaResult = await lambda.invoke(params).promise();
     //removing quotes
@@ -22,16 +23,16 @@ module.exports = {
     return lambdaResult.Payload;
     },
   add: function(req, res) {
-    var eng = req.param('english'),
-        pol = req.param('polish'),
-        comment = req.param('comment'),
-        lessonID = req.param('lessonID');
+    var eng :string = req.param("english"),
+        pol :string = req.param("polish"),
+        comment :string = req.param("comment"),
+        lessonID :string = req.param("lessonID");
     this.create(eng, pol, comment, (wordID) => {
         this.addToLesson(lessonID, wordID, (wordLesson) => {
         sails.log.debug("Word added");
         sails.log.debug(wordLesson);
         return res.json(200);
-        })
+        });
     });
   },
 
@@ -40,7 +41,7 @@ module.exports = {
     sails.models.word.findOne({ english: eng, polish: pol, comment: comment })
       .exec(function(err, word) {
         if (!word) {
-          that.getURL(eng).then(function(data) {
+          that.getURL(eng).then(function(data: string) {
             sails.models.word.create({
               english: eng,
               polish: pol,
@@ -53,27 +54,25 @@ module.exports = {
                   sails.log.error(err);
                 }
                 return callback(word.id);
-
-              })
+              });
           });
 
+        } else {
+          return callback(word.id);
         }
-        else {
-          return callback(word.id)
-        }
-      })
+      });
   },
   update: function(req, res) {
-    let id = req.param("id"),
-      pol = req.param("pol"),
-      comment = req.param("comment")
-    let data = { id: id, polish: pol, comment: comment }
+    let id :string = req.param("id"),
+      pol :string = req.param("pol"),
+      comment :string = req.param("comment");
+    let data : object = { id: id, polish: pol, comment: comment };
     sails.models.word.update({ id: id }, data, function(err, updated) {
       if (err) {
-        sails.log.err(err)
-        sails.log.debug("Error updating word")
+        sails.log.err(err);
+        sails.log.debug("Error updating word");
       }
-      sails.log.debug("word updated")
+      sails.log.debug("word updated");
       return res.json(updated);
     })
   },
@@ -89,6 +88,19 @@ module.exports = {
       }
       return callback(wordLesson);
     });
+  },
 
-  }
+	getAudio: function(req, res): object {
+		const id : string = req.param("id");
+		return sails.models.word.findOne({id: id}).exec(function(err: any, word: any): any {
+			if(err){
+				sails.log.debug("Error in getAudio");
+				sails.log.error(err);
+			}
+      var params : object = { Bucket: "polly-akn-bucket", Key: word.url };
+      var url : string = s3.getSignedUrl("getObject", params);
+
+			return res.json(url);
+		});
+	}
 };

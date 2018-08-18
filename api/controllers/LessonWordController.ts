@@ -35,8 +35,7 @@ getLessonsWords:function(req,res){
             elem={id:<string>word.id,
               polish: <string>word.polish,
               english: <string>word.english,
-              comment: <string>word.comment,
-              url: <string>word.url};
+              comment: <string>word.comment};
             output.push(elem);
             //inside the iterator function we call cb() once we are finished
             cb();
@@ -104,8 +103,7 @@ interface word{
   id: string,
   polish: string,
   english: string,
-  comment: string,
-  url: string
+  comment: string
 }
 interface lessonword{
   id: string,

@@ -3,5 +3,6 @@ export class Word {
 		public id: string,
 		public polish:string,
 		public english: string,
-		public comment: string){}
+		public comment: string,
+		public url: string) {}
 }

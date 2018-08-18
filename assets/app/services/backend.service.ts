@@ -18,8 +18,8 @@ import * as async from "async";
 
 export class BackendService{
 
-  g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
-  //g_url = 'http://localhost:1337/';
+  //g_url='http://54976-1-fba7f6-01.services.oktawave.com:1337/';
+  g_url = 'http://localhost:1337/';
 
 
   constructor(private http:AuthHttp,
@@ -254,6 +254,12 @@ deleteLesson(lessonID:string):Observable<any>{
   return this.http.post(url,body)
         .map(res=>res.json())
         .catch((error:any)=>Observable.throw('Error deleting group'))
+}
+getAudio(wordID: string):Observable<any>{
+  var url = this.g_url + "word/audio/" + wordID;
+  return this.http.get(url)
+        .map( res => res.json() )
+        .catch( (error : any) => Observable.throw('Error getting audio') );
 }
 
 }
