@@ -30,7 +30,11 @@
           </tr>
       </table>
     </div>
-
+    <p class="pull-left">
+      <a (click)="addLesson()">
+        <span class="glyphicon glyphicon-plus"> </span>Add new lesson
+      </a>
+    </p>
   <div *ngIf="lessons[0]!=null" class="row">
     <table class="table table-striped table-bordered table-hover table-condensed">
       <tr>
