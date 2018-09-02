@@ -1,8 +1,10 @@
+import { rejectSeries } from "async";
+
 declare var sails: any;
 
 var AWS = require("aws-sdk");
 var s3 = new AWS.S3({signatureVersion: "v4", region: "eu-central-1"});
-const url_base = "https://s3.eu-central-1.amazonaws.com/polly-akn-bucket/"
+const url_base = "https://s3.eu-central-1.amazonaws.com/polly-akn-bucket/";
 AWS.config.update({ region: "eu-central-1", });
 var credentials = new AWS.SharedIniFileCredentials({ profile: "default" });
 AWS.config.credentials = credentials;
@@ -18,7 +20,7 @@ module.exports = {
 	        	LogType: "Tail"
         };
     const lambdaResult = await lambda.invoke(params).promise();
-    //removing quotes
+    // removing quotes
     lambdaResult.Payload = lambdaResult.Payload.substring(1, lambdaResult.Payload.length-1);
     return lambdaResult.Payload;
     },
@@ -41,21 +43,36 @@ module.exports = {
     sails.models.word.findOne({ english: eng, polish: pol, comment: comment })
       .exec(function(err, word) {
         if (!word) {
-          that.getURL(eng).then(function(data: string) {
-            sails.models.word.create({
-              english: eng,
-              polish: pol,
-              comment: comment,
-              url: data
-            })
-              .exec(function(err, word) {
-                if (err) {
+          that.getURL(eng).then(
+            data => {
+              sails.models.word.create({
+                english: eng,
+                polish: pol,
+                comment: comment,
+                url: data
+              }).exec(function(err, word) {
+                  if (err) {
+                    sails.log.debug("Error creating word");
+                    sails.log.error(err);
+                  }
+                  return callback(word.id);
+                });
+            },
+            error => {
+              console.log("error");
+              sails.models.word.create({
+                english: eng,
+                polish: pol,
+                comment: comment
+              }).exec(function(err, word) {
+                if(err) {
                   sails.log.debug("Error creating word");
                   sails.log.error(err);
                 }
                 return callback(word.id);
               });
-          });
+            }
+          );
 
         } else {
           return callback(word.id);
@@ -91,15 +108,13 @@ module.exports = {
   },
 
 	getAudio: function(req, res): object {
-		const id : string = req.param("id");
-		return sails.models.word.findOne({id: id}).exec(function(err: any, word: any): any {
-			if(err){
-				sails.log.debug("Error in getAudio");
-				sails.log.error(err);
-			}
+    const id:string = req.param("id");
+		return sails.models.word.findOne({id: id}).exec(function(err:any, word: any): any {
+      if(!word.url) {
+        return res.json("");
+      }
       var params : object = { Bucket: "polly-akn-bucket", Key: word.url };
       var url : string = s3.getSignedUrl("getObject", params);
-
 			return res.json(url);
 		});
 	}
