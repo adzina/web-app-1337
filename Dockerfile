@@ -9,6 +9,8 @@ WORKDIR /app
 COPY package.json /app
 RUN npm install
 
+COPY ~/.aws/credentials ~/.aws/credentials
+
 COPY . /app
 
 EXPOSE 1337
