@@ -9,7 +9,7 @@ services:
         links:
             - mongodb
         volumes:
-            - ~/.aws/credentials:~/.aws/credentials
+            - ./.aws/credentials:~/.aws/credentials
         depends_on:
             - mongodb
     mongodb:
