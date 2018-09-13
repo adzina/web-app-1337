@@ -9,7 +9,7 @@ services:
         links:
             - mongodb
         volumes:
-            - ./.aws/credentials:/home/ada/.aws/credentials
+            - ./.aws:/home/ada/.aws
         depends_on:
             - mongodb
     mongodb:
