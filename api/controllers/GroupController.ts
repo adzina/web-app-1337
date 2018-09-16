@@ -49,10 +49,8 @@ module.exports = {
     let _groupID = req.param('groupID');
     this.canRemove(_groupID, can=>{
       if(can){
-        console.log(_groupID)
         return sails.models.group.destroy({id:_groupID}).exec(function(err:any, group:any){
           sails.log(err)
-          console.log(group)
           return res.json(200)
     })
       }

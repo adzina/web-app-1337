@@ -60,25 +60,7 @@ export class LoginComponent{
             this.backendError="Invalid credentials";
           }
         );
-
-
   }
-  submit1(type:string){
-    //this._backendService.addWord("one","fancy word", "1","1").subscribe(data=>{
-    //  console.log(data);
-  //  });
-     this.url=this._backendService.getApiUrl()+'try';
-     this._http.get(this.url)
-       .map(res=>res.json())
-       .subscribe(
-         response => {
-           console.log(response);
-         },
-         error => {
-           console.log(error);
-         }
-       );
-    }
 }
 
 interface ItemsResponse {

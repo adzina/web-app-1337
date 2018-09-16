@@ -6,10 +6,6 @@ module.exports = {
 	addUserToGroup: function(req,res){
 		let _groupID=req.param('groupID'),
 				_userID=req.param('userID');
-        console.log("GROUP ID:")
-        console.log(_groupID)
-        console.log("TEACHER ID:")
-        console.log(_userID)
 				return sails.models.groupuser.create({
 					groupID: _groupID,
 					userID: _userID
@@ -120,8 +116,7 @@ module.exports = {
 	    })
 	},
   getMyGroups: function(req,res){
-  	 let _userID=req.param('userID');
-     console.log(_userID);
+  	let _userID=req.param('userID');
     this.getGroupsID(_userID,GroupsID=>{
 	      var output:group[];
 	      output=[];

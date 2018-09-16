@@ -37,8 +37,6 @@ export class TeacherWordsPanelComponent implements OnInit {
     this.words=[];
     this.buttonClass="btn btn-success disabled";
     this.chosenLesson=this._loginService.getChosenLesson();
-    console.log(this.chosenLesson.date);
-    console.log(this.chosenLesson.date.getDate());
     if(this.chosenLesson!=null) {
         this._backendService.getLessonsGroup(this.chosenLesson.id)
         .subscribe(elem=> {

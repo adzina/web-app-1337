@@ -95,7 +95,6 @@ export class TeacherCreateLessonComponent {
           groupID = this.groups[i].id
         }
     }
-    console.log(tmp_date);
     this._backendService.createLesson(this._loginService.getUserID(),groupID,this.subject,tmp_date,hour).subscribe(data => {
         data.date=new Date(data.date)
         this._loginService.setChosenLesson(data);

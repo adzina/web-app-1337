@@ -81,12 +81,11 @@ module.exports = {
       async.each(ids, async function(id,cb){
         var guessedPromise = sails.models.studentword
                       .find({studentID:studentID,wordID:id, guessed:true})
-        var guessed = await guessedPromise
-        console.log(guessed)
+        var guessed = await guessedPromise;
         if(guessed.length>0)
-                  all_guessed += 1
-        all+=1
-        cb()
+                  all_guessed += 1;
+        all+=1;
+        cb();
       }, function(error){
         if (error)
           sails.log.error(error);
@@ -156,17 +155,13 @@ module.exports = {
 
               var guessedWords = await guessedWordsPromise;
               output.push({ studentID: studentID, all: allWords, guessed: guessedWords });
-              console.log("pośredni output")
-              console.log(output)
-              cb()
+              cb();
 
             }, function(error) {
               if (error)
                 res.negotiate(error);
               else {
                 sails.log.debug(output);
-                console.log("ostateczny output")
-                console.log(output)
                 return res.json(output);
               }
             })

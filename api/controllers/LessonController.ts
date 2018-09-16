@@ -71,11 +71,10 @@ module.exports = {
  delete: function(req:any,res:any){
    let _lessonID = req.param('lessonID');
    this.canRemove(_lessonID, can=>{
-     if(can){
-       return sails.models.lesson.destroy({id:_lessonID}).exec(function(err:any, lesson:any){
-         sails.log(err)
-         console.log(lesson)
-         return res.json(200)
+     if(can) {
+       return sails.models.lesson.destroy({ id:_lessonID }).exec(function(err:any, lesson:any) {
+         sails.log(err);
+         return res.json(200);
    })
      }
 

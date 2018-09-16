@@ -8,13 +8,12 @@ import {LoginService} from '../../services/login.service';
   styleUrls: ['navbar.component.scss']
 })
 
-export class NavbarComponent{
+export class NavbarComponent {
   user: string;
   isAdmin: boolean;
   constructor(private _router:Router, private _loginService:LoginService){
     this.user=_loginService.getUserName();
     this.isAdmin=_loginService.isAdmin();
-    console.log(this.isAdmin);
   }
   logout(){
     this._router.navigate(['./goodbye']);
