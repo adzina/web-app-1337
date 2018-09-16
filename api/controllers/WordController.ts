@@ -1,5 +1,3 @@
-import { rejectSeries } from "async";
-
 declare var sails: any;
 
 var AWS = require("aws-sdk");
@@ -9,6 +7,7 @@ AWS.config.update({ region: "eu-central-1", });
 var credentials = new AWS.SharedIniFileCredentials({ profile: "default" });
 AWS.config.credentials = credentials;
 var lambda = new AWS.Lambda();
+
 
 module.exports = {
 	getURL: async function(english: string) {
@@ -59,7 +58,7 @@ module.exports = {
                 });
             },
             error => {
-              console.log("error");
+              console.log(error);
               sails.models.word.create({
                 english: eng,
                 polish: pol,

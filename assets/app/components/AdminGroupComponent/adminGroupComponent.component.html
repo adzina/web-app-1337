@@ -10,7 +10,7 @@
       <span class="glyphicon glyphicon-plus"></span> Add new group
     </a>
   </p>
-  <div *ngIf="groups && groups[0]" class="row">
+  <div *ngIf="(groups || {}).length()" class="row">
     <table class="table table-striped table-bordered table-hover table-condensed">
       <tr>
         <th>Name</th>
