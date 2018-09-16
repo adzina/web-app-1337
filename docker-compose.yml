@@ -9,7 +9,7 @@ services:
         links:
             - mongodb
         volumes:
-            - ~/.aws:/home/ada/.aws
+            - ~/.aws:/root/.aws
         depends_on:
             - mongodb
     mongodb:

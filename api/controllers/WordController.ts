@@ -54,8 +54,6 @@ module.exports = {
                     sails.log.debug("Error creating word");
                     sails.log.error(err);
                   }
-                  console.log("created word with url");
-                  console.log(data);
                   return callback(word.id);
                 });
             },
@@ -70,7 +68,6 @@ module.exports = {
                   sails.log.debug("Error creating word");
                   sails.log.error(err);
                 }
-                console.log("created word without url");
                 return callback(word.id);
               });
             }
