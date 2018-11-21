@@ -68,27 +68,29 @@ module.exports = {
      * check if the username matches any email
      */
     sails.models.user.findOne({
-      email: req.body.email
+      email: req.body.email.toLowerCase()
     }).exec(function callback(err, user) {
       if (err) {
         sails.log(err);
         return res.serverError(err);}
-      if (!user) return res.serverError("User not found, please sign up.");
-
-
+      if (!user) {
+        return res.serverError("User not found, please sign up.");
+      }
       //check password
       bcrypt.compare(req.body.pswd, user.password, function(error, matched) {
-        if (error) return res.serverError(error);
+        if (error) {
+          return res.serverError(error);
+        }
 
-        if (!matched) return res.serverError("Invalid password.");
-
+        if (!matched) {
+          return res.serverError("Invalid password.");
+        }
         //save the date the token was generated for already inside toJSON()
 
-        var token = jwt.sign(user.toJSON(), "this is my secret key", {
-          expiresIn: '90m'
+        const token = jwt.sign(user.toJSON(), "this is my secret key", {
+          expiresIn: "90m"
         });
 
-        //return the token here
         res.json(200, { id_token: token, id: user.id, role: user.role, first_name: user.first_name });
       });
 
@@ -97,7 +99,7 @@ module.exports = {
   create: function(req, res) {
     let _first_name = req.param('first_name'),
       _last_name = req.param('last_name'),
-      _email = req.param('email'),
+      _email = req.param('email').toLowerCase(),
       _password = req.param('password'),
       _role = req.param('role');
 
@@ -137,7 +139,7 @@ module.exports = {
           return res.serverError(err);}
         if (!user) return res.serverError("Invalid email");
 
-        var data={first_name: user.first_name,
+        var data = {first_name: user.first_name,
                   last_name: user.last_name,
                   password: _new_password,
                   role: user.role};
@@ -147,7 +149,7 @@ module.exports = {
               sails.log.error(err);
               return res.serverError(err);}
             return res.json(200);
-        })
+        });
 
       });
   },
@@ -170,11 +172,12 @@ module.exports = {
             sails.log.error(error);
             return res.serverError(error);}
 
-          if (!matched) return res.serverError("Invalid password");
-
-          else{
-
-            var data={first_name: user.first_name,
+          if (!matched) {
+            return res.serverError("Invalid password");
+          }
+          else {
+            var data = {
+                      first_name: user.first_name,
                       last_name: user.last_name,
                       email: user.email,
                       password: _new_password,
@@ -185,7 +188,7 @@ module.exports = {
                         sails.log.error(err);
                         return res.serverError(err);}
                       return res.json(200);
-            })
+            });
           }
         });
 
@@ -194,9 +197,9 @@ module.exports = {
 };
 
 interface user {
-  id: string,
-  first_name: string,
-  last_name: string,
-  email: string,
-  role: string
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  role: string;
 }

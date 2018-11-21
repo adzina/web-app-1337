@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { AuthHttp } from "angular2-jwt";
 import { LoginService } from "../services/login.service";
-import { Observable, Observer } from "rxjs/Rx";
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { Observable } from "rxjs/Rx";
+import { Http, Response } from "@angular/http";
 
 import { Lesson } from "../models/lesson";
 import { Word } from "../models/word";
@@ -11,12 +11,10 @@ import { User } from "../models/user";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
-import * as async from "async";
-
 @Injectable()
 export class BackendService {
-  g_url = "http://54976-1-fba7f6-01.services.oktawave.com:1337/";
-  // g_url = "http://localhost:1337/";
+  // g_url = "http://54976-1-fba7f6-01.services.oktawave.com:1337/";
+  g_url = "http://localhost:1337/";
 
   constructor(
     private http: AuthHttp,
