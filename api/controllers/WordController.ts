@@ -9,7 +9,7 @@ AWS.config.credentials = credentials;
 const lambda = new AWS.Lambda();
 
 function replaceShorthands(expression: string): string {
-  const replaced: string = expression.replace(" sb ", " somebody ").replace(" sth ", " something ").replace(" e.g. ", " for example ");
+  const replaced: string = expression.replace(" sb", " somebody").replace(" sth", " something").replace(" e.g.", " for example");
   return replaced;
 }
 module.exports = {
