@@ -92,7 +92,7 @@ removeWordFromLesson:function(req,res){
         })
       });
 }
-}
+};
 interface lesson{
   id: string,
   teacherID: string,

@@ -73,81 +73,83 @@ module.exports = {
       })
   },
   getMyProgress: function(req, res){
-    var studentID = req.param("studentID");
-    var lessonID  = req.param("lessonID");
-    var all_guessed = 0
-    var all = 0
-    this.getWordsID(lessonID, ids=>{
-      async.each(ids, async function(id,cb){
+    const studentID: string = req.param("studentID");
+    const lessonID: string  = req.param("lessonID");
+    let all_guessed: number = 0;
+    let all: number = 0;
+
+    this.getWordsID([lessonID], ids => {
+      async.each(ids, async function(id, cb) {
         var guessedPromise = sails.models.studentword
-                      .find({studentID:studentID,wordID:id, guessed:true})
+                      .find({studentID:studentID, wordID:id, guessed:true});
         var guessed = await guessedPromise;
-        if(guessed.length>0)
-                  all_guessed += 1;
+        if (guessed.length > 0) {
+          all_guessed += 1;
+        }
         all+=1;
         cb();
-      }, function(error){
-        if (error)
+      }, function(error) {
+        if (error) {
           sails.log.error(error);
-        else {
+        } else {
           sails.log.debug({guessed:all_guessed,all:all});
-          return res.json(200,{guessed:all_guessed,all:all})
+          return res.json(200,{guessed:all_guessed,all:all});
         }
       }
-    )
-  })
+    );
+  });
 
 
   },
-  getWordsID:function(_lessonID,callback){
-      var output: any[];
-      output = []
+  getWordsID:function(_lessonID, callback) {
+      var output: any[] = [];
+
       async.each(_lessonID, async function(lessonID, cb) {
-        var wordsPromise = sails.models.lessonword.find({ lessonID: lessonID })
+        var wordsPromise = sails.models.lessonword.find({ lessonID: lessonID });
         var words = await wordsPromise;
-        for(var i=0;i<words.length;i++){
-          output.push(words[i].wordID)
+        for(var i: number = 0; i < words.length; i++) {
+          output.push(words[i].wordID);
         }
-        cb()
+        cb();
       }, function(error) {
-        if (error)
+        if (error) {
           sails.log.error(error);
-        else {
-          sails.log.debug("words found")
+        } else {
+          sails.log.debug("words found");
           sails.log.debug(output);
-          return callback(output)
+          return callback(output);
         }
-      })
+      });
   },
-  getLastNLessons:function(group, limit, callback){
+  getLastNLessons:function(group, limit, callback) {
     sails.models.lesson.find({groupID:group})
-                        .sort('date DESC')
+                        .sort("date DESC")
                         .limit(limit)
-                        .exec(function(err,lessons){
+                        .exec(function(err,lessons) {
                           if(err) {
                               sails.log.debug("Error getting lessons' id");
                               sails.log.error(err);
                           }
                           var output:string[];
                           output=[];
-                          for(var i=0;i<lessons.length;i++){
+                          for(var i:number = 0;i < lessons.length;i++) {
                             output[i]=lessons[i].id;
                           }
-                          sails.log.debug("Last n lessons found")
-                          sails.log.debug(lessons)
+                          sails.log.debug("Last n lessons found");
+                          sails.log.debug(lessons);
                           return callback(output);
-                        })
+                        });
   },
   countWordsForManyStudents: function(req, res) {
-    var StudentsID = req.param("studentsID");
-    var group = req.param("groupID");
-    var limit = req.param("limit")
+    var StudentsID: string[] = req.param("studentsID");
+    var group: string = req.param("groupID");
+    var limit: string = req.param("limit");
     var output: any[];
     output = [];
 
-    this.getLastNLessons(group, limit, ids=>{
-        this.getWordsID(ids,words=>{
-          var allWords = words.length
+    this.getLastNLessons(group, limit, ids => {
+        this.getWordsID(ids,words => {
+          var allWords = words.length;
 
           async.each(StudentsID, async function(studentID, cb) {
 
@@ -158,23 +160,15 @@ module.exports = {
               cb();
 
             }, function(error) {
-              if (error)
+              if (error) {
                 res.negotiate(error);
-              else {
+              } else {
                 sails.log.debug(output);
                 return res.json(output);
               }
-            })
-        })
-    })
-
+            });
+        });
+    });
   }
-
-
 };
-interface word {
-  english: string,
-  polish: string,
-  comment: string,
-  id: string;
-}
+
